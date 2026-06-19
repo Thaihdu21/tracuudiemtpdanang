@@ -50,7 +50,6 @@ module.exports = async function handler(req, res) {
     res.setHeader("Content-Type", contentType);
 
     if (contentType.includes("text/event-stream")) {
-      // Stream về browser
       const reader = railwayRes.body.getReader();
       const pump = async () => {
         const { done, value } = await reader.read();
