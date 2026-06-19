@@ -1,0 +1,200 @@
+{
+  "thanh_pho": "Đà Nẵng",
+  "nam_hoc": "2026-2027",
+  "nguon": "Thông báo số 2702/TB-SGDĐT ngày 08/6/2026",
+  "phu_luc_1_chuyen": [
+    {
+      "stt": 1,
+      "lop_chuyen": "Chuyên Hóa",
+      "Le_Quy_Don": 47.14,
+      "Nguyen_Binh_Khiem": 37.25,
+      "Le_Thanh_Tong": 36.00,
+      "ghi_chu": null
+    },
+    {
+      "stt": 2,
+      "lop_chuyen": "Chuyên Lịch sử",
+      "Le_Quy_Don": 41.25,
+      "Nguyen_Binh_Khiem": 34.50,
+      "Le_Thanh_Tong": 34.14,
+      "ghi_chu": null
+    },
+    {
+      "stt": 3,
+      "lop_chuyen": "Chuyên Ngữ văn",
+      "Le_Quy_Don": 44.00,
+      "Nguyen_Binh_Khiem": 39.25,
+      "Le_Thanh_Tong": 40.25,
+      "ghi_chu": "Xét thêm tiêu chí phụ: Điểm thi môn chuyên đạt từ 5.75 trở lên và đạt giải Khuyến khích trở lên trong Kỳ thi chọn học sinh giỏi thành phố năm học 2025-2026"
+    },
+    {
+      "stt": 4,
+      "lop_chuyen": "Chuyên Sinh học",
+      "Le_Quy_Don": 46.50,
+      "Nguyen_Binh_Khiem": 38.25,
+      "Le_Thanh_Tong": 39.50,
+      "ghi_chu": null
+    },
+    {
+      "stt": 5,
+      "lop_chuyen": "Chuyên Tiếng Anh",
+      "Le_Quy_Don": 42.95,
+      "Nguyen_Binh_Khiem": 38.05,
+      "Le_Thanh_Tong": 39.55,
+      "ghi_chu": null
+    },
+    {
+      "stt": 6,
+      "lop_chuyen": "Chuyên Tiếng Nhật",
+      "Le_Quy_Don": 43.68,
+      "Nguyen_Binh_Khiem": null,
+      "Le_Thanh_Tong": null,
+      "ghi_chu": null
+    },
+    {
+      "stt": 7,
+      "lop_chuyen": "Chuyên Tiếng Pháp",
+      "Le_Quy_Don": 41.50,
+      "Nguyen_Binh_Khiem": null,
+      "Le_Thanh_Tong": null,
+      "ghi_chu": null
+    },
+    {
+      "stt": 8,
+      "lop_chuyen": "Chuyên Tin học",
+      "Le_Quy_Don": 39.00,
+      "Nguyen_Binh_Khiem": 25.35,
+      "Le_Thanh_Tong": 31.48,
+      "ghi_chu": null
+    },
+    {
+      "stt": 9,
+      "lop_chuyen": "Chuyên Toán",
+      "Le_Quy_Don": 43.75,
+      "Nguyen_Binh_Khiem": 37.00,
+      "Le_Thanh_Tong": 38.50,
+      "ghi_chu": "Xét thêm tiêu chí phụ: Điểm trung bình cộng tất cả điểm trung bình cả năm của các môn học được đánh giá bằng điểm số ở lớp 9 đạt từ 9.86 trở lên"
+    },
+    {
+      "stt": 10,
+      "lop_chuyen": "Chuyên Vật lí",
+      "Le_Quy_Don": 43.39,
+      "Nguyen_Binh_Khiem": 38.25,
+      "Le_Thanh_Tong": 37.75,
+      "ghi_chu": null
+    },
+    {
+      "stt": 11,
+      "lop_chuyen": "Chuyên Địa lí",
+      "Le_Quy_Don": 44.64,
+      "Nguyen_Binh_Khiem": 37.64,
+      "Le_Thanh_Tong": 35.50,
+      "ghi_chu": null
+    }
+  ],
+  "phu_luc_2_ptdtnt": [
+    {
+      "stt": 1,
+      "doi_tuong": "Người dân tộc Kinh",
+      "diem_chuan": 19.75
+    },
+    {
+      "stt": 2,
+      "doi_tuong": "Người dân tộc thiểu số",
+      "diem_chuan": 14.25
+    }
+  ],
+  "phu_luc_3_tieng_nuoc_ngoai": [
+    {
+      "stt": 1,
+      "lop_truong": "Tiếng Nhật - THPT Phan Châu Trinh",
+      "diem_chuan": 27.50
+    },
+    {
+      "stt": 2,
+      "lop_truong": "Tiếng Pháp - THPT Phan Châu Trinh",
+      "diem_chuan": 32.13
+    },
+    {
+      "stt": 3,
+      "lop_truong": "Tiếng Pháp - THPT Nguyễn Hiền",
+      "diem_chuan": 13.38
+    },
+    {
+      "stt": 4,
+      "lop_truong": "Tiếng Nhật - THPT Hoàng Hoa Thám",
+      "diem_chuan": 16.00
+    }
+  ],
+  "phu_luc_4_cong_lap": [
+    { "stt": 1,  "ten_truong": "THCS, THPT Nguyễn Khuyến",        "diem_chuan": 32.50 },
+    { "stt": 2,  "ten_truong": "THPT Âu Cơ",                       "diem_chuan": 8.00  },
+    { "stt": 3,  "ten_truong": "THPT Bắc Trà My",                  "diem_chuan": 11.00 },
+    { "stt": 4,  "ten_truong": "THPT Cẩm Lệ",                      "diem_chuan": 25.00 },
+    { "stt": 5,  "ten_truong": "THPT Cao Bá Quát",                  "diem_chuan": 10.25 },
+    { "stt": 6,  "ten_truong": "THPT Chu Văn An",                   "diem_chuan": 12.25 },
+    { "stt": 7,  "ten_truong": "THPT Đỗ Đăng Tuyển",               "diem_chuan": 11.75 },
+    { "stt": 8,  "ten_truong": "THPT Duy Tân",                      "diem_chuan": 9.00  },
+    { "stt": 9,  "ten_truong": "THPT Hiệp Đức",                     "diem_chuan": 14.50 },
+    { "stt": 10, "ten_truong": "THPT Hồ Nghinh",                    "diem_chuan": 22.50 },
+    { "stt": 11, "ten_truong": "THPT Hòa Vang",                     "diem_chuan": 33.75 },
+    { "stt": 12, "ten_truong": "THPT Hoàng Diệu",                   "diem_chuan": 18.75 },
+    { "stt": 13, "ten_truong": "THPT Hoàng Hoa Thám",               "diem_chuan": 33.25 },
+    { "stt": 14, "ten_truong": "THPT Hùng Vương",                   "diem_chuan": 12.75 },
+    { "stt": 15, "ten_truong": "THPT Huỳnh Ngọc Huệ",              "diem_chuan": 12.75 },
+    { "stt": 16, "ten_truong": "THPT Huỳnh Thúc Kháng",            "diem_chuan": 8.75  },
+    { "stt": 17, "ten_truong": "THPT Khâm Đức",                     "diem_chuan": 11.50 },
+    { "stt": 18, "ten_truong": "THPT Lê Hồng Phong",               "diem_chuan": 13.50 },
+    { "stt": 19, "ten_truong": "THPT Lê Quý Đôn",                  "diem_chuan": 21.75 },
+    { "stt": 20, "ten_truong": "THPT Liên Chiểu",                   "diem_chuan": 23.00 },
+    { "stt": 21, "ten_truong": "THPT Lương Thế Vinh",              "diem_chuan": 18.25 },
+    { "stt": 22, "ten_truong": "THPT Lương Thúc Kỳ",               "diem_chuan": 17.50 },
+    { "stt": 23, "ten_truong": "THPT Lý Tự Trọng",                 "diem_chuan": 10.75 },
+    { "stt": 24, "ten_truong": "THPT Nam Trà My",                   "diem_chuan": 7.75  },
+    { "stt": 25, "ten_truong": "THPT Ngô Quyền",                    "diem_chuan": 24.00 },
+    { "stt": 26, "ten_truong": "THPT Ngũ Hành Sơn",                "diem_chuan": 24.00 },
+    { "stt": 27, "ten_truong": "THPT Nguyễn Dục",                   "diem_chuan": 7.50  },
+    { "stt": 28, "ten_truong": "THPT Nguyễn Duy Hiệu",             "diem_chuan": 20.00 },
+    { "stt": 29, "ten_truong": "THPT Nguyễn Hiền",                  "diem_chuan": 26.50 },
+    { "stt": 30, "ten_truong": "THPT Nguyễn Hiền - Duy Xuyên",    "diem_chuan": 10.75 },
+    { "stt": 31, "ten_truong": "THPT Nguyễn Huệ",                   "diem_chuan": 13.50 },
+    { "stt": 32, "ten_truong": "THPT Nguyễn Khuyến",               "diem_chuan": 19.00 },
+    { "stt": 33, "ten_truong": "THPT Nguyễn Thái Bình",            "diem_chuan": 10.25 },
+    { "stt": 34, "ten_truong": "THPT Nguyễn Thượng Hiền",         "diem_chuan": 26.00 },
+    { "stt": 35, "ten_truong": "THPT Nguyễn Trãi",                  "diem_chuan": 29.00 },
+    { "stt": 36, "ten_truong": "THPT Nguyễn Trãi - Hội An",       "diem_chuan": 20.25 },
+    { "stt": 37, "ten_truong": "THPT Nguyễn Văn Cừ",               "diem_chuan": 9.00  },
+    { "stt": 38, "ten_truong": "THPT Nguyễn Văn Thoại",            "diem_chuan": 29.25 },
+    { "stt": 39, "ten_truong": "THPT Nguyễn Văn Trỗi",             "diem_chuan": 9.00  },
+    { "stt": 40, "ten_truong": "THPT Nông Sơn",                     "diem_chuan": 10.00 },
+    { "stt": 41, "ten_truong": "THPT Núi Thành",                    "diem_chuan": 16.00 },
+    { "stt": 42, "ten_truong": "THPT Ông Ích Khiêm",               "diem_chuan": 20.75 },
+    { "stt": 43, "ten_truong": "THPT Phạm Phú Thứ",                "diem_chuan": 22.50 },
+    { "stt": 44, "ten_truong": "THPT Phạm Phú Thứ - Gò Nổi",     "diem_chuan": 16.75 },
+    { "stt": 45, "ten_truong": "THPT Phan Bội Châu",               "diem_chuan": 16.75 },
+    { "stt": 46, "ten_truong": "THPT Phan Châu Trinh",             "diem_chuan": 35.50 },
+    { "stt": 47, "ten_truong": "THPT Phan Châu Trinh - Tiên Phước","diem_chuan": 8.50  },
+    { "stt": 48, "ten_truong": "THPT Phan Thành Tài",              "diem_chuan": 22.50 },
+    { "stt": 49, "ten_truong": "THPT Quang Trung - Đông Giang",   "diem_chuan": 8.50  },
+    { "stt": 50, "ten_truong": "THPT Quế Sơn",                      "diem_chuan": 8.75  },
+    { "stt": 51, "ten_truong": "THPT Sào Nam",                      "diem_chuan": 9.00  },
+    { "stt": 52, "ten_truong": "THPT Sơn Trà",                      "diem_chuan": 27.00 },
+    { "stt": 53, "ten_truong": "THPT Tây Giang",                    "diem_chuan": 9.25  },
+    { "stt": 54, "ten_truong": "THPT Thái Phiên",                   "diem_chuan": 31.00 },
+    { "stt": 55, "ten_truong": "THPT Thái Phiên - Thăng Bình",    "diem_chuan": 9.25  },
+    { "stt": 56, "ten_truong": "THPT Thanh Khê",                    "diem_chuan": 26.75 },
+    { "stt": 57, "ten_truong": "THPT Tiểu La",                      "diem_chuan": 8.00  },
+    { "stt": 58, "ten_truong": "THPT Tố Hữu",                       "diem_chuan": 11.00 },
+    { "stt": 59, "ten_truong": "THPT Tôn Thất Tùng",               "diem_chuan": 20.75 },
+    { "stt": 60, "ten_truong": "THPT Trần Cao Vân",                 "diem_chuan": 29.50 },
+    { "stt": 61, "ten_truong": "THPT Trần Đại Nghĩa",              "diem_chuan": 8.25  },
+    { "stt": 62, "ten_truong": "THPT Trần Hưng Đạo",               "diem_chuan": 20.25 },
+    { "stt": 63, "ten_truong": "THPT Trần Phú",                     "diem_chuan": 31.75 },
+    { "stt": 64, "ten_truong": "THPT Trần Phú - Việt An",          "diem_chuan": 9.50  },
+    { "stt": 65, "ten_truong": "THPT Trần Quý Cáp",                "diem_chuan": 25.25 },
+    { "stt": 66, "ten_truong": "THPT Trần Văn Dư",                  "diem_chuan": 15.75 },
+    { "stt": 67, "ten_truong": "THPT Võ Chí Công",                  "diem_chuan": 21.75 },
+    { "stt": 68, "ten_truong": "THPT Võ Chí Công - Hùng Sơn",    "diem_chuan": 9.75  },
+    { "stt": 69, "ten_truong": "THPT Võ Nguyên Giáp",              "diem_chuan": 14.00 }
+  ]
+}
