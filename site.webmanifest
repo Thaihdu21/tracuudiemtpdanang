@@ -1,0 +1,14 @@
+{
+  "name": "Tra Cứu Điểm Thi Lớp 10 Đà Nẵng 2026",
+  "short_name": "Điểm Thi ĐN",
+  "description": "Tra cứu điểm thi tuyển sinh lớp 10 Đà Nẵng 2026",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0066cc",
+  "theme_color": "#0066cc",
+  "icons": [
+    { "src": "/favicon/apple-touch-icon.png",       "sizes": "180x180", "type": "image/png" },
+    { "src": "/favicon/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
