@@ -1,28 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tra Cứu Điểm Thi Lớp 10 Đà Nẵng 2026</title>
-  <!-- SEO cơ bản -->
-<title>Tra Cứu Điểm Thi Tuyển Sinh Lớp 10 Đà Nẵng 2026</title>
 <meta name="description" content="Tra cứu điểm thi tuyển sinh lớp 10 Đà Nẵng 2026. Nhập số báo danh để xem điểm Toán, Văn, Ngoại Ngữ, gợi ý trường và AI nhận xét.">
 <meta name="keywords" content="tra cứu điểm thi lớp 10 Đà Nẵng 2026, điểm thi tuyển sinh lớp 10 Đà Nẵng, xem điểm thi lớp 10 Đà Nẵng 2026">
 <meta name="google-site-verification" content="yRx1XuGJ9Tort5MxMDaoFkCj5CLKi4hKbKv5JDJS3xY">
-<!-- Open Graph (hiện đẹp khi share Facebook/Zalo) -->
 <meta property="og:title" content="Tra Cứu Điểm Thi Tuyển Sinh Lớp 10 Đà Nẵng 2026">
 <meta property="og:description" content="Nhập số báo danh để xem điểm thi + gợi ý trường + AI nhận xét ngay lập tức!">
 <meta property="og:url" content="https://tracuudiemtpdanang.vercel.app">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="vi_VN">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5446158022494926"
-     crossorigin="anonymous"></script>
-<!-- Canonical URL -->
 <link rel="canonical" href="https://tracuudiemtpdanang.vercel.app">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5446158022494926" crossorigin="anonymous"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
     font-family: 'Be Vietnam Pro', sans-serif;
     min-height: 100vh;
@@ -31,22 +27,113 @@
   }
   .container { width: 100%; max-width: 700px; }
 
-  .header { text-align: center; margin-bottom: 30px; animation: fadeDown 0.6s ease; }
-  .header .emoji-big { font-size: 60px; display: block; margin-bottom: 10px; }
-  .header h1 { color: white; font-size: 24px; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.3; }
-  .header p { color: rgba(255,255,255,0.85); margin-top: 8px; font-size: 14px; }
+  /* ========== HAMBURGER ========== */
+  .hamburger-btn {
+    position: fixed; top: 16px; right: 16px; z-index: 1000;
+    width: 46px; height: 46px; border-radius: 14px;
+    background: white; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s; color: #0066cc; font-size: 18px;
+  }
+  .hamburger-btn:hover { transform: scale(1.08); box-shadow: 0 6px 25px rgba(0,0,0,0.25); }
 
-  .card {
-    background: white; border-radius: 24px; padding: 28px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin-bottom: 20px; animation: fadeUp 0.6s ease;
+  /* ========== OVERLAY ========== */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+    z-index: 1001; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .overlay.show { opacity: 1; pointer-events: all; }
+
+  /* ========== SIDEBAR ========== */
+  .sidebar {
+    position: fixed; top: 0; right: -320px; width: 300px; height: 100vh;
+    background: white; z-index: 1002; padding: 0;
+    box-shadow: -8px 0 40px rgba(0,0,0,0.2);
+    transition: right 0.35s cubic-bezier(.4,0,.2,1);
+    display: flex; flex-direction: column;
+    border-radius: 20px 0 0 20px; overflow: hidden;
+  }
+  .sidebar.open { right: 0; }
+
+  .sidebar-header {
+    background: linear-gradient(135deg, #0066cc, #0099ff);
+    padding: 24px 20px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sidebar-header .sb-title { color: white; font-size: 16px; font-weight: 800; }
+  .sidebar-close {
+    width: 34px; height: 34px; border-radius: 10px;
+    background: rgba(255,255,255,0.2); border: none; cursor: pointer;
+    color: white; font-size: 16px; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .sidebar-close:hover { background: rgba(255,255,255,0.35); }
+
+  .sidebar-body { padding: 16px; flex: 1; overflow-y: auto; }
+
+  .sidebar-nav-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px; border-radius: 14px; margin-bottom: 10px;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s; border: 2px solid transparent;
+    background: #f8faff;
+  }
+  .sidebar-nav-item:hover { background: #e8f0ff; border-color: #0066cc; transform: translateX(-4px); }
+  .sidebar-nav-item.active { background: linear-gradient(135deg,#e8f0ff,#dbeafe); border-color: #0066cc; }
+  .sidebar-nav-item .nav-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: linear-gradient(135deg,#0066cc,#0099ff);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 18px; flex-shrink: 0;
+  }
+  .sidebar-nav-item .nav-text .nav-label { font-size: 14px; font-weight: 700; color: #222; }
+  .sidebar-nav-item .nav-text .nav-sub   { font-size: 12px; color: #888; margin-top: 2px; }
+
+  .sidebar-divider { border: none; border-top: 1px solid #f0f0f0; margin: 6px 0 14px; }
+  .sidebar-section-label {
+    font-size: 11px; font-weight: 700; color: #aaa;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 0 4px; margin-bottom: 10px;
   }
 
+  /* ========== HEADER ========== */
+  .header { text-align: center; margin-bottom: 30px; animation: fadeDown 0.6s ease; }
+  .header .emoji-big { font-size: 60px; display: block; margin-bottom: 10px; }
+  .header h1 {
+    color: white; font-size: 24px; font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.3;
+  }
+  .header p { color: rgba(255,255,255,0.85); margin-top: 8px; font-size: 14px; }
+
+  /* ========== STATS ========== */
+  .stats-row {
+    display: flex; gap: 10px; margin-bottom: 20px;
+    flex-wrap: wrap; justify-content: center; animation: fadeUp 0.5s ease;
+  }
+  .stat-badge {
+    background: rgba(255,255,255,0.18); border-radius: 12px;
+    padding: 10px 16px; display: flex; align-items: center; gap: 8px;
+    backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.3);
+  }
+  .stat-badge .stat-icon { font-size: 18px; }
+  .stat-badge .stat-info .stat-num  { font-size: 18px; font-weight: 800; color: white; line-height: 1; }
+  .stat-badge .stat-info .stat-label{ font-size: 11px; color: rgba(255,255,255,0.8); margin-top: 1px; }
+
+  /* ========== CARD ========== */
+  .card {
+    background: white; border-radius: 24px; padding: 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin-bottom: 20px;
+    animation: fadeUp 0.6s ease;
+  }
+
+  /* ========== INPUT ========== */
   .input-group { display: flex; gap: 12px; flex-wrap: wrap; }
   .input-group input {
     flex: 1; min-width: 180px; padding: 16px 20px;
     border: 2.5px solid #e0e0e0; border-radius: 14px;
-    font-size: 18px; font-family: inherit; font-weight: 600; letter-spacing: 2px;
-    outline: none; transition: all 0.3s; color: #333;
+    font-size: 18px; font-family: inherit; font-weight: 600;
+    letter-spacing: 2px; outline: none; transition: all 0.3s; color: #333;
   }
   .input-group input:focus { border-color: #0066cc; box-shadow: 0 0 0 4px rgba(0,102,204,0.15); }
   .input-group input::placeholder { letter-spacing: 0; font-weight: 400; color: #aaa; }
@@ -60,20 +147,27 @@
   .btn-search:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,102,204,0.5); }
   .btn-search:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
+  /* ========== THỦ KHOA ========== */
   #thuKhoaCard {
     background: white; border-radius: 24px; padding: 24px 28px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin-bottom: 20px;
     animation: fadeUp 0.6s ease; transition: all 0.4s ease; overflow: hidden;
   }
-  #thuKhoaCard.hidden { opacity: 0; max-height: 0; padding: 0 28px; margin-bottom: 0; pointer-events: none; }
-
-  .thu-khoa-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  #thuKhoaCard.hidden {
+    opacity: 0; max-height: 0; padding: 0 28px;
+    margin-bottom: 0; pointer-events: none;
+  }
+  .thu-khoa-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px; flex-wrap: wrap;
+  }
   .thu-khoa-header .tk-title { font-size: 16px; font-weight: 800; color: #333; }
   .tk-mode-select {
-    margin-left: auto;
-    padding: 6px 12px; border: 2px solid #0066cc; border-radius: 20px;
-    font-size: 13px; font-weight: 700; color: #0066cc; background: white;
-    font-family: inherit; cursor: pointer; outline: none; transition: all 0.2s;
+    margin-left: auto; padding: 6px 12px;
+    border: 2px solid #0066cc; border-radius: 20px;
+    font-size: 13px; font-weight: 700; color: #0066cc;
+    background: white; font-family: inherit; cursor: pointer;
+    outline: none; transition: all 0.2s;
   }
   .tk-mode-select:hover { background: #0066cc; color: white; }
 
@@ -83,12 +177,12 @@
     padding: 14px 16px; border-radius: 16px; transition: transform 0.2s;
   }
   .tk-item:hover { transform: translateX(4px); }
-  .tk-item.rank1 { background: linear-gradient(135deg, #fff8e1, #ffe082); border: 2px solid #ffd54f; }
-  .tk-item.rank2 { background: linear-gradient(135deg, #f5f5f5, #e0e0e0); border: 2px solid #bdbdbd; }
-  .tk-item.rank3 { background: linear-gradient(135deg, #fbe9e7, #ffccbc); border: 2px solid #ffab91; }
+  .tk-item.rank1 { background: linear-gradient(135deg,#fff8e1,#ffe082); border: 2px solid #ffd54f; }
+  .tk-item.rank2 { background: linear-gradient(135deg,#f5f5f5,#e0e0e0); border: 2px solid #bdbdbd; }
+  .tk-item.rank3 { background: linear-gradient(135deg,#fbe9e7,#ffccbc); border: 2px solid #ffab91; }
   .tk-medal { font-size: 28px; flex-shrink: 0; }
   .tk-info { flex: 1; min-width: 0; }
-  .tk-info .tk-sbd { font-size: 13px; color: #888; font-weight: 600; }
+  .tk-info .tk-sbd  { font-size: 13px; color: #888; font-weight: 600; }
   .tk-info .tk-name { font-size: 15px; font-weight: 800; color: #222; margin-top: 1px; }
   .tk-score-box { text-align: right; flex-shrink: 0; }
   .tk-score-box .tk-score { font-size: 28px; font-weight: 800; line-height: 1; }
@@ -97,8 +191,12 @@
   .tk-item.rank3 .tk-score { color: #ea580c; }
   .tk-score-box .tk-score-label { font-size: 11px; color: #aaa; margin-top: 2px; }
   .tk-details { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
-  .tk-tag { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; background: rgba(255,255,255,0.7); color: #555; }
+  .tk-tag {
+    font-size: 11px; font-weight: 600; padding: 3px 8px;
+    border-radius: 20px; background: rgba(255,255,255,0.7); color: #555;
+  }
 
+  /* ========== RESULT ========== */
   #result { display: none; }
   .student-header {
     display: flex; align-items: center; gap: 16px;
@@ -110,164 +208,438 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 30px; flex-shrink: 0;
   }
-  .student-info h2 { font-size: 20px; color: #222; font-weight: 800; }
+  .student-info h2   { font-size: 20px; color: #222; font-weight: 800; }
   .student-info .sbd-tag { font-size: 13px; color: #888; }
 
   .scores-grid { display: grid; gap: 12px; margin-bottom: 16px; }
-  .scores-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .scores-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
-  .scores-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .scores-grid.cols-3 { grid-template-columns: repeat(3,1fr); }
+  .scores-grid.cols-4 { grid-template-columns: repeat(4,1fr); }
+  .scores-grid.cols-2 { grid-template-columns: repeat(2,1fr); }
 
   .score-box { border-radius: 16px; padding: 16px 10px; text-align: center; }
-  .score-box.van    { background: linear-gradient(135deg,#f093fb22,#f093fb44); border: 2px solid #f093fb; }
-  .score-box.nn     { background: linear-gradient(135deg,#4facfe22,#4facfe44); border: 2px solid #4facfe; }
-  .score-box.toan   { background: linear-gradient(135deg,#43e97b22,#43e97b44); border: 2px solid #43e97b; }
-  .score-box.chuyen { background: linear-gradient(135deg,#fa709a22,#fa709a44); border: 2px solid #fa709a; }
-  .score-box.kk     { background: linear-gradient(135deg,#ffecd222,#fcb69f44); border: 2px solid #fcb69f; }
-  .score-box.ut     { background: linear-gradient(135deg,#a8edea22,#fed6e344); border: 2px solid #a8edea; }
-  .score-box .mon   { font-size: 11px; font-weight: 700; color: #666; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .score-box .diem  { font-size: 30px; font-weight: 800; color: #333; line-height: 1; }
-  .score-box.van    .diem { color: #c026d3; }
-  .score-box.nn     .diem { color: #0284c7; }
-  .score-box.toan   .diem { color: #16a34a; }
-  .score-box.chuyen .diem { color: #db2777; }
-  .score-box.kk     .diem { color: #ea580c; }
-  .score-box.ut     .diem { color: #0891b2; }
-  .score-box .label { font-size: 11px; color: #999; margin-top: 4px; }
+  .score-box.van    { background:linear-gradient(135deg,#f093fb22,#f093fb44); border:2px solid #f093fb; }
+  .score-box.nn     { background:linear-gradient(135deg,#4facfe22,#4facfe44); border:2px solid #4facfe; }
+  .score-box.toan   { background:linear-gradient(135deg,#43e97b22,#43e97b44); border:2px solid #43e97b; }
+  .score-box.chuyen { background:linear-gradient(135deg,#fa709a22,#fa709a44); border:2px solid #fa709a; }
+  .score-box.kk     { background:linear-gradient(135deg,#ffecd222,#fcb69f44); border:2px solid #fcb69f; }
+  .score-box.ut     { background:linear-gradient(135deg,#a8edea22,#fed6e344); border:2px solid #a8edea; }
+  .score-box .mon   {
+    font-size:11px; font-weight:700; color:#666; margin-bottom:6px;
+    text-transform:uppercase; letter-spacing:0.5px;
+  }
+  .score-box .diem  { font-size:30px; font-weight:800; color:#333; line-height:1; }
+  .score-box.van    .diem { color:#c026d3; }
+  .score-box.nn     .diem { color:#0284c7; }
+  .score-box.toan   .diem { color:#16a34a; }
+  .score-box.chuyen .diem { color:#db2777; }
+  .score-box.kk     .diem { color:#ea580c; }
+  .score-box.ut     .diem { color:#0891b2; }
+  .score-box .label { font-size:11px; color:#999; margin-top:4px; }
 
   .qd-box {
-    background: linear-gradient(135deg, #d4fc7922, #96e6a144);
-    border: 2px solid #96e6a1; border-radius: 16px;
-    padding: 16px 24px; margin-bottom: 16px;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    background:linear-gradient(135deg,#d4fc7922,#96e6a144);
+    border:2px solid #96e6a1; border-radius:16px;
+    padding:16px 24px; margin-bottom:16px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
   }
-  .qd-box .qd-left .qd-label { font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-  .qd-box .qd-left .qd-sub { font-size: 12px; color: #888; }
-  .qd-box .qd-score { font-size: 36px; font-weight: 800; color: #15803d; flex-shrink: 0; }
+  .qd-box .qd-left .qd-label {
+    font-size:11px; font-weight:700; color:#666;
+    text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;
+  }
+  .qd-box .qd-left .qd-sub { font-size:12px; color:#888; }
+  .qd-box .qd-score { font-size:36px; font-weight:800; color:#15803d; flex-shrink:0; }
 
-  .tong-section { margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
-  .total-box { border-radius: 16px; padding: 18px 20px; text-align: center; color: white; }
-  .total-box.dai-tra { background: linear-gradient(135deg, #0066cc, #0099ff); }
-  .total-box.ptdtnt  { background: linear-gradient(135deg, #7c3aed, #a855f7); }
-  .total-box.chuyen  { background: linear-gradient(135deg, #db2777, #f472b6); }
-  .total-box .total-label { font-size: 12px; opacity: 0.85; margin-bottom: 4px; font-weight: 700; letter-spacing: 1px; }
-  .total-box .total-score { font-size: 48px; font-weight: 800; line-height: 1; }
-  .total-box .total-note  { font-size: 11px; opacity: 0.7; margin-top: 4px; }
+  .tong-section { margin-bottom:20px; display:flex; flex-direction:column; gap:10px; }
+  .total-box { border-radius:16px; padding:18px 20px; text-align:center; color:white; }
+  .total-box.dai-tra { background:linear-gradient(135deg,#0066cc,#0099ff); }
+  .total-box.ptdtnt  { background:linear-gradient(135deg,#7c3aed,#a855f7); }
+  .total-box.chuyen  { background:linear-gradient(135deg,#db2777,#f472b6); }
+  .total-box .total-label { font-size:12px; opacity:0.85; margin-bottom:4px; font-weight:700; letter-spacing:1px; }
+  .total-box .total-score { font-size:48px; font-weight:800; line-height:1; }
+  .total-box .total-note  { font-size:11px; opacity:0.7; margin-top:4px; }
 
   .rank-box {
-    background: linear-gradient(135deg, #ffecd2, #fcb69f);
-    border-radius: 16px; padding: 16px 20px; margin-bottom: 20px;
-    display: flex; flex-direction: column; gap: 10px;
+    background:linear-gradient(135deg,#ffecd2,#fcb69f);
+    border-radius:16px; padding:16px 20px; margin-bottom:20px;
+    display:flex; flex-direction:column; gap:10px;
   }
-  .rank-row { display: flex; align-items: center; gap: 14px; }
-  .rank-row .rank-icon { font-size: 32px; flex-shrink: 0; width: 40px; text-align: center; }
-  .rank-row .rank-text { font-size: 15px; font-weight: 700; color: #92400e; }
-  .rank-row .rank-sub  { font-size: 13px; color: #b45309; margin-top: 2px; }
-  .rank-divider { border: none; border-top: 1px dashed #f59e0b; margin: 2px 0; }
+  .rank-row { display:flex; align-items:center; gap:14px; }
+  .rank-row .rank-icon { font-size:32px; flex-shrink:0; width:40px; text-align:center; }
+  .rank-row .rank-text { font-size:15px; font-weight:700; color:#92400e; }
+  .rank-row .rank-sub  { font-size:13px; color:#b45309; margin-top:2px; }
+  .rank-divider { border:none; border-top:1px dashed #f59e0b; margin:2px 0; }
 
   .ai-box {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    border-radius: 16px; padding: 20px; margin-bottom: 20px; position: relative; overflow: hidden;
+    background:linear-gradient(135deg,#1a1a2e,#16213e);
+    border-radius:16px; padding:20px; margin-bottom:20px;
+    position:relative; overflow:hidden;
   }
-  .ai-box::before { content: '🤖'; position: absolute; right:-10px; top:-10px; font-size:80px; opacity:0.08; }
-  .ai-box .ai-label { font-size: 11px; color: #60a5fa; font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; }
-  .ai-box .ai-text  { color: #e2e8f0; font-size: 15px; line-height: 1.8; }
-  .ai-box .ai-typing { display: flex; gap: 6px; align-items: center; padding: 10px 0; }
-  .ai-box .ai-typing span { width:8px; height:8px; border-radius:50%; background:#60a5fa; animation: typing 1.2s infinite; }
-  .ai-box .ai-typing span:nth-child(2) { animation-delay: 0.2s; }
-  .ai-box .ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+  .ai-box::before { content:'🤖'; position:absolute; right:-10px; top:-10px; font-size:80px; opacity:0.08; }
+  .ai-box .ai-label { font-size:11px; color:#60a5fa; font-weight:700; letter-spacing:2px; margin-bottom:10px; }
+  .ai-box .ai-text  { color:#e2e8f0; font-size:15px; line-height:1.8; }
+  .ai-box .ai-typing { display:flex; gap:6px; align-items:center; padding:10px 0; }
+  .ai-box .ai-typing span {
+    width:8px; height:8px; border-radius:50%;
+    background:#60a5fa; animation:typing 1.2s infinite;
+  }
+  .ai-box .ai-typing span:nth-child(2) { animation-delay:0.2s; }
+  .ai-box .ai-typing span:nth-child(3) { animation-delay:0.4s; }
 
-  .section-title { font-size: 15px; font-weight: 800; color: #444; margin: 16px 0 10px; }
+  .section-title { font-size:15px; font-weight:800; color:#444; margin:16px 0 10px; }
   .school-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 16px; border-radius: 12px; margin-bottom: 8px; transition: transform 0.2s; gap: 10px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 16px; border-radius:12px; margin-bottom:8px;
+    transition:transform 0.2s; gap:10px;
   }
-  .school-item:hover { transform: translateX(4px); }
-  .school-item.dau { background:#f0fdf4; border-left: 4px solid #22c55e; }
-  .school-item.sat { background:#fffbeb; border-left: 4px solid #f59e0b; }
-  .school-item.kho { background:#fef2f2; border-left: 4px solid #ef4444; }
-  .school-name  { font-size: 14px; font-weight: 600; color: #333; }
-  .school-meta  { font-size: 12px; color: #888; margin-top: 2px; }
-  .school-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+  .school-item:hover { transform:translateX(4px); }
+  .school-item.dau { background:#f0fdf4; border-left:4px solid #22c55e; }
+  .school-item.sat { background:#fffbeb; border-left:4px solid #f59e0b; }
+  .school-item.kho { background:#fef2f2; border-left:4px solid #ef4444; }
+  .school-name { font-size:14px; font-weight:600; color:#333; }
+  .school-meta { font-size:12px; color:#888; margin-top:2px; }
+  .school-badge {
+    font-size:11px; font-weight:700; padding:4px 10px;
+    border-radius:20px; white-space:nowrap; flex-shrink:0;
+  }
   .dau .school-badge { background:#dcfce7; color:#15803d; }
   .sat .school-badge { background:#fef3c7; color:#92400e; }
   .kho .school-badge { background:#fee2e2; color:#b91c1c; }
 
   .chuyen-table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:16px; }
-  .chuyen-table th { background:#0066cc; color:white; padding:10px 8px; text-align:center; font-weight:700; }
+  .chuyen-table th {
+    background:#0066cc; color:white; padding:10px 8px;
+    text-align:center; font-weight:700;
+  }
   .chuyen-table td { padding:9px 8px; border-bottom:1px solid #f0f0f0; text-align:center; color:#333; }
   .chuyen-table tr:nth-child(even) td { background:#f8faff; }
   .chuyen-table .dc { font-weight:800; color:#0066cc; }
 
   .not-found { text-align:center; padding:20px; color:#ef4444; font-weight:600; font-size:15px; }
-  .footer { text-align:center; color:rgba(255,255,255,0.6); font-size:12px; margin-top:10px; }
 
-  @media (max-width: 480px) {
-    body { padding: 20px 12px; }
-    .header h1 { font-size: 19px; }
-    .header .emoji-big { font-size: 48px; }
-    .card { padding: 18px 16px; }
-    .input-group { flex-direction: column; }
-    .input-group input { width:100%; font-size:16px; }
-    .btn-search { width:100%; }
-    #thuKhoaCard { padding: 18px 16px; }
-    .scores-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
-    .scores-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-    .score-box .diem { font-size: 24px; }
-    .score-box .mon  { font-size: 10px; }
-    .total-box .total-score { font-size: 40px; }
-    .tk-score-box .tk-score { font-size: 22px; }
-    .chuyen-table { font-size: 11px; }
-    .chuyen-table th, .chuyen-table td { padding: 7px 4px; }
-    .thu-khoa-header { gap: 8px; }
-    .tk-mode-select { font-size: 12px; padding: 5px 10px; }
-    .qd-box { flex-direction: column; text-align: center; gap: 8px; }
-    .qd-box .qd-score { font-size: 28px; }
-    .rank-row .rank-text { font-size: 13px; }
-    .rank-row .rank-sub  { font-size: 12px; }
+  /* ========== PAGES ========== */
+  .page { display:none; }
+  .page.active { display:block; }
+
+  .page-header { text-align:center; margin-bottom:28px; animation:fadeDown 0.6s ease; }
+  .page-header .page-emoji { font-size:52px; display:block; margin-bottom:10px; }
+  .page-header h1 {
+    color:white; font-size:22px; font-weight:800;
+    text-shadow:0 2px 10px rgba(0,0,0,0.3); line-height:1.3;
+  }
+  .page-header p {
+    color:rgba(255,255,255,0.85); margin-top:8px; font-size:14px;
+    max-width:500px; margin-left:auto; margin-right:auto;
   }
 
-  @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes fadeUp   { from { opacity:0; transform:translateY(20px);  } to { opacity:1; transform:translateY(0); } }
-  @keyframes typing   { 0%,60%,100% { transform:translateY(0); } 30% { transform:translateY(-8px); } }
-  @keyframes pop      { 0% { transform:scale(0.8); opacity:0; } 70% { transform:scale(1.05); } 100% { transform:scale(1); opacity:1; } }
-  .pop { animation: pop 0.5s ease forwards; }
+  /* ========== PDF CARD ========== */
+  .pdf-card {
+    background:white; border-radius:24px; overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.2); margin-bottom:20px;
+    animation:fadeUp 0.6s ease;
+  }
+  .pdf-toolbar {
+    padding:16px 20px; background:#f8faff;
+    border-bottom:2px solid #e8f0ff;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; flex-wrap:wrap;
+  }
+  .pdf-toolbar .pdf-title {
+    font-size:14px; font-weight:700; color:#333;
+    display:flex; align-items:center; gap:8px;
+  }
+  .pdf-toolbar .pdf-title i { color:#ef4444; font-size:18px; }
+  .pdf-actions { display:flex; gap:8px; flex-wrap:wrap; }
+
+  .btn-download {
+    padding:10px 18px; border-radius:10px; border:none; cursor:pointer;
+    font-size:13px; font-weight:700; font-family:inherit;
+    display:flex; align-items:center; gap:7px;
+    transition:all 0.2s; text-decoration:none;
+  }
+  .btn-download.pdf { background:linear-gradient(135deg,#ef4444,#f87171); color:white; }
+  .btn-download.csv { background:linear-gradient(135deg,#16a34a,#22c55e); color:white; }
+  .btn-download:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,0.18); }
+  .btn-download.disabled { opacity:0.5; cursor:not-allowed; pointer-events:none; }
+
+  .pdf-embed-wrap { width:100%; background:#525659; min-height:500px; position:relative; }
+  .pdf-embed-wrap iframe { width:100%; height:820px; border:none; display:block; }
+
+  .pdf-placeholder {
+    min-height:300px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:12px; padding:40px 20px; background:#f8faff;
+  }
+  .pdf-placeholder i { font-size:52px; color:#cbd5e1; }
+  .pdf-placeholder .ph-title { font-size:16px; font-weight:700; color:#94a3b8; }
+  .pdf-placeholder .ph-sub   { font-size:13px; color:#b0bec5; text-align:center; }
+
+  /* ========== BẢNG ĐIỂM CHUẨN ========== */
+  .dc-filter-row { display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+  .dc-search-input {
+    flex:1; min-width:180px; padding:10px 16px;
+    border:2px solid #e0e0e0; border-radius:10px;
+    font-size:14px; font-family:inherit; outline:none; transition:all 0.2s;
+  }
+  .dc-search-input:focus { border-color:#0066cc; box-shadow:0 0 0 3px rgba(0,102,204,0.12); }
+
+  .dc-table-wrap { overflow-x:auto; border-radius:16px; border:2px solid #e8f0ff; }
+  .dc-table { width:100%; border-collapse:collapse; font-size:14px; }
+  .dc-table thead th {
+    background:linear-gradient(135deg,#0066cc,#0099ff); color:white;
+    padding:12px 14px; text-align:left; font-weight:700; white-space:nowrap;
+  }
+  .dc-table tbody tr { transition:background 0.15s; }
+  .dc-table tbody tr:hover td { background:#f0f7ff; }
+  .dc-table tbody td { padding:11px 14px; border-bottom:1px solid #f0f0f0; color:#333; }
+  .dc-table tbody tr:last-child td { border-bottom:none; }
+  .dc-table .dc-score { font-weight:800; color:#0066cc; font-size:15px; }
+  .dc-table .dc-rank  {
+    font-size:11px; font-weight:700; padding:3px 10px;
+    border-radius:20px; white-space:nowrap;
+  }
+  .dc-table .rank-high { background:#dcfce7; color:#15803d; }
+  .dc-table .rank-mid  { background:#fef3c7; color:#92400e; }
+  .dc-table .rank-low  { background:#fee2e2; color:#b91c1c; }
+
+  .tab-row { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .tab-btn {
+    padding:8px 16px; border-radius:20px; border:2px solid #e0e0e0;
+    font-size:13px; font-weight:700; font-family:inherit;
+    cursor:pointer; background:white; color:#666; transition:all 0.2s;
+  }
+  .tab-btn.active { background:linear-gradient(135deg,#0066cc,#0099ff); color:white; border-color:transparent; }
+  .tab-btn:hover:not(.active) { border-color:#0066cc; color:#0066cc; }
+
+  .footer {
+    text-align:center; color:rgba(255,255,255,0.6);
+    font-size:12px; margin-top:10px;
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 480px) {
+    body { padding:20px 12px; }
+    .header h1, .page-header h1 { font-size:18px; }
+    .header .emoji-big, .page-header .page-emoji { font-size:42px; }
+    .card { padding:18px 16px; }
+    .input-group { flex-direction:column; }
+    .input-group input, .btn-search { width:100%; }
+    #thuKhoaCard { padding:18px 16px; }
+    .scores-grid.cols-4 { grid-template-columns:repeat(2,1fr); }
+    .score-box .diem { font-size:24px; }
+    .total-box .total-score { font-size:38px; }
+    .tk-score-box .tk-score { font-size:22px; }
+    .chuyen-table { font-size:11px; }
+    .chuyen-table th, .chuyen-table td { padding:7px 4px; }
+    .qd-box { flex-direction:column; text-align:center; gap:8px; }
+    .qd-box .qd-score { font-size:28px; }
+    .rank-row .rank-text { font-size:13px; }
+    .rank-row .rank-sub  { font-size:12px; }
+    .pdf-embed-wrap iframe { height:500px; }
+    .sidebar { width:280px; }
+    .stat-badge { padding:8px 12px; }
+    .stat-badge .stat-info .stat-num { font-size:16px; }
+    .tab-btn { font-size:12px; padding:7px 12px; }
+    .pdf-toolbar { flex-direction:column; align-items:flex-start; }
+  }
+
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(20px)}  to{opacity:1;transform:translateY(0)} }
+  @keyframes typing   { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-8px)} }
+  @keyframes pop      { 0%{transform:scale(0.8);opacity:0} 70%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1} }
+  .pop { animation:pop 0.5s ease forwards; }
 </style>
 </head>
 <body>
+
+<!-- HAMBURGER -->
+<button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()" title="Menu">
+  <i class="fa-solid fa-bars"></i>
+</button>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sb-title">📚 Điều hướng</span>
+    <button class="sidebar-close" onclick="closeSidebar()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody"></div>
+</div>
+
 <div class="container">
 
-  <div class="header">
-    <span class="emoji-big">🎓</span>
-    <h1>Tra Cứu Điểm Thi<br>Tuyển Sinh Lớp 10 Đà Nẵng 2026</h1>
-    <p>Nhập SBD để xem điểm + gợi ý trường + AI nhận xét 👇</p>
-  </div>
+  <!-- ===== PAGE HOME ===== -->
+  <div class="page active" id="page-home">
+    <div class="header">
+      <span class="emoji-big">🎓</span>
+      <h1>Tra Cứu Điểm Thi<br>Tuyển Sinh Lớp 10 Đà Nẵng 2026</h1>
+      <p>Nhập SBD để xem điểm + gợi ý trường + AI nhận xét 👇</p>
+    </div>
 
-  <div class="card">
-    <div class="input-group">
-      <input type="text" id="sbdInput" placeholder="Nhập số báo danh..." maxlength="10"
-        onkeydown="if(event.key==='Enter') search()">
-      <button class="btn-search" id="btnSearch" onclick="search()">🔍 Tra cứu</button>
+    <div class="stats-row">
+      <div class="stat-badge">
+        <span class="stat-icon">🏫</span>
+        <div class="stat-info">
+          <div class="stat-num" id="statDaiTra">—</div>
+          <div class="stat-label">Thí sinh đại trà</div>
+        </div>
+      </div>
+      <div class="stat-badge">
+        <span class="stat-icon">⭐</span>
+        <div class="stat-info">
+          <div class="stat-num" id="statChuyen">—</div>
+          <div class="stat-label">Thí sinh chuyên</div>
+        </div>
+      </div>
+      <div class="stat-badge">
+        <span class="stat-icon">🌿</span>
+        <div class="stat-info">
+          <div class="stat-num" id="statPTDTNT">—</div>
+          <div class="stat-label">Thí sinh PTDTNT</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="input-group">
+        <input type="text" id="sbdInput" placeholder="Nhập số báo danh..."
+          maxlength="10" onkeydown="if(event.key==='Enter') search()">
+        <button class="btn-search" id="btnSearch" onclick="search()">🔍 Tra cứu</button>
+      </div>
+    </div>
+
+    <div id="thuKhoaCard">
+      <div class="thu-khoa-header">
+        <span style="font-size:22px">🏆</span>
+        <span class="tk-title">Thủ Khoa 2026</span>
+        <select class="tk-mode-select" id="tkModeSelect" onchange="renderThuKhoa()">
+          <option value="dai_tra">🏫 Đại trà</option>
+          <option value="chuyen">⭐ Chuyên</option>
+          <option value="ptdtnt">🌿 PTDTNT</option>
+        </select>
+      </div>
+      <div class="tk-list" id="tkList">
+        <div style="text-align:center;color:#aaa;padding:16px;font-size:14px">⏳ Đang tải dữ liệu...</div>
+      </div>
+    </div>
+
+    <div class="card" id="result">
+      <div id="resultContent"></div>
     </div>
   </div>
 
-  <div id="thuKhoaCard">
-    <div class="thu-khoa-header">
-      <span style="font-size:22px">🏆</span>
-      <span class="tk-title">Thủ Khoa 2026</span>
-      <select class="tk-mode-select" id="tkModeSelect" onchange="renderThuKhoa()">
-        <option value="dai_tra">🏫 Đại trà</option>
-        <option value="chuyen">⭐ Chuyên</option>
-        <option value="ptdtnt">🌿 PTDTNT</option>
-      </select>
+  <!-- ===== PAGE ĐIỂM CHUẨN ===== -->
+  <div class="page" id="page-diem-chuan">
+    <div class="page-header">
+      <span class="page-emoji">📋</span>
+      <h1>Điểm Chuẩn Tuyển Sinh Lớp 10<br>Đà Nẵng 2026</h1>
+      <p>Điểm chuẩn chính thức từ Sở GD&ĐT Đà Nẵng, năm học 2026–2027</p>
     </div>
-    <div class="tk-list" id="tkList">
-      <div style="text-align:center;color:#aaa;padding:16px;font-size:14px">⏳ Đang tải dữ liệu...</div>
+
+    <div class="pdf-card">
+      <div class="pdf-toolbar">
+        <div class="pdf-title">
+          <i class="fa-solid fa-file-pdf"></i>
+          Thông báo điểm chuẩn (Sở GD&ĐT)
+        </div>
+        <div class="pdf-actions">
+          <a class="btn-download pdf disabled" id="btnDcPdf" href="#" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i> Tải PDF
+          </a>
+        </div>
+      </div>
+      <div class="pdf-embed-wrap">
+        <div class="pdf-placeholder" id="dcPdfPlaceholder">
+          <i class="fa-solid fa-file-pdf"></i>
+          <div class="ph-title">File PDF sẽ được cập nhật sớm</div>
+          <div class="ph-sub">Bạn có thể xem bảng điểm chuẩn chi tiết bên dưới</div>
+        </div>
+        <iframe id="dcPdfIframe" src="" style="display:none" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="card" style="padding:24px 20px">
+      <div class="tab-row">
+        <button class="tab-btn active" onclick="switchDcTab('cong_lap')">🏫 Công lập (69 trường)</button>
+        <button class="tab-btn" onclick="switchDcTab('chuyen')">⭐ THPT Chuyên</button>
+        <button class="tab-btn" onclick="switchDcTab('ptdtnt')">🌿 PTDTNT</button>
+        <button class="tab-btn" onclick="switchDcTab('ngoai_ngu')">🌐 Tiếng Nhật / Pháp</button>
+      </div>
+      <div class="dc-filter-row" id="dcFilterRow">
+        <input type="text" class="dc-search-input" id="dcSearchInput"
+          placeholder="🔍 Tìm tên trường..." oninput="filterDcTable()">
+      </div>
+      <div class="dc-table-wrap">
+        <table class="dc-table">
+          <thead id="dcTableHead"></thead>
+          <tbody id="dcTableBody"></tbody>
+        </table>
+      </div>
+      <p style="font-size:12px;color:#aaa;margin-top:12px">
+        Nguồn: Thông báo số 2702/TB-SGDĐT ngày 08/6/2026 của Sở GD&ĐT Đà Nẵng
+      </p>
     </div>
   </div>
 
-  <div class="card" id="result">
-    <div id="resultContent"></div>
+  <!-- ===== PAGE DANH SÁCH ĐIỂM THI ===== -->
+  <div class="page" id="page-danh-sach">
+    <div class="page-header">
+      <span class="page-emoji">📁</span>
+      <h1>Danh Sách Điểm Thi<br>Tuyển Sinh Lớp 10 Đà Nẵng 2026</h1>
+      <p>Toàn bộ điểm thi của các thí sinh — xem trước và tải về dạng PDF hoặc CSV</p>
+    </div>
+
+    <div class="pdf-card">
+      <div class="pdf-toolbar">
+        <div class="pdf-title">
+          <i class="fa-solid fa-file-pdf"></i>
+          Danh sách điểm thi (PDF)
+        </div>
+        <div class="pdf-actions">
+          <a class="btn-download pdf disabled" id="btnDanhSachPdf" href="#" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i> Tải PDF
+          </a>
+          <a class="btn-download csv disabled" id="btnDanhSachCsv" href="#" download>
+            <i class="fa-solid fa-file-csv"></i> Tải CSV
+          </a>
+        </div>
+      </div>
+      <div class="pdf-embed-wrap">
+        <div class="pdf-placeholder" id="dsPdfPlaceholder">
+          <i class="fa-solid fa-file-pdf"></i>
+          <div class="ph-title">File PDF sẽ được cập nhật sớm</div>
+          <div class="ph-sub">Khi có file, nhấn "Tải PDF" để tải hoặc xem trực tiếp tại đây</div>
+        </div>
+        <iframe id="dsPdfIframe" src="" style="display:none" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="card" style="padding:20px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <span style="font-size:20px">ℹ️</span>
+        <span style="font-size:14px;font-weight:700;color:#333">Hướng dẫn sử dụng file</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:12px;background:#fef2f2;border-radius:10px;border-left:4px solid #ef4444">
+          <i class="fa-solid fa-file-pdf" style="color:#ef4444;font-size:16px;margin-top:2px;flex-shrink:0"></i>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#333">File PDF</div>
+            <div style="font-size:12px;color:#666;margin-top:2px">Xem toàn bộ danh sách điểm thi dạng văn bản, dễ đọc, phù hợp in ấn.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding:12px;background:#f0fdf4;border-radius:10px;border-left:4px solid #22c55e">
+          <i class="fa-solid fa-file-csv" style="color:#16a34a;font-size:16px;margin-top:2px;flex-shrink:0"></i>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#333">File CSV</div>
+            <div style="font-size:12px;color:#666;margin-top:2px">Dữ liệu thô dạng bảng, mở bằng Excel / Google Sheets để lọc, sắp xếp, phân tích.</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="footer">Dữ liệu từ Sở GD&ĐT Đà Nẵng • AI nhận xét mang tính tham khảo</div>
@@ -275,10 +647,140 @@
 
 <script>
 // ================================================
-// KHÔNG CÓ API KEY Ở ĐÂY
-// Mọi request AI đều đi qua /api/ai (Vercel)
+// CONFIG — chỉ sửa 3 dòng này khi có file
 // ================================================
+const CONFIG = {
+  PDF_DIEM_CHUAN: "",  // VD: "/pdfjs/web/viewer.html?file=/files/diem-chuan-2026.pdf"
+  PDF_DANH_SACH:  "",  // VD: "/pdfjs/web/viewer.html?file=/files/danh-sach-diem-thi-2026.pdf"
+  CSV_DANH_SACH:  "",  // VD: "/files/danh-sach-diem-thi-2026.csv"
+};
 
+// ================================================
+// ROUTER
+// ================================================
+const ROUTES = {
+  "":                                                       "home",
+  "danh-sach-diem-chuan-vao-10":                           "diem-chuan",
+  "danh-sach-diem-tuyen-sinh-cua-cac-thi-sinh-vao-10":    "danh-sach",
+};
+
+function getRoute() {
+  const hash = location.hash.replace(/^#\/?/, "").trim();
+  return ROUTES[hash] ?? "home";
+}
+
+function navigate(path) {
+  location.hash = path ? `/${path}` : "";
+  renderPage();
+  closeSidebar();
+}
+
+function renderPage() {
+  const route = getRoute();
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  const el = document.getElementById(`page-${route}`);
+  if (el) { el.classList.add("active"); window.scrollTo(0,0); }
+  renderSidebar();
+  updateMeta(route);
+  if (route === "diem-chuan") renderDcTable();
+}
+
+function updateMeta(route) {
+  const metas = {
+    "home":        { title:"Tra Cứu Điểm Thi Lớp 10 Đà Nẵng 2026",        desc:"Nhập SBD để xem điểm thi, gợi ý trường và AI nhận xét." },
+    "diem-chuan":  { title:"Điểm Chuẩn Lớp 10 Đà Nẵng 2026",              desc:"Điểm chuẩn chính thức các trường THPT Đà Nẵng năm học 2026-2027." },
+    "danh-sach":   { title:"Danh Sách Điểm Thi Lớp 10 Đà Nẵng 2026",      desc:"Tải danh sách điểm thi tuyển sinh lớp 10 Đà Nẵng 2026 (PDF & CSV)." },
+  };
+  const m = metas[route] ?? metas["home"];
+  document.title = m.title;
+  document.querySelector('meta[name="description"]')?.setAttribute("content", m.desc);
+}
+
+window.addEventListener("hashchange", renderPage);
+
+// ================================================
+// SIDEBAR
+// ================================================
+const NAV_ITEMS = [
+  { id:"home",       path:"",                                                     icon:"fa-magnifying-glass", label:"Tra cứu điểm thi",     sub:"Trang chủ — Nhập SBD" },
+  { id:"diem-chuan", path:"danh-sach-diem-chuan-vao-10",                          icon:"fa-list-ol",          label:"Điểm chuẩn các trường", sub:"69 trường THPT + chuyên" },
+  { id:"danh-sach",  path:"danh-sach-diem-tuyen-sinh-cua-cac-thi-sinh-vao-10",   icon:"fa-file-lines",       label:"Danh sách điểm thi",    sub:"File PDF & CSV toàn bộ thí sinh" },
+];
+
+function renderSidebar() {
+  const cur  = getRoute();
+  const body = document.getElementById("sidebarBody");
+  body.innerHTML =
+    `<div class="sidebar-section-label">Danh mục</div>` +
+    NAV_ITEMS.map(item => `
+      <a class="sidebar-nav-item ${cur === item.id ? 'active' : ''}"
+         onclick="navigate('${item.path}')">
+        <div class="nav-icon"><i class="fa-solid ${item.icon}"></i></div>
+        <div class="nav-text">
+          <div class="nav-label">${item.label}</div>
+          <div class="nav-sub">${item.sub}</div>
+        </div>
+      </a>`).join("") +
+    `<hr class="sidebar-divider">
+     <div class="sidebar-section-label">Thông tin</div>
+     <div style="padding:8px 4px;font-size:12px;color:#aaa;line-height:1.9">
+       📅 Kỳ thi: Tuyển sinh lớp 10 THPT<br>
+       🏙️ Địa điểm: Đà Nẵng<br>
+       📆 Năm học: 2026–2027<br>
+       📌 Nguồn: Sở GD&ĐT Đà Nẵng
+     </div>`;
+}
+
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("overlay").classList.toggle("show");
+}
+function closeSidebar() {
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("overlay").classList.remove("show");
+}
+
+// ================================================
+// PDF SETUP — dùng PDF.js viewer
+// ================================================
+function setupPdfs() {
+  // Điểm chuẩn PDF
+  if (CONFIG.PDF_DIEM_CHUAN) {
+    const viewerUrl = `/pdfjs/web/viewer.html?file=${encodeURIComponent(CONFIG.PDF_DIEM_CHUAN)}`;
+    const iframe    = document.getElementById("dcPdfIframe");
+    const ph        = document.getElementById("dcPdfPlaceholder");
+    const btn       = document.getElementById("btnDcPdf");
+    iframe.src           = viewerUrl;
+    iframe.style.display = "block";
+    ph.style.display     = "none";
+    btn.href             = CONFIG.PDF_DIEM_CHUAN;
+    btn.classList.remove("disabled");
+  }
+
+  // Danh sách điểm thi PDF
+  if (CONFIG.PDF_DANH_SACH) {
+    const viewerUrl = `/pdfjs/web/viewer.html?file=${encodeURIComponent(CONFIG.PDF_DANH_SACH)}`;
+    const iframe    = document.getElementById("dsPdfIframe");
+    const ph        = document.getElementById("dsPdfPlaceholder");
+    const btn       = document.getElementById("btnDanhSachPdf");
+    iframe.src           = viewerUrl;
+    iframe.style.display = "block";
+    ph.style.display     = "none";
+    btn.href             = CONFIG.PDF_DANH_SACH;
+    btn.classList.remove("disabled");
+  }
+
+  // CSV
+  if (CONFIG.CSV_DANH_SACH) {
+    const btn = document.getElementById("btnDanhSachCsv");
+    btn.href  = CONFIG.CSV_DANH_SACH;
+    btn.classList.remove("disabled");
+  }
+}
+
+// ================================================
+// DATA
+// ================================================
 let diemThiData   = null;
 let diemChuanData = null;
 
@@ -286,66 +788,184 @@ async function loadData() {
   try {
     const [r1, r2] = await Promise.all([
       fetch("diem-thi-lop10-danang-2026.json"),
-      fetch("diem-chuan-danang-2026.json")
+      fetch("diem-chuan-danang-2026.json"),
     ]);
-    const j1 = await r1.json();
-    const j2 = await r2.json();
-
+    const j1  = await r1.json();
+    const j2  = await r2.json();
     const arr = Array.isArray(j1) ? j1 : (j1.du_lieu ?? []);
+
     diemThiData = {};
     arr.forEach(item => {
       diemThiData[String(item.so_bao_danh).trim()] = item;
     });
-
     diemChuanData = j2;
     console.log("✅ Loaded", Object.keys(diemThiData).length, "thí sinh");
+
+    // Stats
+    const all = Object.values(diemThiData);
+    document.getElementById("statDaiTra").textContent = all.filter(d => d.tong_dai_tra != null).length.toLocaleString("vi-VN");
+    document.getElementById("statChuyen").textContent = all.filter(d => d.tong_chuyen  != null).length.toLocaleString("vi-VN");
+    document.getElementById("statPTDTNT").textContent = all.filter(d => d.tong_ptdtnt  != null).length.toLocaleString("vi-VN");
+
     renderThuKhoa();
+    if (getRoute() === "diem-chuan") renderDcTable();
   } catch(e) {
     console.error("❌ Lỗi load data:", e);
     document.getElementById("tkList").innerHTML =
       `<div style="text-align:center;color:#ef4444;padding:16px;font-size:14px">❌ Không tải được dữ liệu</div>`;
   }
 }
-loadData();
 
-// ========== THỦ KHOA ==========
+// ================================================
+// ĐIỂM CHUẨN TABLE DATA
+// ================================================
+let dcCurrentTab = "cong_lap";
+
+const DC_DATA = {
+  cong_lap: {
+    head: ["#","Tên trường","Điểm chuẩn","Mức độ"],
+    rows: [
+      ["THCS, THPT Nguyễn Khuyến",32.50],["THPT Âu Cơ",8.00],["THPT Bắc Trà My",11.00],
+      ["THPT Cẩm Lệ",25.00],["THPT Cao Bá Quát",10.25],["THPT Chu Văn An",12.25],
+      ["THPT Đỗ Đăng Tuyển",11.75],["THPT Duy Tân",9.00],["THPT Hiệp Đức",14.50],
+      ["THPT Hồ Nghinh",22.50],["THPT Hòa Vang",33.75],["THPT Hoàng Diệu",18.75],
+      ["THPT Hoàng Hoa Thám",33.25],["THPT Hùng Vương",12.75],["THPT Huỳnh Ngọc Huệ",12.75],
+      ["THPT Huỳnh Thúc Kháng",8.75],["THPT Khâm Đức",11.50],["THPT Lê Hồng Phong",13.50],
+      ["THPT Lê Quý Đôn",21.75],["THPT Liên Chiểu",23.00],["THPT Lương Thế Vinh",18.25],
+      ["THPT Lương Thúc Kỳ",17.50],["THPT Lý Tự Trọng",10.75],["THPT Nam Trà My",7.75],
+      ["THPT Ngô Quyền",24.00],["THPT Ngũ Hành Sơn",24.00],["THPT Nguyễn Dục",7.50],
+      ["THPT Nguyễn Duy Hiệu",20.00],["THPT Nguyễn Hiền",26.50],["THPT Nguyễn Hiền - Duy Xuyên",10.75],
+      ["THPT Nguyễn Huệ",13.50],["THPT Nguyễn Khuyến",19.00],["THPT Nguyễn Thái Bình",10.25],
+      ["THPT Nguyễn Thượng Hiền",26.00],["THPT Nguyễn Trãi",29.00],["THPT Nguyễn Trãi - Hội An",20.25],
+      ["THPT Nguyễn Văn Cừ",9.00],["THPT Nguyễn Văn Thoại",29.25],["THPT Nguyễn Văn Trỗi",9.00],
+      ["THPT Nông Sơn",10.00],["THPT Núi Thành",16.00],["THPT Ông Ích Khiêm",20.75],
+      ["THPT Phạm Phú Thứ",22.50],["THPT Phạm Phú Thứ - Gò Nổi",16.75],["THPT Phan Bội Châu",16.75],
+      ["THPT Phan Châu Trinh",35.50],["THPT Phan Châu Trinh - Tiên Phước",8.50],["THPT Phan Thành Tài",22.50],
+      ["THPT Quang Trung - Đông Giang",8.50],["THPT Quế Sơn",8.75],["THPT Sào Nam",9.00],
+      ["THPT Sơn Trà",27.00],["THPT Tây Giang",9.25],["THPT Thái Phiên",31.00],
+      ["THPT Thái Phiên - Thăng Bình",9.25],["THPT Thanh Khê",26.75],["THPT Tiểu La",8.00],
+      ["THPT Tố Hữu",11.00],["THPT Tôn Thất Tùng",20.75],["THPT Trần Cao Vân",29.50],
+      ["THPT Trần Đại Nghĩa",8.25],["THPT Trần Hưng Đạo",20.25],["THPT Trần Phú",31.75],
+      ["THPT Trần Phú - Việt An",9.50],["THPT Trần Quý Cáp",25.25],["THPT Trần Văn Dư",15.75],
+      ["THPT Võ Chí Công",21.75],["THPT Võ Chí Công - Hùng Sơn",9.75],["THPT Võ Nguyên Giáp",14.00],
+    ]
+  },
+  chuyen: {
+    head: ["Lớp chuyên","Lê Quý Đôn","Nguyễn Bỉnh Khiêm","Lê Thánh Tông"],
+    rows: [
+      ["Chuyên Hóa",47.14,37.25,36.00],
+      ["Chuyên Lịch sử",41.25,34.50,34.14],
+      ["Chuyên Ngữ văn","44.00 ①",39.25,40.25],
+      ["Chuyên Sinh học",46.50,38.25,39.50],
+      ["Chuyên Tiếng Anh",42.95,38.05,39.55],
+      ["Chuyên Tiếng Nhật",43.68,"—","—"],
+      ["Chuyên Tiếng Pháp",41.50,"—","—"],
+      ["Chuyên Tin học",39.00,25.35,31.48],
+      ["Chuyên Toán",43.75,37.00,"38.50 ②"],
+      ["Chuyên Vật lí",43.39,38.25,37.75],
+      ["Chuyên Địa lí",44.64,37.64,35.50],
+    ]
+  },
+  ptdtnt: {
+    head: ["Đối tượng thi sinh","Điểm chuẩn"],
+    rows: [
+      ["Người dân tộc Kinh",19.75],
+      ["Người dân tộc thiểu số",14.25],
+    ]
+  },
+  ngoai_ngu: {
+    head: ["Lớp – Trường","Điểm chuẩn"],
+    rows: [
+      ["Tiếng Nhật – THPT Phan Châu Trinh",27.50],
+      ["Tiếng Pháp – THPT Phan Châu Trinh",32.13],
+      ["Tiếng Pháp – THPT Nguyễn Hiền",13.38],
+      ["Tiếng Nhật – THPT Hoàng Hoa Thám",16.00],
+    ]
+  },
+};
+
+function switchDcTab(tab) {
+  dcCurrentTab = tab;
+  const tabs   = ["cong_lap","chuyen","ptdtnt","ngoai_ngu"];
+  document.querySelectorAll(".tab-btn").forEach((b,i) => {
+    b.classList.toggle("active", tabs[i] === tab);
+  });
+  document.getElementById("dcFilterRow").style.display = tab === "cong_lap" ? "flex" : "none";
+  renderDcTable();
+}
+
+function renderDcTable() {
+  const data = DC_DATA[dcCurrentTab];
+  if (!data) return;
+  document.getElementById("dcTableHead").innerHTML =
+    `<tr>${data.head.map(h => `<th>${h}</th>`).join("")}</tr>`;
+
+  const body  = document.getElementById("dcTableBody");
+  const query = (document.getElementById("dcSearchInput")?.value ?? "").toLowerCase();
+
+  if (dcCurrentTab === "cong_lap") {
+    const sorted   = [...data.rows].sort((a,b) => b[1] - a[1]);
+    const filtered = query ? sorted.filter(r => r[0].toLowerCase().includes(query)) : sorted;
+    body.innerHTML = filtered.map((r,i) => {
+      const dc  = r[1];
+      const cls = dc >= 28 ? "rank-high" : dc >= 18 ? "rank-mid" : "rank-low";
+      const lbl = dc >= 28 ? "Cao"       : dc >= 18 ? "Trung bình" : "Thấp";
+      return `<tr>
+        <td style="color:#aaa;font-size:12px">${i+1}</td>
+        <td style="font-weight:600">${r[0]}</td>
+        <td class="dc-score">${dc}</td>
+        <td><span class="dc-rank ${cls}">${lbl}</span></td>
+      </tr>`;
+    }).join("") ||
+    `<tr><td colspan="4" style="text-align:center;color:#aaa;padding:20px">Không tìm thấy trường nào</td></tr>`;
+
+  } else if (dcCurrentTab === "chuyen") {
+    body.innerHTML = data.rows.map(r =>
+      `<tr>${r.map((c,i) =>
+        `<td style="${i > 0 ? 'text-align:center;font-weight:700;color:#0066cc' : ''}">${c}</td>`
+      ).join("")}</tr>`
+    ).join("");
+  } else {
+    body.innerHTML = data.rows.map(r =>
+      `<tr>
+        <td style="font-weight:600">${r[0]}</td>
+        <td style="text-align:center;font-weight:800;color:#0066cc;font-size:15px">${r[1]}</td>
+      </tr>`
+    ).join("");
+  }
+}
+
+function filterDcTable() { renderDcTable(); }
+
+// ================================================
+// THỦ KHOA
+// ================================================
 function renderThuKhoa() {
   if (!diemThiData) return;
-
-  const mode    = document.getElementById("tkModeSelect").value;
-  const medals  = ["🥇","🥈","🥉"];
-  const classes = ["rank1","rank2","rank3"];
-  const labels  = ["Thủ khoa","Á khoa","Hạng Ba"];
-
-  const tongField = mode === "chuyen"  ? "tong_chuyen"
-                  : mode === "ptdtnt" ? "tong_ptdtnt"
-                  : "tong_dai_tra";
-
-  const modeLabel = mode === "chuyen"  ? "tổng chuyên"
-                  : mode === "ptdtnt" ? "tổng PTDTNT"
-                  : "đại trà";
+  const mode      = document.getElementById("tkModeSelect").value;
+  const medals    = ["🥇","🥈","🥉"];
+  const classes   = ["rank1","rank2","rank3"];
+  const labels    = ["Thủ khoa","Á khoa","Hạng Ba"];
+  const tongField = mode === "chuyen" ? "tong_chuyen" : mode === "ptdtnt" ? "tong_ptdtnt" : "tong_dai_tra";
+  const modeLabel = mode === "chuyen" ? "tổng chuyên" : mode === "ptdtnt" ? "tổng PTDTNT"  : "đại trà";
 
   const sorted = Object.values(diemThiData)
     .filter(ts => ts[tongField] != null)
     .map(ts => ({
-      sbd:        String(ts.so_bao_danh),
-      ten:        ts.ho_ten ?? "—",
-      van:        ts.ngu_van,
-      nn:         ts.ngoai_ngu,
-      toan:       ts.toan,
-      mon_chuyen: ts.mon_chuyen,
-      tong:       ts[tongField]
+      sbd: String(ts.so_bao_danh), ten: ts.ho_ten ?? "—",
+      van: ts.ngu_van, nn: ts.ngoai_ngu, toan: ts.toan,
+      mon_chuyen: ts.mon_chuyen, tong: ts[tongField],
     }))
     .sort((a,b) => b.tong - a.tong)
     .slice(0,3);
 
-  if (sorted.length === 0) {
+  if (!sorted.length) {
     document.getElementById("tkList").innerHTML =
-      `<div style="text-align:center;color:#aaa;padding:16px;font-size:14px">Không có dữ liệu cho loại này</div>`;
+      `<div style="text-align:center;color:#aaa;padding:16px;font-size:14px">Không có dữ liệu</div>`;
     return;
   }
 
-  const html = sorted.map((ts,i) => `
+  document.getElementById("tkList").innerHTML = sorted.map((ts,i) => `
     <div class="tk-item ${classes[i]} pop" style="animation-delay:${i*0.12}s">
       <div class="tk-medal">${medals[i]}</div>
       <div class="tk-info">
@@ -363,84 +983,69 @@ function renderThuKhoa() {
         <div class="tk-score-label">${modeLabel}</div>
       </div>
     </div>`).join("");
-
-  document.getElementById("tkList").innerHTML = html;
 }
 
 function hideThuKhoa() {
   document.getElementById("thuKhoaCard").classList.add("hidden");
 }
 
-// ========== XẾP HẠNG ==========
-function tinhRank(tongDaiTra) {
+// ================================================
+// RANK
+// ================================================
+function tinhRank(tong) {
   if (!diemThiData) return { rank:"?", total:"?" };
-  const all = Object.values(diemThiData)
-    .map(d => d.tong_dai_tra ?? 0)
-    .sort((a,b) => b-a);
-  const rank = all.findIndex(d => d <= tongDaiTra) + 1;
-  return { rank, total: all.length };
+  const all = Object.values(diemThiData).map(d => d.tong_dai_tra ?? 0).sort((a,b) => b-a);
+  return { rank: all.findIndex(d => d <= tong) + 1, total: all.length };
+}
+function tinhRankChuyen(tong) {
+  if (!diemThiData || tong == null) return null;
+  const all = Object.values(diemThiData).filter(d => d.tong_chuyen != null).map(d => d.tong_chuyen).sort((a,b) => b-a);
+  if (!all.length) return null;
+  return { rank: all.findIndex(d => d <= tong) + 1, total: all.length };
+}
+function tinhRankPTDTNT(tong) {
+  if (!diemThiData || tong == null) return null;
+  const all = Object.values(diemThiData).filter(d => d.tong_ptdtnt != null).map(d => d.tong_ptdtnt).sort((a,b) => b-a);
+  if (!all.length) return null;
+  return { rank: all.findIndex(d => d <= tong) + 1, total: all.length };
 }
 
-function tinhRankChuyen(tongChuyen) {
-  if (!diemThiData || tongChuyen == null) return null;
-  const all = Object.values(diemThiData)
-    .filter(d => d.tong_chuyen != null)
-    .map(d => d.tong_chuyen)
-    .sort((a,b) => b-a);
-  if (all.length === 0) return null;
-  const rank = all.findIndex(d => d <= tongChuyen) + 1;
-  return { rank, total: all.length };
-}
-
-function tinhRankPTDTNT(tongPt) {
-  if (!diemThiData || tongPt == null) return null;
-  const all = Object.values(diemThiData)
-    .filter(d => d.tong_ptdtnt != null)
-    .map(d => d.tong_ptdtnt)
-    .sort((a,b) => b-a);
-  if (all.length === 0) return null;
-  const rank = all.findIndex(d => d <= tongPt) + 1;
-  return { rank, total: all.length };
-}
-
-// ========== GỢI Ý TRƯỜNG ==========
-function goiYTruong(tongDaiTra) {
+// ================================================
+// GỢI Ý TRƯỜNG
+// ================================================
+function goiYTruong(tong) {
   if (!diemChuanData?.phu_luc_4_cong_lap) return { dau:[], sat:[], kho:[] };
   const dau=[], sat=[], kho=[];
-
   diemChuanData.phu_luc_4_cong_lap.forEach(t => {
-    const dc = t.diem_chuan;
-    if (!dc) return;
-    const diff = Math.round((tongDaiTra - dc) * 100) / 100;
+    const dc = t.diem_chuan; if (!dc) return;
+    const diff = Math.round((tong - dc) * 100) / 100;
     const obj  = { ten: t.ten_truong, dc, diff };
-
-    if (diff >= 0)      dau.push(obj);
+    if (diff >= 0) dau.push(obj);
     else if (diff > -1) sat.push(obj);
-    else                kho.push(obj);
+    else kho.push(obj);
   });
-
   dau.sort((a,b) => b.dc - a.dc);
   sat.sort((a,b) => b.diff - a.diff);
   kho.sort((a,b) => b.diff - a.diff);
-
   return { dau, sat, kho };
 }
 
-// ========== BẢNG CHUYÊN ==========
-function renderBangChuyen(tongChuyen) {
-  if (!diemChuanData?.phu_luc_1_chuyen || tongChuyen == null) return "";
+// ================================================
+// BẢNG CHUYÊN & PTDTNT
+// ================================================
+function renderBangChuyen(tong) {
+  if (!diemChuanData?.phu_luc_1_chuyen || tong == null) return "";
   const rows = diemChuanData.phu_luc_1_chuyen.map(lop => {
     const truongs = [
-      { ten:"Lê Quý Đôn",    dc: lop.Le_Quy_Don },
-      { ten:"N.Bỉnh Khiêm",  dc: lop.Nguyen_Binh_Khiem },
-      { ten:"Lê Thánh Tông", dc: lop.Le_Thanh_Tong }
+      { ten:"Lê Quý Đôn",        dc: lop.Le_Quy_Don },
+      { ten:"N.Bỉnh Khiêm",      dc: lop.Nguyen_Binh_Khiem },
+      { ten:"Lê Thánh Tông",     dc: lop.Le_Thanh_Tong },
     ];
     const tds = truongs.map(t => {
       if (!t.dc) return `<td>—</td>`;
-      const diff  = Math.round((tongChuyen - t.dc) * 100) / 100;
-      const style = diff >= 0
-        ? ' style="color:#16a34a;font-weight:800"'
-        : diff > -2 ? ' style="color:#f59e0b;font-weight:700"' : '';
+      const diff  = Math.round((tong - t.dc) * 100) / 100;
+      const style = diff >= 0 ? ' style="color:#16a34a;font-weight:800"'
+                  : diff > -2 ? ' style="color:#f59e0b;font-weight:700"' : '';
       const icon  = diff >= 0 ? "✅" : diff > -2 ? "⚡" : "";
       return `<td class="dc"${style}>${t.dc} ${icon}</td>`;
     }).join("");
@@ -448,14 +1053,12 @@ function renderBangChuyen(tongChuyen) {
   }).join("");
 
   return `
-    <div class="section-title">🎯 So sánh điểm chuyên (tổng chuyên: <strong>${tongChuyen}</strong>)</div>
+    <div class="section-title">🎯 So sánh điểm chuyên (tổng chuyên: <strong>${tong}</strong>)</div>
     <div style="overflow-x:auto;margin-bottom:8px">
       <table class="chuyen-table">
         <thead><tr>
-          <th>Lớp chuyên</th>
-          <th>Lê Quý Đôn</th>
-          <th>N.Bỉnh Khiêm</th>
-          <th>Lê Thánh Tông</th>
+          <th>Lớp chuyên</th><th>Lê Quý Đôn</th>
+          <th>N.Bỉnh Khiêm</th><th>Lê Thánh Tông</th>
         </tr></thead>
         <tbody>${rows}</tbody>
       </table>
@@ -463,61 +1066,63 @@ function renderBangChuyen(tongChuyen) {
     <p style="font-size:12px;color:#888;margin-bottom:16px">✅ Đủ điểm &nbsp;⚡ Sát trong 2 điểm</p>`;
 }
 
-// ========== PTDTNT ==========
-function renderPTDTNT(tongPt) {
-  if (!diemChuanData?.phu_luc_2_ptdtnt || tongPt == null) return "";
+function renderPTDTNT(tong) {
+  if (!diemChuanData?.phu_luc_2_ptdtnt || tong == null) return "";
   const rows = diemChuanData.phu_luc_2_ptdtnt.map(obj => {
-    const diff = Math.round((tongPt - obj.diem_chuan) * 100) / 100;
+    const diff = Math.round((tong - obj.diem_chuan) * 100) / 100;
     const cls  = diff >= 0 ? "dau" : diff > -1 ? "sat" : "kho";
     const icon = diff >= 0 ? "✅" : diff > -1 ? "⚡" : "❌";
     const txt  = diff >= 0 ? "Đủ điều kiện" : diff > -1 ? "Sát sao" : "Chưa đủ";
     return `<div class="school-item ${cls}" style="margin-bottom:8px">
-      <div><div class="school-name">${obj.doi_tuong}</div>
-      <div class="school-meta">Điểm chuẩn PTDTNT: ${obj.diem_chuan}</div></div>
+      <div>
+        <div class="school-name">${obj.doi_tuong}</div>
+        <div class="school-meta">Điểm chuẩn PTDTNT: ${obj.diem_chuan}</div>
+      </div>
       <span class="school-badge">${icon} ${txt}</span>
     </div>`;
   }).join("");
-  return `<div class="section-title">🏫 Trường PTDTNT Quảng Nam (tổng: ${tongPt})</div>${rows}`;
+  return `<div class="section-title">🏫 Trường PTDTNT Quảng Nam (tổng: ${tong})</div>${rows}`;
 }
 
-// ========== BUILD INFO CHO AI ==========
-function buildChuyenInfoForAI(tongChuyen) {
-  if (!diemChuanData?.phu_luc_1_chuyen || tongChuyen == null) return "";
+// ================================================
+// AI INFO BUILDERS
+// ================================================
+function buildChuyenInfoForAI(tong) {
+  if (!diemChuanData?.phu_luc_1_chuyen || tong == null) return "";
   const lines = diemChuanData.phu_luc_1_chuyen.map(lop => {
     const truongs = [
-      { ten: "Lê Quý Đôn",        dc: lop.Le_Quy_Don },
-      { ten: "Nguyễn Bỉnh Khiêm", dc: lop.Nguyen_Binh_Khiem },
-      { ten: "Lê Thánh Tông",     dc: lop.Le_Thanh_Tong }
+      { ten:"Lê Quý Đôn",        dc: lop.Le_Quy_Don },
+      { ten:"Nguyễn Bỉnh Khiêm", dc: lop.Nguyen_Binh_Khiem },
+      { ten:"Lê Thánh Tông",     dc: lop.Le_Thanh_Tong },
     ];
-    const parts = truongs
-      .filter(t => t.dc != null)
-      .map(t => {
-        const diff   = Math.round((tongChuyen - t.dc) * 100) / 100;
-        const trang  = diff >= 0 ? "ĐẬU ✅" : diff > -2 ? "SÁT ⚡" : "TRƯỢT ❌";
-        return `${t.ten}: chuẩn ${t.dc} → ${trang} (${diff >= 0 ? "+" : ""}${diff})`;
-      });
+    const parts = truongs.filter(t => t.dc != null).map(t => {
+      const diff  = Math.round((tong - t.dc) * 100) / 100;
+      const trang = diff >= 0 ? "ĐẬU ✅" : diff > -2 ? "SÁT ⚡" : "TRƯỢT ❌";
+      return `${t.ten}: chuẩn ${t.dc} → ${trang} (${diff >= 0 ? "+" : ""}${diff})`;
+    });
     return `  ${lop.lop_chuyen}: ${parts.join(" | ")}`;
   });
-  return `\nĐiểm chuẩn các lớp chuyên (so với tổng chuyên ${tongChuyen} của thí sinh):\n${lines.join("\n")}`;
+  return `\nĐiểm chuẩn các lớp chuyên:\n${lines.join("\n")}`;
 }
 
-function buildPTDTNTInfoForAI(tongPt) {
-  if (!diemChuanData?.phu_luc_2_ptdtnt || tongPt == null) return "";
+function buildPTDTNTInfoForAI(tong) {
+  if (!diemChuanData?.phu_luc_2_ptdtnt || tong == null) return "";
   const lines = diemChuanData.phu_luc_2_ptdtnt.map(obj => {
-    const diff  = Math.round((tongPt - obj.diem_chuan) * 100) / 100;
-    const trang = diff >= 0 ? "ĐỦ ĐIỀU KIỆN ✅" : diff > -1 ? "SÁT ⚡" : "CHƯA ĐỦ ❌";
+    const diff  = Math.round((tong - obj.diem_chuan) * 100) / 100;
+    const trang = diff >= 0 ? "ĐỦ ✅" : diff > -1 ? "SÁT ⚡" : "CHƯA ĐỦ ❌";
     return `  ${obj.doi_tuong}: chuẩn ${obj.diem_chuan} → ${trang} (${diff >= 0 ? "+" : ""}${diff})`;
   });
-  return `\nĐiểm chuẩn PTDTNT (so với tổng PTDTNT ${tongPt} của thí sinh):\n${lines.join("\n")}`;
+  return `\nĐiểm chuẩn PTDTNT:\n${lines.join("\n")}`;
 }
 
-// ========== AI — GỌI QUA /api/ai TRÊN VERCEL ==========
-// KHÔNG CÓ API KEY, ENDPOINT AI, HAY SECRET NÀO Ở ĐÂY
+// ================================================
+// AI
+// ================================================
 async function goiAI(info) {
   const {
     sbd, ten, van, nn, toan, mon_chuyen, diem_kk, diem_ut, diem_qd,
     tong_dai_tra, tong_chuyen, tong_ptdtnt, rank, total,
-    truongDau, truongSat, truongKho, chuyenInfo, ptdtntInfo
+    truongDau, truongSat, truongKho, chuyenInfo, ptdtntInfo,
   } = info;
 
   const prompt = `Bạn là AI cà khịa nhưng vẫn động viên học sinh vừa tra điểm thi tuyển sinh lớp 10 Đà Nẵng 2026.
@@ -529,29 +1134,27 @@ Thông tin thí sinh ${ten} (SBD: ${sbd}):
 ${mon_chuyen != null ? `- Điểm môn chuyên: ${mon_chuyen}` : ""}
 ${diem_kk    != null ? `- Điểm khuyến khích: ${diem_kk}` : ""}
 ${diem_ut    != null ? `- Điểm ưu tiên: ${diem_ut}` : ""}
-${diem_qd    != null ? `- Điểm quy đổi (KQHT-RL): ${diem_qd}` : ""}
+${diem_qd    != null ? `- Điểm quy đổi: ${diem_qd}` : ""}
 - Tổng điểm đại trà: ${tong_dai_tra}
 ${tong_chuyen  != null ? `- Tổng điểm chuyên: ${tong_chuyen}` : ""}
 ${tong_ptdtnt  != null ? `- Tổng điểm PTDTNT: ${tong_ptdtnt}` : ""}
-- Xếp hạng: Top ${rank}/${total} thí sinh toàn thành phố
+- Xếp hạng: Top ${rank}/${total}
 - Trường có thể đậu: ${truongDau.slice(0,3).map(t=>t.ten).join(", ") || "chưa rõ"}
 - Trường sát sao: ${truongSat.slice(0,2).map(t=>t.ten).join(", ") || "không có"}
 ${chuyenInfo}${ptdtntInfo}
 
 Hãy viết 3-5 câu: cà khịa hài hước GenZ nhưng có động viên, nhận xét điểm từng môn, nếu có thi chuyên thì nhận xét khả năng đậu lớp chuyên nào, nhận xét trường công lập khả năng đậu/sát/khó, chúc mừng hoặc an ủi. Dùng tiếng Việt tự nhiên, có thể dùng emoji. KHÔNG dùng markdown.`;
 
-  // Chỉ gọi /api/ai — Vercel sẽ ký HMAC và chuyển tiếp sang Railway
   return fetch("/api/ai", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      messages: [{ role: "user", content: prompt }],
-      max_tokens: 50000,
-    }),
+    body: JSON.stringify({ messages:[{ role:"user", content:prompt }], max_tokens:50000 }),
   });
 }
 
-// ========== SEARCH ==========
+// ================================================
+// SEARCH
+// ================================================
 async function search() {
   const sbd = document.getElementById("sbdInput").value.trim();
   if (!sbd) return;
@@ -565,33 +1168,22 @@ async function search() {
   const contentDiv = document.getElementById("resultContent");
   resultDiv.style.display = "block";
 
-  const ts = diemThiData[sbd]
-           ?? diemThiData[sbd.padStart(5,"0")]
-           ?? null;
-
+  const ts = diemThiData[sbd] ?? diemThiData[sbd.padStart(5,"0")] ?? null;
   if (!ts) {
     contentDiv.innerHTML = `<div class="not-found">😅 Không tìm thấy SBD <strong>${sbd}</strong><br><small>Kiểm tra lại số báo danh nhé!</small></div>`;
-    btn.disabled=false; btn.textContent="🔍 Tra cứu";
-    return;
+    btn.disabled=false; btn.textContent="🔍 Tra cứu"; return;
   }
 
-  const van        = ts.ngu_van;
-  const nn         = ts.ngoai_ngu;
-  const toan       = ts.toan;
-  const mon_chuyen = ts.mon_chuyen;
-  const diem_kk    = ts.diem_kk;
-  const diem_ut    = ts.diem_uu_tien;
-  const diem_qd    = ts.diem_quy_doi;
-  const tong_dt    = ts.tong_dai_tra;
-  const tong_pt    = ts.tong_ptdtnt;
-  const tong_cv    = ts.tong_chuyen;
+  const van=ts.ngu_van, nn=ts.ngoai_ngu, toan=ts.toan;
+  const mon_chuyen=ts.mon_chuyen, diem_kk=ts.diem_kk;
+  const diem_ut=ts.diem_uu_tien, diem_qd=ts.diem_quy_doi;
+  const tong_dt=ts.tong_dai_tra, tong_pt=ts.tong_ptdtnt, tong_cv=ts.tong_chuyen;
 
   const { rank, total }   = tinhRank(tong_dt ?? 0);
   const rankChuyen        = tinhRankChuyen(tong_cv);
   const rankPTDTNT        = tinhRankPTDTNT(tong_pt);
   const { dau, sat, kho } = goiYTruong(tong_dt ?? 0);
 
-  // --- Score boxes ---
   const boxes = [];
   boxes.push(`<div class="score-box van pop"><div class="mon">Ngữ Văn</div><div class="diem">${van ?? "—"}</div><div class="label">điểm</div></div>`);
   boxes.push(`<div class="score-box nn pop"><div class="mon">Ngoại Ngữ</div><div class="diem">${nn ?? "—"}</div><div class="label">điểm</div></div>`);
@@ -601,9 +1193,7 @@ async function search() {
   if (diem_ut    != null) boxes.push(`<div class="score-box ut pop"><div class="mon">Ưu Tiên</div><div class="diem">${diem_ut}</div><div class="label">điểm</div></div>`);
 
   const colsCls = boxes.length <= 3 ? "cols-3" : "cols-4";
-
-  // --- KQHT-RL ---
-  const qdBox = diem_qd != null ? `
+  const qdBox   = diem_qd != null ? `
     <div class="qd-box pop">
       <div class="qd-left">
         <div class="qd-label">📋 Điểm Quy Đổi KQHT – RL</div>
@@ -612,48 +1202,40 @@ async function search() {
       <div class="qd-score">${diem_qd}</div>
     </div>` : "";
 
-  // --- Tổng điểm ---
   let tongHtml = `<div class="tong-section">`;
-  if (tong_dt != null)
-    tongHtml += `<div class="total-box dai-tra pop"><div class="total-label">🏫 TỔNG ĐIỂM ĐẠI TRÀ</div><div class="total-score">${tong_dt}</div></div>`;
-  if (tong_pt != null)
-    tongHtml += `<div class="total-box ptdtnt pop"><div class="total-label">🌿 TỔNG ĐIỂM PTDTNT</div><div class="total-score">${tong_pt}</div></div>`;
-  if (tong_cv != null)
-    tongHtml += `<div class="total-box chuyen pop"><div class="total-label">⭐ TỔNG ĐIỂM CHUYÊN</div><div class="total-score">${tong_cv}</div></div>`;
+  if (tong_dt != null) tongHtml += `<div class="total-box dai-tra pop"><div class="total-label">🏫 TỔNG ĐIỂM ĐẠI TRÀ</div><div class="total-score">${tong_dt}</div></div>`;
+  if (tong_pt != null) tongHtml += `<div class="total-box ptdtnt pop"><div class="total-label">🌿 TỔNG ĐIỂM PTDTNT</div><div class="total-score">${tong_pt}</div></div>`;
+  if (tong_cv != null) tongHtml += `<div class="total-box chuyen pop"><div class="total-label">⭐ TỔNG ĐIỂM CHUYÊN</div><div class="total-score">${tong_cv}</div></div>`;
   tongHtml += `</div>`;
 
-  // --- Rank ---
   const rankIcon = rank<=10?"🏆":rank<=50?"🥈":rank<=200?"🥉":"📊";
-  const pct      = Math.round((1 - rank / total) * 100);
-
+  const pct      = Math.round((1 - rank/total) * 100);
   let rankRowsHtml = `
     <div class="rank-row">
       <div class="rank-icon">${rankIcon}</div>
       <div>
-        <div class="rank-text">🏫 Top ${rank} / ${total} thí sinh đại trà toàn thành phố</div>
+        <div class="rank-text">🏫 Top ${rank} / ${total} thí sinh đại trà</div>
         <div class="rank-sub">Cao hơn ${pct}% thí sinh 📈</div>
       </div>
     </div>`;
-
   if (rankChuyen) {
-    const pctC = Math.round((1 - rankChuyen.rank / rankChuyen.total) * 100);
+    const pctC = Math.round((1 - rankChuyen.rank/rankChuyen.total) * 100);
     rankRowsHtml += `<hr class="rank-divider">
     <div class="rank-row">
       <div class="rank-icon">⭐</div>
       <div>
-        <div class="rank-text">Top ${rankChuyen.rank} / ${rankChuyen.total} thí sinh thi chuyên</div>
+        <div class="rank-text">Top ${rankChuyen.rank} / ${rankChuyen.total} thí sinh chuyên</div>
         <div class="rank-sub">Cao hơn ${pctC}% thí sinh chuyên 📈</div>
       </div>
     </div>`;
   }
-
   if (rankPTDTNT) {
-    const pctP = Math.round((1 - rankPTDTNT.rank / rankPTDTNT.total) * 100);
+    const pctP = Math.round((1 - rankPTDTNT.rank/rankPTDTNT.total) * 100);
     rankRowsHtml += `<hr class="rank-divider">
     <div class="rank-row">
       <div class="rank-icon">🌿</div>
       <div>
-        <div class="rank-text">Top ${rankPTDTNT.rank} / ${rankPTDTNT.total} thí sinh thi PTDTNT</div>
+        <div class="rank-text">Top ${rankPTDTNT.rank} / ${rankPTDTNT.total} thí sinh PTDTNT</div>
         <div class="rank-sub">Cao hơn ${pctP}% thí sinh PTDTNT 📈</div>
       </div>
     </div>`;
@@ -661,17 +1243,16 @@ async function search() {
 
   function schoolList(arr, cls, badge) {
     return arr.slice(0,4).map(s => {
-      const diffStr = s.diff === 0
-        ? "Bằng điểm chuẩn"
-        : s.diff > 0
-          ? `Hơn ${s.diff} điểm`
-          : `Thiếu ${Math.abs(s.diff)} điểm`;
-      return `
-        <div class="school-item ${cls}">
-          <div><div class="school-name">${s.ten}</div>
-          <div class="school-meta">Điểm chuẩn 2026: ${s.dc} &nbsp;•&nbsp; ${diffStr}</div></div>
-          <span class="school-badge">${badge}</span>
-        </div>`;
+      const diffStr = s.diff === 0 ? "Bằng điểm chuẩn"
+                    : s.diff  > 0 ? `Hơn ${s.diff} điểm`
+                    : `Thiếu ${Math.abs(s.diff)} điểm`;
+      return `<div class="school-item ${cls}">
+        <div>
+          <div class="school-name">${s.ten}</div>
+          <div class="school-meta">Điểm chuẩn 2026: ${s.dc} &nbsp;•&nbsp; ${diffStr}</div>
+        </div>
+        <span class="school-badge">${badge}</span>
+      </div>`;
     }).join("");
   }
 
@@ -683,86 +1264,77 @@ async function search() {
         <span class="sbd-tag">SBD: ${ts.so_bao_danh} • Kết quả thi Lớp 10 Đà Nẵng 2026</span>
       </div>
     </div>
-
     <div class="scores-grid ${colsCls}">${boxes.join("")}</div>
     ${qdBox}
     ${tongHtml}
-
     <div class="rank-box pop">${rankRowsHtml}</div>
-
     <div class="ai-box">
       <div class="ai-label">🤖 AI NHẬN XÉT</div>
       <div class="ai-text" id="aiText">
         <div class="ai-typing"><span></span><span></span><span></span></div>
       </div>
     </div>
-
     ${renderBangChuyen(tong_cv)}
     ${renderPTDTNT(tong_pt)}
-
-    ${dau.length>0 ? `<div class="section-title">🟢 Trường công lập có thể đậu</div>${schoolList(dau,"dau","✅ Khả năng cao")}` : ""}
-    ${sat.length>0 ? `<div class="section-title">🟡 Sát sao (dưới 1 điểm)</div>${schoolList(sat,"sat","⚡ Cần theo dõi")}` : ""}
-    ${kho.length>0 ? `<div class="section-title">🔴 Khó đậu hơn</div>${schoolList(kho.slice(0,4),"kho","❌ Cần cân nhắc")}` : ""}
+    ${dau.length > 0 ? `<div class="section-title">🟢 Trường công lập có thể đậu</div>${schoolList(dau,"dau","✅ Khả năng cao")}` : ""}
+    ${sat.length > 0 ? `<div class="section-title">🟡 Sát sao (dưới 1 điểm)</div>${schoolList(sat,"sat","⚡ Cần theo dõi")}` : ""}
+    ${kho.length > 0 ? `<div class="section-title">🔴 Khó đậu hơn</div>${schoolList(kho.slice(0,4),"kho","❌ Cần cân nhắc")}` : ""}
   `;
 
-  // --- AI streaming ---
+  // AI streaming
   try {
-    const chuyenInfo  = buildChuyenInfoForAI(tong_cv);
-    const ptdtntInfo  = buildPTDTNTInfoForAI(tong_pt);
-
     const res = await goiAI({
       sbd: ts.so_bao_danh, ten: ts.ho_ten, van, nn, toan,
       mon_chuyen, diem_kk, diem_ut, diem_qd,
       tong_dai_tra: tong_dt, tong_chuyen: tong_cv, tong_ptdtnt: tong_pt,
-      rank, total,
-      truongDau: dau, truongSat: sat, truongKho: kho,
-      chuyenInfo, ptdtntInfo
+      rank, total, truongDau: dau, truongSat: sat, truongKho: kho,
+      chuyenInfo: buildChuyenInfoForAI(tong_cv),
+      ptdtntInfo: buildPTDTNTInfoForAI(tong_pt),
     });
 
-    // Xử lý lỗi từ server (rate limit, auth, v.v.)
     if (!res.ok) {
       let errMsg = "😅 AI đang bận, thử lại sau nhé!";
-      try {
-        const errJson = await res.json();
-        if (errJson?.message) errMsg = `⚠️ ${errJson.message}`;
-      } catch {}
+      try { const e = await res.json(); if (e?.message) errMsg = `⚠️ ${e.message}`; } catch {}
       document.getElementById("aiText").innerHTML = errMsg;
-      btn.disabled=false; btn.textContent="🔍 Tra cứu";
-      resultDiv.scrollIntoView({ behavior:"smooth", block:"start" });
-      return;
-    }
-
-    const reader  = res.body.getReader();
-    const decoder = new TextDecoder();
-    const aiEl    = document.getElementById("aiText");
-    aiEl.innerHTML = "";
-    let buffer = "";
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream:true });
-      const lines = buffer.split("\n");
-      buffer = lines.pop();
-      for (const line of lines) {
-        if (!line.startsWith("data: ")) continue;
-        const data = line.slice(6).trim();
-        if (data === "[DONE]") break;
-        try {
-          const json  = JSON.parse(data);
-          const chunk = json.choices?.[0]?.delta?.content ?? "";
-          aiEl.innerHTML += chunk.replace(/\n/g,"<br>");
-        } catch {}
+    } else {
+      const reader  = res.body.getReader();
+      const decoder = new TextDecoder();
+      const aiEl    = document.getElementById("aiText");
+      aiEl.innerHTML = "";
+      let buffer = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream:true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop();
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          const data = line.slice(6).trim();
+          if (data === "[DONE]") break;
+          try {
+            const json  = JSON.parse(data);
+            const chunk = json.choices?.[0]?.delta?.content ?? "";
+            aiEl.innerHTML += chunk.replace(/\n/g,"<br>");
+          } catch {}
+        }
       }
     }
-  } catch(e) {
+  } catch {
     document.getElementById("aiText").innerHTML = "😅 AI đang bận, thử lại sau nhé!";
   }
 
-  btn.disabled=false; btn.textContent="🔍 Tra cứu";
+  btn.disabled = false; btn.textContent = "🔍 Tra cứu";
   resultDiv.scrollIntoView({ behavior:"smooth", block:"start" });
 }
+
+// ================================================
+// INIT
+// ================================================
+setupPdfs();
+renderPage();
+loadData();
 </script>
-  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
