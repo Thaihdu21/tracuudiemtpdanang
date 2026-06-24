@@ -519,6 +519,41 @@
   @keyframes typing   { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-8px)} }
   @keyframes pop      { 0%{transform:scale(0.8);opacity:0} 70%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1} }
   .pop { animation:pop 0.5s ease forwards; }
+  /* ===== SCROLLBAR CUSTOM ===== */
+
+/* Toàn bộ scrollbar */
+::-webkit-scrollbar {
+  width: 8px;        /* độ rộng scrollbar dọc */
+  height: 8px;       /* độ cao scrollbar ngang */
+}
+
+/* Nền phía sau scrollbar */
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 10px;
+}
+
+/* Thanh kéo (thumb) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6c63ff, #3b82f6);
+  border-radius: 10px;
+  border: 2px solid #1e1e1e; /* tạo khoảng cách với track */
+}
+
+/* Khi hover vào thumb */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #8b80ff, #60a5fa);
+}
+
+/* Khi đang kéo */
+::-webkit-scrollbar-thumb:active {
+  background: #6c63ff;
+}
+
+/* Góc giao nhau (nếu có cả 2 chiều) */
+::-webkit-scrollbar-corner {
+  background: #1e1e1e;
+}
 </style>
 </head>
 <body>
