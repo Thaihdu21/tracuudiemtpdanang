@@ -165,22 +165,6 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 .btn-search:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,102,204,0.5); }
 .btn-search:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-/* ========== SKELETON LOADING ========== */
-.skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 10px; }
-@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-.skeleton-card { background: white; border-radius: 24px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin-bottom: 20px; }
-.skeleton-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 2px dashed #f0f0f0; }
-.skeleton-avatar { width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; }
-.skeleton-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.skeleton-name { height: 22px; width: 60%; }
-.skeleton-sub { height: 14px; width: 40%; }
-.skeleton-scores { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 16px; }
-.skeleton-score-box { height: 90px; border-radius: 16px; }
-.skeleton-total { height: 80px; border-radius: 16px; margin-bottom: 12px; }
-.skeleton-rank { height: 72px; border-radius: 16px; margin-bottom: 16px; }
-.skeleton-ai { height: 100px; border-radius: 16px; margin-bottom: 16px; }
-.skeleton-school { height: 56px; border-radius: 12px; margin-bottom: 8px; }
-
 /* ========== THỦ KHOA ========== */
 #thuKhoaCard { background: white; border-radius: 24px; padding: 24px 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin-bottom: 20px; animation: fadeUp 0.6s ease; transition: all 0.4s ease; overflow: hidden; }
 #thuKhoaCard.hidden { opacity: 0; max-height: 0; padding: 0 28px; margin-bottom: 0; pointer-events: none; }
@@ -567,30 +551,6 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
       </div>
       <div class="tk-list" id="tkList">
         <div style="text-align:center;color:#aaa;padding:16px;font-size:14px">⏳ Đang tải dữ liệu...</div>
-      </div>
-    </div>
-
-    <!-- Skeleton Loading (hiển thị khi đang tìm kiếm) -->
-    <div id="skeletonResult" style="display:none">
-      <div class="skeleton-card">
-        <div class="skeleton-header">
-          <div class="skeleton skeleton-avatar"></div>
-          <div class="skeleton-info">
-            <div class="skeleton skeleton-name"></div>
-            <div class="skeleton skeleton-sub"></div>
-          </div>
-        </div>
-        <div class="skeleton-scores">
-          <div class="skeleton skeleton-score-box"></div>
-          <div class="skeleton skeleton-score-box"></div>
-          <div class="skeleton skeleton-score-box"></div>
-        </div>
-        <div class="skeleton skeleton-total"></div>
-        <div class="skeleton skeleton-rank"></div>
-        <div class="skeleton skeleton-ai"></div>
-        <div class="skeleton skeleton-school"></div>
-        <div class="skeleton skeleton-school"></div>
-        <div class="skeleton skeleton-school"></div>
       </div>
     </div>
 
@@ -1538,37 +1498,26 @@ Hãy viết 3-5 câu: cà khịa hài hước GenZ nhưng có động viên, nh�
 }
 
 // ================================================
-// SEARCH (with Skeleton Loading)
+// SEARCH
 // ================================================
 async function search() {
   const sbd = document.getElementById("sbdInput").value.trim();
   if (!sbd) return;
   if (!diemThiData) { alert("Đang tải dữ liệu, thử lại!"); return; }
 
-  const btn         = document.getElementById("btnSearch");
-  const resultDiv   = document.getElementById("result");
-  const skeletonDiv = document.getElementById("skeletonResult");
+  const btn       = document.getElementById("btnSearch");
+  const resultDiv = document.getElementById("result");
 
   btn.disabled = true;
   btn.textContent = "⏳ Đang tìm...";
   hideThuKhoa();
 
-  // Ẩn kết quả cũ, hiện skeleton
-  resultDiv.style.display = "none";
   document.getElementById("distCard").style.display = "none";
-  skeletonDiv.style.display = "block";
-  skeletonDiv.scrollIntoView({ behavior:"smooth", block:"start" });
-
-  // Giả lập độ trễ nhỏ để skeleton thấy rõ (nếu data local thì tìm ngay)
-  await new Promise(r => setTimeout(r, 400));
-
-  const ts = diemThiData[sbd] ?? diemThiData[sbd.padStart(5,"0")] ?? null;
-
-  // Ẩn skeleton, hiện kết quả
-  skeletonDiv.style.display = "none";
-  resultDiv.style.display = "block";
 
   const contentDiv = document.getElementById("resultContent");
+  resultDiv.style.display = "block";
+
+  const ts = diemThiData[sbd] ?? diemThiData[sbd.padStart(5,"0")] ?? null;
 
   if (!ts) {
     contentDiv.innerHTML = `<div class="not-found">😅 Không tìm thấy SBD <strong>${sbd}</strong><br><small>Kiểm tra lại số báo danh nhé!</small></div>`;
