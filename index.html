@@ -558,7 +558,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
       <div id="resultContent"></div>
     </div>
 
-    <!-- Distribution Chart Card (xuất hiện sau khi tìm kiếm) -->
+    <!-- Distribution Chart Card -->
     <div class="dist-card" id="distCard" style="display:none">
       <div class="dist-header">
         <span style="font-size:22px">📊</span>
@@ -684,6 +684,24 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 
 <script>
 // ================================================
+// SECURITY HELPERS
+// ================================================
+function escapeHtml(str) {
+  if (str == null) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+}
+
+// Dùng cho AI streaming: escape HTML trước, rồi chỉ cho phép <br>
+function safeChunk(text) {
+  return escapeHtml(text).replace(/\n/g, "<br>");
+}
+
+// ================================================
 // DONATE CONFIG
 // ================================================
 const MOMO_CONFIG = {
@@ -701,8 +719,9 @@ const CONFIG = {
 };
 
 // ================================================
-// ROUTER
+// ROUTER — whitelist hash để chống DOM-based XSS
 // ================================================
+const VALID_ROUTES = new Set(["home", "diem-chuan", "danh-sach"]);
 const ROUTES = {
   "":                                                    "home",
   "danh-sach-diem-chuan-vao-10":                        "diem-chuan",
@@ -710,7 +729,9 @@ const ROUTES = {
 };
 function getRoute() {
   const hash = location.hash.replace(/^#\/?/, "").trim();
-  return ROUTES[hash] ?? "home";
+  const route = ROUTES[hash] ?? "home";
+  // Whitelist check — nếu không hợp lệ thì về home
+  return VALID_ROUTES.has(route) ? route : "home";
 }
 function navigate(path) {
   location.hash = path ? `/${path}` : "";
@@ -749,14 +770,15 @@ const NAV_ITEMS = [
 function renderSidebar() {
   const cur  = getRoute();
   const body = document.getElementById("sidebarBody");
+  // NAV_ITEMS chứa hằng số tĩnh, không có dữ liệu người dùng → an toàn
   body.innerHTML =
     `<div class="sidebar-section-label">Danh mục</div>` +
     NAV_ITEMS.map(item => `
-      <a class="sidebar-nav-item ${cur === item.id ? 'active' : ''}" onclick="navigate('${item.path}')">
-        <div class="nav-icon"><i class="fa-solid ${item.icon}"></i></div>
+      <a class="sidebar-nav-item ${cur === item.id ? 'active' : ''}" onclick="navigate('${escapeHtml(item.path)}')">
+        <div class="nav-icon"><i class="fa-solid ${escapeHtml(item.icon)}"></i></div>
         <div class="nav-text">
-          <div class="nav-label">${item.label}</div>
-          <div class="nav-sub">${item.sub}</div>
+          <div class="nav-label">${escapeHtml(item.label)}</div>
+          <div class="nav-sub">${escapeHtml(item.sub)}</div>
         </div>
       </a>`).join("") +
     `<hr class="sidebar-divider">
@@ -834,11 +856,12 @@ function genDonateQR() {
   const qrUrl  = `https://api.vietqr.io/image/971025-${PHONE}-NKNPGUv.jpg?accountName=${encodeURIComponent(NAME)}&amount=${val}&addInfo=${desc}`;
   const cups   = dmSelectedCoffees || Math.ceil(val / 20000);
   const icons  = cups <= 5 ? "☕".repeat(Math.min(cups,5)) : cups <= 10 ? "☕☕☕☕☕+" : "🏆";
+  // Dùng textContent cho các giá trị động
   document.getElementById("dmQRCoffees").textContent = icons;
   document.getElementById("dmQRAmount").textContent  = val.toLocaleString("vi-VN") + "đ";
   document.getElementById("dmQRImg").src             = qrUrl;
   document.getElementById("dmBankInfo").innerHTML    =
-    `💜 Ví MoMo: <strong>${PHONE}</strong><br>👤 Tên: <strong>${NAME}</strong><br>📝 Nội dung: <strong>Cam on ban da ung ho!</strong>`;
+    `💜 Ví MoMo: <strong>${escapeHtml(PHONE)}</strong><br>👤 Tên: <strong>${escapeHtml(NAME)}</strong><br>📝 Nội dung: <strong>Cam on ban da ung ho!</strong>`;
   document.getElementById("dmStep1").style.display = "none";
   document.getElementById("dmStep2").classList.add("show");
 }
@@ -861,17 +884,14 @@ function openCompare() {
   closeSidebar();
   document.getElementById("compareOverlay").classList.add("show");
   document.body.style.overflow = "hidden";
-  // Reset về trạng thái ban đầu với 2 ô nhập
   const list = document.getElementById("cmSbdList");
   list.innerHTML = "";
   document.getElementById("cmResults").classList.remove("show");
   document.getElementById("cmError").classList.remove("show");
   if (cmChart) { cmChart.destroy(); cmChart = null; }
-  // Thêm 2 ô mặc định
   addCompareRow();
   addCompareRow();
   updateAddBtn();
-  // Nếu đang có kết quả search, tự điền SBD đầu tiên
   const sbdVal = document.getElementById("sbdInput").value.trim();
   if (sbdVal) {
     const inputs = document.querySelectorAll(".cm-sbd-input");
@@ -893,27 +913,39 @@ function addCompareRow() {
   const row   = document.createElement("div");
   row.className = "cm-sbd-row";
   row.dataset.idx = idx;
-  row.innerHTML = `
-    <div class="cm-sbd-dot" style="background:${color}"></div>
-    <input class="cm-sbd-input" type="text" placeholder="Số báo danh ${idx + 1}..." maxlength="10"
-      onkeydown="if(event.key==='Enter') runCompare()">
-    <button class="cm-remove-btn" onclick="compareRemoveRow(this)" title="Xoá">
-      <i class="fa-solid fa-xmark"></i>
-    </button>`;
+  // Dùng DOM API thay vì innerHTML để tránh XSS
+  const dot = document.createElement("div");
+  dot.className = "cm-sbd-dot";
+  dot.style.background = color;
+
+  const input = document.createElement("input");
+  input.className = "cm-sbd-input";
+  input.type = "text";
+  input.placeholder = `Số báo danh ${idx + 1}...`;
+  input.maxLength = 10;
+  input.addEventListener("keydown", e => { if (e.key === "Enter") runCompare(); });
+
+  const btn = document.createElement("button");
+  btn.className = "cm-remove-btn";
+  btn.title = "Xoá";
+  btn.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+  btn.addEventListener("click", () => compareRemoveRow(btn));
+
+  row.appendChild(dot);
+  row.appendChild(input);
+  row.appendChild(btn);
   list.appendChild(row);
   updateAddBtn();
 }
 function compareAddRow() {
   addCompareRow();
-  // Focus vào ô vừa thêm
   const inputs = document.querySelectorAll(".cm-sbd-input");
   inputs[inputs.length - 1]?.focus();
 }
 function compareRemoveRow(btn) {
   const list = document.getElementById("cmSbdList");
-  if (list.children.length <= 2) return; // tối thiểu 2
+  if (list.children.length <= 2) return;
   btn.closest(".cm-sbd-row").remove();
-  // Cập nhật lại màu & placeholder
   Array.from(list.children).forEach((row, i) => {
     row.querySelector(".cm-sbd-dot").style.background = COMPARE_COLORS[i];
     row.querySelector(".cm-sbd-input").placeholder = `Số báo danh ${i + 1}...`;
@@ -935,12 +967,12 @@ async function runCompare() {
   btn.disabled = true;
   btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Đang tìm...`;
 
-  const results = [];
+  const results  = [];
   const notFound = [];
   for (const sbd of sbds) {
     const ts = diemThiData[sbd] ?? diemThiData[sbd.padStart(5,"0")] ?? null;
     if (ts) results.push(ts);
-    else notFound.push(sbd);
+    else notFound.push(escapeHtml(sbd)); // escape trước khi dùng
   }
 
   btn.disabled = false;
@@ -958,20 +990,21 @@ async function runCompare() {
 
 function showCmError(msg) {
   const el = document.getElementById("cmError");
-  el.textContent = "⚠️ " + msg;
+  el.textContent = "⚠️ " + msg; // textContent — an toàn
   el.classList.add("show");
 }
 
 function renderCompareResults(list) {
   const resultsEl = document.getElementById("cmResults");
   resultsEl.classList.add("show");
-
-  // Cuộn xuống kết quả
   setTimeout(() => resultsEl.scrollIntoView({ behavior:"smooth", block:"start" }), 100);
 
   const labels  = ["Ngữ Văn","Ngoại Ngữ","Toán","Tổng ĐT"];
   const datasets = list.map((ts, i) => ({
-    label: ts.ho_ten ? `${ts.ho_ten} (${ts.so_bao_danh})` : `SBD ${ts.so_bao_danh}`,
+    // escape tên để an toàn trong Chart.js label (render dạng text)
+    label: ts.ho_ten
+      ? `${escapeHtml(String(ts.ho_ten))} (${escapeHtml(String(ts.so_bao_danh))})`
+      : `SBD ${escapeHtml(String(ts.so_bao_danh))}`,
     data: [
       ts.ngu_van      ?? 0,
       ts.ngoai_ngu    ?? 0,
@@ -984,9 +1017,7 @@ function renderCompareResults(list) {
     borderRadius: 6,
   }));
 
-  // Destroy chart cũ
   if (cmChart) { cmChart.destroy(); cmChart = null; }
-
   const ctx = document.getElementById("cmChart").getContext("2d");
   cmChart = new Chart(ctx, {
     type: "bar",
@@ -1011,7 +1042,7 @@ function renderCompareResults(list) {
     }
   });
 
-  // Bảng chi tiết
+  // Bảng chi tiết — dùng escapeHtml cho mọi dữ liệu từ JSON
   const fields = [
     { key:"ngu_van",      label:"📖 Ngữ Văn" },
     { key:"ngoai_ngu",    label:"🌐 Ngoại Ngữ" },
@@ -1025,11 +1056,10 @@ function renderCompareResults(list) {
     { key:"tong_ptdtnt",  label:"🌿 Tổng PTDTNT" },
   ];
 
-  // Chỉ show các field có ít nhất 1 thí sinh có dữ liệu
   const activeFields = fields.filter(f => list.some(ts => ts[f.key] != null));
 
   const headCols = list.map((ts, i) =>
-    `<th><span class="cm-color-dot" style="background:${COMPARE_COLORS[i]}"></span>${ts.ho_ten ? ts.ho_ten.split(" ").pop() : "SBD"}<br><small style="font-weight:600;opacity:0.8">${ts.so_bao_danh}</small></th>`
+    `<th><span class="cm-color-dot" style="background:${COMPARE_COLORS[i]}"></span>${escapeHtml(ts.ho_ten ? String(ts.ho_ten).split(" ").pop() : "SBD")}<br><small style="font-weight:600;opacity:0.8">${escapeHtml(String(ts.so_bao_danh))}</small></th>`
   ).join("");
   document.getElementById("cmTableHead").innerHTML = `<tr><th>Môn / Điểm</th>${headCols}</tr>`;
 
@@ -1040,9 +1070,9 @@ function renderCompareResults(list) {
     const cols  = vals.map((v, i) => {
       if (v == null) return `<td style="color:#ccc">—</td>`;
       const isWin = v === maxV && valid.filter(x => x === maxV).length === 1;
-      return `<td style="font-weight:700;color:${COMPARE_COLORS[i]}">${v}${isWin ? '<span class="cm-winner-badge">🏆 Cao nhất</span>' : ''}</td>`;
+      return `<td style="font-weight:700;color:${COMPARE_COLORS[i]}">${escapeHtml(String(v))}${isWin ? '<span class="cm-winner-badge">🏆 Cao nhất</span>' : ''}</td>`;
     }).join("");
-    return `<tr><td style="font-weight:700;color:#444">${f.label}</td>${cols}</tr>`;
+    return `<tr><td style="font-weight:700;color:#444">${escapeHtml(f.label)}</td>${cols}</tr>`;
   }).join("");
   document.getElementById("cmTableBody").innerHTML = rows;
 }
@@ -1097,7 +1127,7 @@ async function loadData() {
     document.getElementById("statChuyen").textContent = all.filter(d => d.tong_chuyen  != null).length.toLocaleString("vi-VN");
     document.getElementById("statPTDTNT").textContent = all.filter(d => d.tong_ptdtnt  != null).length.toLocaleString("vi-VN");
     renderThuKhoa();
-    buildDistData(); // chuẩn bị dữ liệu phân bố
+    buildDistData();
     if (getRoute() === "diem-chuan") renderDcTable();
   } catch(e) {
     console.error("❌ Lỗi load data:", e);
@@ -1109,15 +1139,14 @@ async function loadData() {
 // ================================================
 // DISTRIBUTION CHART
 // ================================================
-let distData    = {};  // { dai_tra: [{range, count},...], chuyen: ..., ptdtnt: ... }
-let distChart   = null;
-let distMode    = "dai_tra";
+let distData     = {};
+let distChart    = null;
+let distMode     = "dai_tra";
 let distMyScores = { dai_tra: null, chuyen: null, ptdtnt: null };
 
 function buildDistData() {
   if (!diemThiData) return;
   const all = Object.values(diemThiData);
-  // Tạo bins 0–5, 5–10, ... tuỳ field
   function buildBins(arr, step) {
     const max = Math.ceil(Math.max(...arr) / step) * step;
     const bins = {};
@@ -1131,9 +1160,9 @@ function buildDistData() {
   const dtScores = all.filter(d => d.tong_dai_tra != null).map(d => d.tong_dai_tra);
   const cvScores = all.filter(d => d.tong_chuyen  != null).map(d => d.tong_chuyen);
   const ptScores = all.filter(d => d.tong_ptdtnt  != null).map(d => d.tong_ptdtnt);
-  distData.dai_tra = dtScores.length ? buildBins(dtScores, 2.5)  : [];
-  distData.chuyen  = cvScores.length ? buildBins(cvScores, 2.5)  : [];
-  distData.ptdtnt  = ptScores.length ? buildBins(ptScores, 2.5)  : [];
+  distData.dai_tra = dtScores.length ? buildBins(dtScores, 2.5) : [];
+  distData.chuyen  = cvScores.length ? buildBins(cvScores, 2.5) : [];
+  distData.ptdtnt  = ptScores.length ? buildBins(ptScores, 2.5) : [];
 }
 
 function switchDistMode(mode, btn) {
@@ -1152,9 +1181,8 @@ function renderDistChart(myScore) {
   const labels = data.map(d => d.range);
   const counts = data.map(d => d.count);
 
-  // Highlight bin của người dùng
   const score = myScore ?? distMyScores[distMode];
-  const bgColors = labels.map((lbl, i) => {
+  const bgColors = labels.map((lbl) => {
     if (score != null) {
       const binStart = parseFloat(lbl.split("–")[0]);
       const binEnd   = parseFloat(lbl.split("–")[1]);
@@ -1198,19 +1226,19 @@ function renderDistChart(myScore) {
     }
   });
 
-  // Hiện vị trí của người dùng
-  const myScoreEl   = document.getElementById("distMyScore");
-  const myTextEl    = document.getElementById("distMyScoreText");
-  const mySubEl     = document.getElementById("distMyScoreSub");
+  const myScoreEl = document.getElementById("distMyScore");
+  const myTextEl  = document.getElementById("distMyScoreText");
+  const mySubEl   = document.getElementById("distMyScoreSub");
   if (score != null) {
-    const total    = counts.reduce((a, b) => a + b, 0);
-    const above    = counts.reduce((sum, c, i) => {
+    const total = counts.reduce((a, b) => a + b, 0);
+    const above = counts.reduce((sum, c, i) => {
       const binStart = parseFloat(labels[i].split("–")[0]);
       return sum + (binStart > score ? c : 0);
     }, 0);
     const pct = Math.round((above / total) * 100);
     myScoreEl.style.display = "flex";
     const modeLabel = distMode === "chuyen" ? "chuyên" : distMode === "ptdtnt" ? "PTDTNT" : "đại trà";
+    // Dùng textContent để tránh XSS
     myTextEl.textContent = `📍 Điểm ${modeLabel} của bạn: ${score} điểm`;
     mySubEl.textContent  = `Cao hơn khoảng ${pct}% số thí sinh ${modeLabel}`;
   } else {
@@ -1284,7 +1312,8 @@ function switchDcTab(tab) {
 }
 function renderDcTable() {
   const data = DC_DATA[dcCurrentTab]; if (!data) return;
-  document.getElementById("dcTableHead").innerHTML = `<tr>${data.head.map(h=>`<th>${h}</th>`).join("")}</tr>`;
+  // DC_DATA là hằng số tĩnh trong code → an toàn, nhưng vẫn escape để nhất quán
+  document.getElementById("dcTableHead").innerHTML = `<tr>${data.head.map(h=>`<th>${escapeHtml(h)}</th>`).join("")}</tr>`;
   const body  = document.getElementById("dcTableBody");
   const query = (document.getElementById("dcSearchInput")?.value ?? "").toLowerCase();
   if (dcCurrentTab === "cong_lap") {
@@ -1294,15 +1323,15 @@ function renderDcTable() {
       const dc  = r[1];
       const cls = dc >= 28 ? "rank-high" : dc >= 18 ? "rank-mid" : "rank-low";
       const lbl = dc >= 28 ? "Cao" : dc >= 18 ? "Trung bình" : "Thấp";
-      return `<tr><td style="color:#aaa;font-size:12px">${i+1}</td><td style="font-weight:600">${r[0]}</td><td class="dc-score">${dc}</td><td><span class="dc-rank ${cls}">${lbl}</span></td></tr>`;
+      return `<tr><td style="color:#aaa;font-size:12px">${i+1}</td><td style="font-weight:600">${escapeHtml(r[0])}</td><td class="dc-score">${escapeHtml(String(dc))}</td><td><span class="dc-rank ${cls}">${escapeHtml(lbl)}</span></td></tr>`;
     }).join("") || `<tr><td colspan="4" style="text-align:center;color:#aaa;padding:20px">Không tìm thấy trường nào</td></tr>`;
   } else if (dcCurrentTab === "chuyen") {
     body.innerHTML = data.rows.map(r =>
-      `<tr>${r.map((c,i) => `<td style="${i>0?'text-align:center;font-weight:700;color:#0066cc':''}">${c}</td>`).join("")}</tr>`
+      `<tr>${r.map((c,i) => `<td style="${i>0?'text-align:center;font-weight:700;color:#0066cc':''}">${escapeHtml(String(c))}</td>`).join("")}</tr>`
     ).join("");
   } else {
     body.innerHTML = data.rows.map(r =>
-      `<tr><td style="font-weight:600">${r[0]}</td><td style="text-align:center;font-weight:800;color:#0066cc;font-size:15px">${r[1]}</td></tr>`
+      `<tr><td style="font-weight:600">${escapeHtml(String(r[0]))}</td><td style="text-align:center;font-weight:800;color:#0066cc;font-size:15px">${escapeHtml(String(r[1]))}</td></tr>`
     ).join("");
   }
 }
@@ -1321,8 +1350,16 @@ function renderThuKhoa() {
   const modeLabel = mode === "chuyen" ? "tổng chuyên" : mode === "ptdtnt" ? "tổng PTDTNT" : "đại trà";
   const sorted = Object.values(diemThiData)
     .filter(ts => ts[tongField] != null)
-    .map(ts => ({ sbd:String(ts.so_bao_danh), ten:ts.ho_ten??"—", van:ts.ngu_van, nn:ts.ngoai_ngu, toan:ts.toan, mon_chuyen:ts.mon_chuyen, tong:ts[tongField] }))
-    .sort((a,b) => b.tong-a.tong).slice(0,3);
+    .map(ts => ({
+      sbd: String(ts.so_bao_danh),
+      ten: ts.ho_ten ?? "—",
+      van: ts.ngu_van,
+      nn: ts.ngoai_ngu,
+      toan: ts.toan,
+      mon_chuyen: ts.mon_chuyen,
+      tong: ts[tongField]
+    }))
+    .sort((a,b) => b.tong - a.tong).slice(0,3);
   if (!sorted.length) {
     document.getElementById("tkList").innerHTML = `<div style="text-align:center;color:#aaa;padding:16px;font-size:14px">Không có dữ liệu</div>`;
     return;
@@ -1331,18 +1368,18 @@ function renderThuKhoa() {
     <div class="tk-item ${classes[i]} pop" style="animation-delay:${i*0.12}s">
       <div class="tk-medal">${medals[i]}</div>
       <div class="tk-info">
-        <div class="tk-sbd">SBD: ${ts.sbd}</div>
-        <div class="tk-name">${ts.ten} &nbsp;•&nbsp; ${labels[i]}</div>
+        <div class="tk-sbd">SBD: ${escapeHtml(ts.sbd)}</div>
+        <div class="tk-name">${escapeHtml(ts.ten)} &nbsp;•&nbsp; ${escapeHtml(labels[i])}</div>
         <div class="tk-details">
-          <span class="tk-tag">📖 Văn: ${ts.van??"—"}</span>
-          <span class="tk-tag">🌐 NN: ${ts.nn??"—"}</span>
-          <span class="tk-tag">📐 Toán: ${ts.toan??"—"}</span>
-          ${ts.mon_chuyen != null ? `<span class="tk-tag">⭐ Chuyên: ${ts.mon_chuyen}</span>` : ""}
+          <span class="tk-tag">📖 Văn: ${ts.van != null ? escapeHtml(String(ts.van)) : "—"}</span>
+          <span class="tk-tag">🌐 NN: ${ts.nn != null ? escapeHtml(String(ts.nn)) : "—"}</span>
+          <span class="tk-tag">📐 Toán: ${ts.toan != null ? escapeHtml(String(ts.toan)) : "—"}</span>
+          ${ts.mon_chuyen != null ? `<span class="tk-tag">⭐ Chuyên: ${escapeHtml(String(ts.mon_chuyen))}</span>` : ""}
         </div>
       </div>
       <div class="tk-score-box">
-        <div class="tk-score">${ts.tong}</div>
-        <div class="tk-score-label">${modeLabel}</div>
+        <div class="tk-score">${escapeHtml(String(ts.tong))}</div>
+        <div class="tk-score-label">${escapeHtml(modeLabel)}</div>
       </div>
     </div>`).join("");
 }
@@ -1405,12 +1442,12 @@ function renderBangChuyen(tong) {
       const diff  = Math.round((tong-t.dc)*100)/100;
       const style = diff >= 0 ? ' style="color:#16a34a;font-weight:800"' : diff > -2 ? ' style="color:#f59e0b;font-weight:700"' : '';
       const icon  = diff >= 0 ? "✅" : diff > -2 ? "⚡" : "";
-      return `<td class="dc"${style}>${t.dc} ${icon}</td>`;
+      return `<td class="dc"${style}>${escapeHtml(String(t.dc))} ${icon}</td>`;
     }).join("");
-    return `<tr><td style="text-align:left;font-weight:600">${lop.lop_chuyen}</td>${tds}</tr>`;
+    return `<tr><td style="text-align:left;font-weight:600">${escapeHtml(lop.lop_chuyen)}</td>${tds}</tr>`;
   }).join("");
   return `
-    <div class="section-title">🎯 So sánh điểm chuyên (tổng chuyên: <strong>${tong}</strong>)</div>
+    <div class="section-title">🎯 So sánh điểm chuyên (tổng chuyên: <strong>${escapeHtml(String(tong))}</strong>)</div>
     <div style="overflow-x:auto;margin-bottom:8px">
       <table class="chuyen-table">
         <thead><tr><th>Lớp chuyên</th><th>Lê Quý Đôn</th><th>N.Bỉnh Khiêm</th><th>Lê Thánh Tông</th></tr></thead>
@@ -1427,11 +1464,14 @@ function renderPTDTNT(tong) {
     const icon = diff >= 0 ? "✅" : diff > -1 ? "⚡" : "❌";
     const txt  = diff >= 0 ? "Đủ điều kiện" : diff > -1 ? "Sát sao" : "Chưa đủ";
     return `<div class="school-item ${cls}" style="margin-bottom:8px">
-      <div><div class="school-name">${obj.doi_tuong}</div><div class="school-meta">Điểm chuẩn PTDTNT: ${obj.diem_chuan}</div></div>
-      <span class="school-badge">${icon} ${txt}</span>
+      <div>
+        <div class="school-name">${escapeHtml(obj.doi_tuong)}</div>
+        <div class="school-meta">Điểm chuẩn PTDTNT: ${escapeHtml(String(obj.diem_chuan))}</div>
+      </div>
+      <span class="school-badge">${icon} ${escapeHtml(txt)}</span>
     </div>`;
   }).join("");
-  return `<div class="section-title">🏫 Trường PTDTNT Quảng Nam (tổng: ${tong})</div>${rows}`;
+  return `<div class="section-title">🏫 Trường PTDTNT Quảng Nam (tổng: ${escapeHtml(String(tong))})</div>${rows}`;
 }
 
 // ================================================
@@ -1511,7 +1551,6 @@ async function search() {
   btn.disabled = true;
   btn.textContent = "⏳ Đang tìm...";
   hideThuKhoa();
-
   document.getElementById("distCard").style.display = "none";
 
   const contentDiv = document.getElementById("resultContent");
@@ -1520,21 +1559,38 @@ async function search() {
   const ts = diemThiData[sbd] ?? diemThiData[sbd.padStart(5,"0")] ?? null;
 
   if (!ts) {
-    contentDiv.innerHTML = `<div class="not-found">😅 Không tìm thấy SBD <strong>${sbd}</strong><br><small>Kiểm tra lại số báo danh nhé!</small></div>`;
+    // Dùng textContent cho phần SBD người dùng nhập để tránh reflected XSS
+    const notFoundDiv = document.createElement("div");
+    notFoundDiv.className = "not-found";
+    const msg = document.createElement("span");
+    msg.textContent = `😅 Không tìm thấy SBD ${sbd}`;
+    const hint = document.createElement("div");
+    hint.style.fontSize = "13px";
+    hint.textContent = "Kiểm tra lại số báo danh nhé!";
+    notFoundDiv.appendChild(msg);
+    notFoundDiv.appendChild(document.createElement("br"));
+    notFoundDiv.appendChild(hint);
+    contentDiv.innerHTML = "";
+    contentDiv.appendChild(notFoundDiv);
     btn.disabled = false; btn.textContent = "🔍 Tra cứu";
     return;
   }
 
-  const van=ts.ngu_van, nn=ts.ngoai_ngu, toan=ts.toan;
-  const mon_chuyen=ts.mon_chuyen, diem_kk=ts.diem_kk;
-  const diem_ut=ts.diem_uu_tien, diem_qd=ts.diem_quy_doi;
-  const tong_dt=ts.tong_dai_tra, tong_pt=ts.tong_ptdtnt, tong_cv=ts.tong_chuyen;
-  const { rank, total }   = tinhRank(tong_dt??0);
+  const van        = ts.ngu_van;
+  const nn         = ts.ngoai_ngu;
+  const toan       = ts.toan;
+  const mon_chuyen = ts.mon_chuyen;
+  const diem_kk    = ts.diem_kk;
+  const diem_ut    = ts.diem_uu_tien;
+  const diem_qd    = ts.diem_quy_doi;
+  const tong_dt    = ts.tong_dai_tra;
+  const tong_pt    = ts.tong_ptdtnt;
+  const tong_cv    = ts.tong_chuyen;
+  const { rank, total }   = tinhRank(tong_dt ?? 0);
   const rankChuyen        = tinhRankChuyen(tong_cv);
   const rankPTDTNT        = tinhRankPTDTNT(tong_pt);
-  const { dau, sat, kho } = goiYTruong(tong_dt??0);
+  const { dau, sat, kho } = goiYTruong(tong_dt ?? 0);
 
-  // Lưu điểm của thí sinh cho distribution chart
   distMyScores = {
     dai_tra: tong_dt ?? null,
     chuyen:  tong_cv ?? null,
@@ -1542,12 +1598,13 @@ async function search() {
   };
 
   const boxes = [];
-  boxes.push(`<div class="score-box van pop"><div class="mon">Ngữ Văn</div><div class="diem">${van??"—"}</div><div class="label">điểm</div></div>`);
-  boxes.push(`<div class="score-box nn pop"><div class="mon">Ngoại Ngữ</div><div class="diem">${nn??"—"}</div><div class="label">điểm</div></div>`);
-  boxes.push(`<div class="score-box toan pop"><div class="mon">Toán</div><div class="diem">${toan??"—"}</div><div class="label">điểm</div></div>`);
-  if (mon_chuyen != null) boxes.push(`<div class="score-box chuyen pop"><div class="mon">Môn Chuyên</div><div class="diem">${mon_chuyen}</div><div class="label">điểm</div></div>`);
-  if (diem_kk    != null) boxes.push(`<div class="score-box kk pop"><div class="mon">Khuyến Khích</div><div class="diem">${diem_kk}</div><div class="label">điểm</div></div>`);
-  if (diem_ut    != null) boxes.push(`<div class="score-box ut pop"><div class="mon">Ưu Tiên</div><div class="diem">${diem_ut}</div><div class="label">điểm</div></div>`);
+  boxes.push(`<div class="score-box van pop"><div class="mon">Ngữ Văn</div><div class="diem">${van != null ? escapeHtml(String(van)) : "—"}</div><div class="label">điểm</div></div>`);
+  boxes.push(`<div class="score-box nn pop"><div class="mon">Ngoại Ngữ</div><div class="diem">${nn != null ? escapeHtml(String(nn)) : "—"}</div><div class="label">điểm</div></div>`);
+  boxes.push(`<div class="score-box toan pop"><div class="mon">Toán</div><div class="diem">${toan != null ? escapeHtml(String(toan)) : "—"}</div><div class="label">điểm</div></div>`);
+  if (mon_chuyen != null) boxes.push(`<div class="score-box chuyen pop"><div class="mon">Môn Chuyên</div><div class="diem">${escapeHtml(String(mon_chuyen))}</div><div class="label">điểm</div></div>`);
+  if (diem_kk    != null) boxes.push(`<div class="score-box kk pop"><div class="mon">Khuyến Khích</div><div class="diem">${escapeHtml(String(diem_kk))}</div><div class="label">điểm</div></div>`);
+  if (diem_ut    != null) boxes.push(`<div class="score-box ut pop"><div class="mon">Ưu Tiên</div><div class="diem">${escapeHtml(String(diem_ut))}</div><div class="label">điểm</div></div>`);
+
   const colsCls = boxes.length <= 3 ? "cols-3" : "cols-4";
   const qdBox   = diem_qd != null ? `
     <div class="qd-box pop">
@@ -1555,21 +1612,23 @@ async function search() {
         <div class="qd-label">📋 Điểm Quy Đổi KQHT – RL</div>
         <div class="qd-sub">Kết quả học tập &amp; rèn luyện 4 năm học</div>
       </div>
-      <div class="qd-score">${diem_qd}</div>
+      <div class="qd-score">${escapeHtml(String(diem_qd))}</div>
     </div>` : "";
+
   let tongHtml = `<div class="tong-section">`;
-  if (tong_dt != null) tongHtml += `<div class="total-box dai-tra pop"><div class="total-label">🏫 TỔNG ĐIỂM ĐẠI TRÀ</div><div class="total-score">${tong_dt}</div></div>`;
-  if (tong_pt != null) tongHtml += `<div class="total-box ptdtnt pop"><div class="total-label">🌿 TỔNG ĐIỂM PTDTNT</div><div class="total-score">${tong_pt}</div></div>`;
-  if (tong_cv != null) tongHtml += `<div class="total-box chuyen pop"><div class="total-label">⭐ TỔNG ĐIỂM CHUYÊN</div><div class="total-score">${tong_cv}</div></div>`;
+  if (tong_dt != null) tongHtml += `<div class="total-box dai-tra pop"><div class="total-label">🏫 TỔNG ĐIỂM ĐẠI TRÀ</div><div class="total-score">${escapeHtml(String(tong_dt))}</div></div>`;
+  if (tong_pt != null) tongHtml += `<div class="total-box ptdtnt pop"><div class="total-label">🌿 TỔNG ĐIỂM PTDTNT</div><div class="total-score">${escapeHtml(String(tong_pt))}</div></div>`;
+  if (tong_cv != null) tongHtml += `<div class="total-box chuyen pop"><div class="total-label">⭐ TỔNG ĐIỂM CHUYÊN</div><div class="total-score">${escapeHtml(String(tong_cv))}</div></div>`;
   tongHtml += `</div>`;
+
   const rankIcon = rank<=10?"🏆":rank<=50?"🥈":rank<=200?"🥉":"📊";
   const pct      = Math.round((1-rank/total)*100);
   let rankRowsHtml = `
     <div class="rank-row">
       <div class="rank-icon">${rankIcon}</div>
       <div>
-        <div class="rank-text">🏫 Top ${rank} / ${total} thí sinh đại trà</div>
-        <div class="rank-sub">Cao hơn ${pct}% thí sinh 📈</div>
+        <div class="rank-text">🏫 Top ${escapeHtml(String(rank))} / ${escapeHtml(String(total))} thí sinh đại trà</div>
+        <div class="rank-sub">Cao hơn ${escapeHtml(String(pct))}% thí sinh 📈</div>
       </div>
     </div>`;
   if (rankChuyen) {
@@ -1578,8 +1637,8 @@ async function search() {
     <div class="rank-row">
       <div class="rank-icon">⭐</div>
       <div>
-        <div class="rank-text">Top ${rankChuyen.rank} / ${rankChuyen.total} thí sinh chuyên</div>
-        <div class="rank-sub">Cao hơn ${pctC}% thí sinh chuyên 📈</div>
+        <div class="rank-text">Top ${escapeHtml(String(rankChuyen.rank))} / ${escapeHtml(String(rankChuyen.total))} thí sinh chuyên</div>
+        <div class="rank-sub">Cao hơn ${escapeHtml(String(pctC))}% thí sinh chuyên 📈</div>
       </div>
     </div>`;
   }
@@ -1589,26 +1648,31 @@ async function search() {
     <div class="rank-row">
       <div class="rank-icon">🌿</div>
       <div>
-        <div class="rank-text">Top ${rankPTDTNT.rank} / ${rankPTDTNT.total} thí sinh PTDTNT</div>
-        <div class="rank-sub">Cao hơn ${pctP}% thí sinh PTDTNT 📈</div>
+        <div class="rank-text">Top ${escapeHtml(String(rankPTDTNT.rank))} / ${escapeHtml(String(rankPTDTNT.total))} thí sinh PTDTNT</div>
+        <div class="rank-sub">Cao hơn ${escapeHtml(String(pctP))}% thí sinh PTDTNT 📈</div>
       </div>
     </div>`;
   }
+
   function schoolList(arr, cls, badge) {
     return arr.slice(0,4).map(s => {
-      const diffStr = s.diff===0?"Bằng điểm chuẩn":s.diff>0?`Hơn ${s.diff} điểm`:`Thiếu ${Math.abs(s.diff)} điểm`;
+      const diffStr = s.diff===0 ? "Bằng điểm chuẩn" : s.diff>0 ? `Hơn ${s.diff} điểm` : `Thiếu ${Math.abs(s.diff)} điểm`;
       return `<div class="school-item ${cls}">
-        <div><div class="school-name">${s.ten}</div><div class="school-meta">Điểm chuẩn 2026: ${s.dc} &nbsp;•&nbsp; ${diffStr}</div></div>
-        <span class="school-badge">${badge}</span>
+        <div>
+          <div class="school-name">${escapeHtml(String(s.ten))}</div>
+          <div class="school-meta">Điểm chuẩn 2026: ${escapeHtml(String(s.dc))} &nbsp;•&nbsp; ${escapeHtml(diffStr)}</div>
+        </div>
+        <span class="school-badge">${escapeHtml(badge)}</span>
       </div>`;
     }).join("");
   }
+
   contentDiv.innerHTML = `
     <div class="student-header">
       <div class="avatar">🎒</div>
       <div class="student-info">
-        <h2>${ts.ho_ten??"Thí sinh"}</h2>
-        <span class="sbd-tag">SBD: ${ts.so_bao_danh} • Kết quả thi Lớp 10 Đà Nẵng 2026</span>
+        <h2>${escapeHtml(ts.ho_ten) || "Thí sinh"}</h2>
+        <span class="sbd-tag">SBD: ${escapeHtml(String(ts.so_bao_danh))} • Kết quả thi Lớp 10 Đà Nẵng 2026</span>
       </div>
     </div>
     <div class="scores-grid ${colsCls}">${boxes.join("")}</div>
@@ -1627,8 +1691,6 @@ async function search() {
     ${kho.length>0?`<div class="section-title">🔴 Khó đậu hơn</div>${schoolList(kho.slice(0,4),"kho","❌ Cần cân nhắc")}`:""}
   `;
 
-  // Render distribution chart ngay sau kết quả
-  // Đặt mode mặc định dựa trên loại điểm có sẵn
   distMode = tong_dt != null ? "dai_tra" : tong_cv != null ? "chuyen" : "ptdtnt";
   document.querySelectorAll(".dist-mode-btn").forEach((b, i) => {
     const modes = ["dai_tra","chuyen","ptdtnt"];
@@ -1636,19 +1698,19 @@ async function search() {
   });
   setTimeout(() => renderDistChart(distMyScores[distMode]), 100);
 
-  // AI
+  // AI streaming — dùng safeChunk để escape trước khi chèn vào innerHTML
   try {
     const res = await goiAI({
-      sbd:ts.so_bao_danh, ten:ts.ho_ten, van, nn, toan,
+      sbd: ts.so_bao_danh, ten: ts.ho_ten, van, nn, toan,
       mon_chuyen, diem_kk, diem_ut, diem_qd,
-      tong_dai_tra:tong_dt, tong_chuyen:tong_cv, tong_ptdtnt:tong_pt,
-      rank, total, truongDau:dau, truongSat:sat, truongKho:kho,
-      chuyenInfo:buildChuyenInfoForAI(tong_cv),
-      ptdtntInfo:buildPTDTNTInfoForAI(tong_pt),
+      tong_dai_tra: tong_dt, tong_chuyen: tong_cv, tong_ptdtnt: tong_pt,
+      rank, total, truongDau: dau, truongSat: sat, truongKho: kho,
+      chuyenInfo: buildChuyenInfoForAI(tong_cv),
+      ptdtntInfo: buildPTDTNTInfoForAI(tong_pt),
     });
     if (!res.ok) {
       let errMsg = "😅 AI đang bận, thử lại sau nhé!";
-      try { const e=await res.json(); if(e?.message) errMsg=`⚠️ ${e.message}`; } catch {}
+      try { const e = await res.json(); if (e?.message) errMsg = `⚠️ ${escapeHtml(e.message)}`; } catch {}
       document.getElementById("aiText").innerHTML = errMsg;
     } else {
       const reader  = res.body.getReader();
@@ -1659,7 +1721,7 @@ async function search() {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        buffer += decoder.decode(value, { stream:true });
+        buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split("\n");
         buffer = lines.pop();
         for (const line of lines) {
@@ -1669,7 +1731,8 @@ async function search() {
           try {
             const json  = JSON.parse(data);
             const chunk = json.choices?.[0]?.delta?.content ?? "";
-            aiEl.innerHTML += chunk.replace(/\n/g,"<br>");
+            // safeChunk: escapeHtml + đổi \n thành <br> — không cho inject HTML
+            aiEl.innerHTML += safeChunk(chunk);
           } catch {}
         }
       }
