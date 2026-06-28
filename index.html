@@ -320,6 +320,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 .page-header { text-align: center; margin-bottom: 28px; animation: fadeDown 0.6s ease; }
 .page-header .page-emoji { font-size: 52px; display: block; margin-bottom: 10px; }
 .page-header h1 { color: white; font-size: 22px; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.3; }
+.page-header h2 { color: white; font-size: 22px; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.3; }
 .page-header p { color: rgba(255,255,255,0.85); margin-top: 8px; font-size: 14px; max-width: 500px; margin-left: auto; margin-right: auto; }
 
 /* ========== PDF CARD ========== */
@@ -366,7 +367,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 /* ========== RESPONSIVE ========== */
 @media (max-width: 480px) {
   body { padding: 20px 12px; }
-  .header h1, .page-header h1 { font-size: 18px; }
+  .header h1, .page-header h1, .page-header h2 { font-size: 18px; }
   .header .emoji-big, .page-header .page-emoji { font-size: 42px; }
   .card { padding: 18px 16px; }
   .input-group { flex-direction: column; }
@@ -586,7 +587,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
   <div class="page" id="page-diem-chuan">
     <div class="page-header">
       <span class="page-emoji">📋</span>
-      <h1>Điểm Chuẩn Tuyển Sinh Lớp 10<br>Đà Nẵng 2026</h1>
+      <h2>Điểm Chuẩn Tuyển Sinh Lớp 10<br>Đà Nẵng 2026</h2>
       <p>Điểm chuẩn chính thức từ Sở GD&ĐT Đà Nẵng, năm học 2026–2027</p>
     </div>
     <div class="pdf-card">
@@ -631,7 +632,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
   <div class="page" id="page-danh-sach">
     <div class="page-header">
       <span class="page-emoji">📁</span>
-      <h1>Danh Sách Điểm Thi<br>Tuyển Sinh Lớp 10 Đà Nẵng 2026</h1>
+      <h2>Danh Sách Điểm Thi<br>Tuyển Sinh Lớp 10 Đà Nẵng 2026</h2>
       <p>Toàn bộ điểm thi của các thí sinh — xem trước và tải về dạng PDF hoặc CSV</p>
     </div>
     <div class="pdf-card">
@@ -696,7 +697,6 @@ function escapeHtml(str) {
     .replace(/'/g, "&#x27;");
 }
 
-// Dùng cho AI streaming: escape HTML trước, rồi chỉ cho phép <br>
 function safeChunk(text) {
   return escapeHtml(text).replace(/\n/g, "<br>");
 }
@@ -719,7 +719,7 @@ const CONFIG = {
 };
 
 // ================================================
-// ROUTER — whitelist hash để chống DOM-based XSS
+// ROUTER
 // ================================================
 const VALID_ROUTES = new Set(["home", "diem-chuan", "danh-sach"]);
 const ROUTES = {
@@ -730,7 +730,6 @@ const ROUTES = {
 function getRoute() {
   const hash = location.hash.replace(/^#\/?/, "").trim();
   const route = ROUTES[hash] ?? "home";
-  // Whitelist check — nếu không hợp lệ thì về home
   return VALID_ROUTES.has(route) ? route : "home";
 }
 function navigate(path) {
@@ -770,7 +769,6 @@ const NAV_ITEMS = [
 function renderSidebar() {
   const cur  = getRoute();
   const body = document.getElementById("sidebarBody");
-  // NAV_ITEMS chứa hằng số tĩnh, không có dữ liệu người dùng → an toàn
   body.innerHTML =
     `<div class="sidebar-section-label">Danh mục</div>` +
     NAV_ITEMS.map(item => `
@@ -856,7 +854,6 @@ function genDonateQR() {
   const qrUrl  = `https://api.vietqr.io/image/971025-${PHONE}-NKNPGUv.jpg?accountName=${encodeURIComponent(NAME)}&amount=${val}&addInfo=${desc}`;
   const cups   = dmSelectedCoffees || Math.ceil(val / 20000);
   const icons  = cups <= 5 ? "☕".repeat(Math.min(cups,5)) : cups <= 10 ? "☕☕☕☕☕+" : "🏆";
-  // Dùng textContent cho các giá trị động
   document.getElementById("dmQRCoffees").textContent = icons;
   document.getElementById("dmQRAmount").textContent  = val.toLocaleString("vi-VN") + "đ";
   document.getElementById("dmQRImg").src             = qrUrl;
@@ -913,24 +910,20 @@ function addCompareRow() {
   const row   = document.createElement("div");
   row.className = "cm-sbd-row";
   row.dataset.idx = idx;
-  // Dùng DOM API thay vì innerHTML để tránh XSS
   const dot = document.createElement("div");
   dot.className = "cm-sbd-dot";
   dot.style.background = color;
-
   const input = document.createElement("input");
   input.className = "cm-sbd-input";
   input.type = "text";
   input.placeholder = `Số báo danh ${idx + 1}...`;
   input.maxLength = 10;
   input.addEventListener("keydown", e => { if (e.key === "Enter") runCompare(); });
-
   const btn = document.createElement("button");
   btn.className = "cm-remove-btn";
   btn.title = "Xoá";
   btn.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
   btn.addEventListener("click", () => compareRemoveRow(btn));
-
   row.appendChild(dot);
   row.appendChild(input);
   row.appendChild(btn);
@@ -962,35 +955,30 @@ async function runCompare() {
   const inputs = Array.from(document.querySelectorAll(".cm-sbd-input"));
   const sbds   = inputs.map(i => i.value.trim()).filter(Boolean);
   if (sbds.length < 2) { showCmError("Nhập ít nhất 2 số báo danh để so sánh!"); return; }
-
   const btn = document.getElementById("cmSearchBtn");
   btn.disabled = true;
   btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Đang tìm...`;
-
   const results  = [];
   const notFound = [];
   for (const sbd of sbds) {
     const ts = diemThiData[sbd] ?? diemThiData[sbd.padStart(5,"0")] ?? null;
     if (ts) results.push(ts);
-    else notFound.push(escapeHtml(sbd)); // escape trước khi dùng
+    else notFound.push(escapeHtml(sbd));
   }
-
   btn.disabled = false;
   btn.innerHTML = `<i class="fa-solid fa-chart-bar"></i> So sánh ngay`;
-
   if (notFound.length > 0) {
     showCmError(`Không tìm thấy SBD: ${notFound.join(", ")}. Kiểm tra lại!`);
   } else {
     document.getElementById("cmError").classList.remove("show");
   }
   if (results.length < 2) { showCmError("Cần ít nhất 2 SBD hợp lệ để so sánh!"); return; }
-
   renderCompareResults(results);
 }
 
 function showCmError(msg) {
   const el = document.getElementById("cmError");
-  el.textContent = "⚠️ " + msg; // textContent — an toàn
+  el.textContent = "⚠️ " + msg;
   el.classList.add("show");
 }
 
@@ -998,10 +986,8 @@ function renderCompareResults(list) {
   const resultsEl = document.getElementById("cmResults");
   resultsEl.classList.add("show");
   setTimeout(() => resultsEl.scrollIntoView({ behavior:"smooth", block:"start" }), 100);
-
   const labels  = ["Ngữ Văn","Ngoại Ngữ","Toán","Tổng ĐT"];
   const datasets = list.map((ts, i) => ({
-    // escape tên để an toàn trong Chart.js label (render dạng text)
     label: ts.ho_ten
       ? `${escapeHtml(String(ts.ho_ten))} (${escapeHtml(String(ts.so_bao_danh))})`
       : `SBD ${escapeHtml(String(ts.so_bao_danh))}`,
@@ -1016,7 +1002,6 @@ function renderCompareResults(list) {
     borderWidth: 2,
     borderRadius: 6,
   }));
-
   if (cmChart) { cmChart.destroy(); cmChart = null; }
   const ctx = document.getElementById("cmChart").getContext("2d");
   cmChart = new Chart(ctx, {
@@ -1041,8 +1026,6 @@ function renderCompareResults(list) {
       }
     }
   });
-
-  // Bảng chi tiết — dùng escapeHtml cho mọi dữ liệu từ JSON
   const fields = [
     { key:"ngu_van",      label:"📖 Ngữ Văn" },
     { key:"ngoai_ngu",    label:"🌐 Ngoại Ngữ" },
@@ -1055,14 +1038,11 @@ function renderCompareResults(list) {
     { key:"tong_chuyen",  label:"⭐ Tổng Chuyên" },
     { key:"tong_ptdtnt",  label:"🌿 Tổng PTDTNT" },
   ];
-
   const activeFields = fields.filter(f => list.some(ts => ts[f.key] != null));
-
   const headCols = list.map((ts, i) =>
     `<th><span class="cm-color-dot" style="background:${COMPARE_COLORS[i]}"></span>${escapeHtml(ts.ho_ten ? String(ts.ho_ten).split(" ").pop() : "SBD")}<br><small style="font-weight:600;opacity:0.8">${escapeHtml(String(ts.so_bao_danh))}</small></th>`
   ).join("");
   document.getElementById("cmTableHead").innerHTML = `<tr><th>Môn / Điểm</th>${headCols}</tr>`;
-
   const rows = activeFields.map(f => {
     const vals  = list.map(ts => ts[f.key] ?? null);
     const valid = vals.filter(v => v != null);
@@ -1177,10 +1157,8 @@ function renderDistChart(myScore) {
   if (!data || !data.length) return;
   const cardEl = document.getElementById("distCard");
   cardEl.style.display = "block";
-
   const labels = data.map(d => d.range);
   const counts = data.map(d => d.count);
-
   const score = myScore ?? distMyScores[distMode];
   const bgColors = labels.map((lbl) => {
     if (score != null) {
@@ -1191,7 +1169,6 @@ function renderDistChart(myScore) {
     return "#0099ff55";
   });
   const borderColors = bgColors.map(c => c === "#f59e0b" ? "#f59e0b" : "#0066cc");
-
   if (distChart) { distChart.destroy(); distChart = null; }
   const ctx = document.getElementById("distChart").getContext("2d");
   distChart = new Chart(ctx, {
@@ -1225,7 +1202,6 @@ function renderDistChart(myScore) {
       }
     }
   });
-
   const myScoreEl = document.getElementById("distMyScore");
   const myTextEl  = document.getElementById("distMyScoreText");
   const mySubEl   = document.getElementById("distMyScoreSub");
@@ -1238,7 +1214,6 @@ function renderDistChart(myScore) {
     const pct = Math.round((above / total) * 100);
     myScoreEl.style.display = "flex";
     const modeLabel = distMode === "chuyen" ? "chuyên" : distMode === "ptdtnt" ? "PTDTNT" : "đại trà";
-    // Dùng textContent để tránh XSS
     myTextEl.textContent = `📍 Điểm ${modeLabel} của bạn: ${score} điểm`;
     mySubEl.textContent  = `Cao hơn khoảng ${pct}% số thí sinh ${modeLabel}`;
   } else {
@@ -1312,7 +1287,6 @@ function switchDcTab(tab) {
 }
 function renderDcTable() {
   const data = DC_DATA[dcCurrentTab]; if (!data) return;
-  // DC_DATA là hằng số tĩnh trong code → an toàn, nhưng vẫn escape để nhất quán
   document.getElementById("dcTableHead").innerHTML = `<tr>${data.head.map(h=>`<th>${escapeHtml(h)}</th>`).join("")}</tr>`;
   const body  = document.getElementById("dcTableBody");
   const query = (document.getElementById("dcSearchInput")?.value ?? "").toLowerCase();
@@ -1544,22 +1518,16 @@ async function search() {
   const sbd = document.getElementById("sbdInput").value.trim();
   if (!sbd) return;
   if (!diemThiData) { alert("Đang tải dữ liệu, thử lại!"); return; }
-
   const btn       = document.getElementById("btnSearch");
   const resultDiv = document.getElementById("result");
-
   btn.disabled = true;
   btn.textContent = "⏳ Đang tìm...";
   hideThuKhoa();
   document.getElementById("distCard").style.display = "none";
-
   const contentDiv = document.getElementById("resultContent");
   resultDiv.style.display = "block";
-
   const ts = diemThiData[sbd] ?? diemThiData[sbd.padStart(5,"0")] ?? null;
-
   if (!ts) {
-    // Dùng textContent cho phần SBD người dùng nhập để tránh reflected XSS
     const notFoundDiv = document.createElement("div");
     notFoundDiv.className = "not-found";
     const msg = document.createElement("span");
@@ -1575,7 +1543,6 @@ async function search() {
     btn.disabled = false; btn.textContent = "🔍 Tra cứu";
     return;
   }
-
   const van        = ts.ngu_van;
   const nn         = ts.ngoai_ngu;
   const toan       = ts.toan;
@@ -1590,13 +1557,11 @@ async function search() {
   const rankChuyen        = tinhRankChuyen(tong_cv);
   const rankPTDTNT        = tinhRankPTDTNT(tong_pt);
   const { dau, sat, kho } = goiYTruong(tong_dt ?? 0);
-
   distMyScores = {
     dai_tra: tong_dt ?? null,
     chuyen:  tong_cv ?? null,
     ptdtnt:  tong_pt ?? null,
   };
-
   const boxes = [];
   boxes.push(`<div class="score-box van pop"><div class="mon">Ngữ Văn</div><div class="diem">${van != null ? escapeHtml(String(van)) : "—"}</div><div class="label">điểm</div></div>`);
   boxes.push(`<div class="score-box nn pop"><div class="mon">Ngoại Ngữ</div><div class="diem">${nn != null ? escapeHtml(String(nn)) : "—"}</div><div class="label">điểm</div></div>`);
@@ -1604,7 +1569,6 @@ async function search() {
   if (mon_chuyen != null) boxes.push(`<div class="score-box chuyen pop"><div class="mon">Môn Chuyên</div><div class="diem">${escapeHtml(String(mon_chuyen))}</div><div class="label">điểm</div></div>`);
   if (diem_kk    != null) boxes.push(`<div class="score-box kk pop"><div class="mon">Khuyến Khích</div><div class="diem">${escapeHtml(String(diem_kk))}</div><div class="label">điểm</div></div>`);
   if (diem_ut    != null) boxes.push(`<div class="score-box ut pop"><div class="mon">Ưu Tiên</div><div class="diem">${escapeHtml(String(diem_ut))}</div><div class="label">điểm</div></div>`);
-
   const colsCls = boxes.length <= 3 ? "cols-3" : "cols-4";
   const qdBox   = diem_qd != null ? `
     <div class="qd-box pop">
@@ -1614,13 +1578,11 @@ async function search() {
       </div>
       <div class="qd-score">${escapeHtml(String(diem_qd))}</div>
     </div>` : "";
-
   let tongHtml = `<div class="tong-section">`;
   if (tong_dt != null) tongHtml += `<div class="total-box dai-tra pop"><div class="total-label">🏫 TỔNG ĐIỂM ĐẠI TRÀ</div><div class="total-score">${escapeHtml(String(tong_dt))}</div></div>`;
   if (tong_pt != null) tongHtml += `<div class="total-box ptdtnt pop"><div class="total-label">🌿 TỔNG ĐIỂM PTDTNT</div><div class="total-score">${escapeHtml(String(tong_pt))}</div></div>`;
   if (tong_cv != null) tongHtml += `<div class="total-box chuyen pop"><div class="total-label">⭐ TỔNG ĐIỂM CHUYÊN</div><div class="total-score">${escapeHtml(String(tong_cv))}</div></div>`;
   tongHtml += `</div>`;
-
   const rankIcon = rank<=10?"🏆":rank<=50?"🥈":rank<=200?"🥉":"📊";
   const pct      = Math.round((1-rank/total)*100);
   let rankRowsHtml = `
@@ -1653,7 +1615,6 @@ async function search() {
       </div>
     </div>`;
   }
-
   function schoolList(arr, cls, badge) {
     return arr.slice(0,4).map(s => {
       const diffStr = s.diff===0 ? "Bằng điểm chuẩn" : s.diff>0 ? `Hơn ${s.diff} điểm` : `Thiếu ${Math.abs(s.diff)} điểm`;
@@ -1666,7 +1627,6 @@ async function search() {
       </div>`;
     }).join("");
   }
-
   contentDiv.innerHTML = `
     <div class="student-header">
       <div class="avatar">🎒</div>
@@ -1690,15 +1650,12 @@ async function search() {
     ${sat.length>0?`<div class="section-title">🟡 Sát sao (dưới 1 điểm)</div>${schoolList(sat,"sat","⚡ Cần theo dõi")}`:""}
     ${kho.length>0?`<div class="section-title">🔴 Khó đậu hơn</div>${schoolList(kho.slice(0,4),"kho","❌ Cần cân nhắc")}`:""}
   `;
-
   distMode = tong_dt != null ? "dai_tra" : tong_cv != null ? "chuyen" : "ptdtnt";
   document.querySelectorAll(".dist-mode-btn").forEach((b, i) => {
     const modes = ["dai_tra","chuyen","ptdtnt"];
     b.classList.toggle("active", modes[i] === distMode);
   });
   setTimeout(() => renderDistChart(distMyScores[distMode]), 100);
-
-  // AI streaming — dùng safeChunk để escape trước khi chèn vào innerHTML
   try {
     const res = await goiAI({
       sbd: ts.so_bao_danh, ten: ts.ho_ten, van, nn, toan,
@@ -1731,7 +1688,6 @@ async function search() {
           try {
             const json  = JSON.parse(data);
             const chunk = json.choices?.[0]?.delta?.content ?? "";
-            // safeChunk: escapeHtml + đổi \n thành <br> — không cho inject HTML
             aiEl.innerHTML += safeChunk(chunk);
           } catch {}
         }
@@ -1740,7 +1696,6 @@ async function search() {
   } catch {
     document.getElementById("aiText").innerHTML = "😅 AI đang bận, thử lại sau nhé!";
   }
-
   btn.disabled = false;
   btn.textContent = "🔍 Tra cứu";
   resultDiv.scrollIntoView({ behavior:"smooth", block:"start" });
