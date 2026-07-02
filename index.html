@@ -1708,6 +1708,146 @@ setupPdfs();
 renderPage();
 loadData();
 </script>
+  <!-- ====== ADVANCED TRACKER ====== -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, push, set, onValue, remove, serverTimestamp, onDisconnect }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyAv5yuqrBdngZzYepCBk1iHUbKuJS_fxIc",
+  authDomain: "the-firstday.firebaseapp.com",
+  databaseURL: "https://the-firstday-default-rtdb.firebaseio.com",
+  projectId: "the-firstday",
+  storageBucket: "the-firstday.firebasestorage.app",
+  messagingSenderId: "178669199590",
+  appId: "1:178669199590:web:4b2cebc41cda20c7a35b27",
+  measurementId: "G-FYK8620VZK"
+  };
+
+  const app = initializeApp(firebaseConfig, "tracker");
+  const db  = getDatabase(app);
+
+  // ── Tạo session ID duy nhất ──────────────────
+  const SESSION_ID = Math.random().toString(36).slice(2) + Date.now().toString(36);
+  const onlineRef  = ref(db, `online/${SESSION_ID}`);
+
+  // ── Lấy thông tin thiết bị ──────────────────
+  function getDeviceInfo() {
+    const ua = navigator.userAgent;
+    let browser = "Unknown", os = "Unknown", device = "Desktop";
+    if (/Edg\//.test(ua))          browser = "Microsoft Edge";
+    else if (/OPR\//.test(ua))     browser = "Opera";
+    else if (/Chrome\//.test(ua))  browser = "Chrome";
+    else if (/Firefox\//.test(ua)) browser = "Firefox";
+    else if (/Safari\//.test(ua))  browser = "Safari";
+    const bVersion = (ua.match(/(Chrome|Firefox|Safari|Edg|OPR)[\/ ]([\d.]+)/) || [])[2] || "";
+    if (/Windows NT 10/.test(ua))       os = "Windows 10/11";
+    else if (/Windows NT 6/.test(ua))   os = "Windows 7/8";
+    else if (/Mac OS X/.test(ua))       os = "macOS";
+    else if (/Android/.test(ua))        os = "Android";
+    else if (/iPhone|iPad/.test(ua))    os = "iOS";
+    else if (/Linux/.test(ua))          os = "Linux";
+    if (/Mobi|Android|iPhone/.test(ua)) device = "Mobile";
+    else if (/iPad|Tablet/.test(ua))    device = "Tablet";
+    return { browser: `${browser} ${bVersion}`.trim(), os, device, userAgent: ua };
+  }
+
+  // ── Lấy IP + vị trí + nhà mạng ──────────────
+  async function getNetworkInfo() {
+    try {
+      const r = await fetch("https://ipapi.co/json/");
+      const d = await r.json();
+      return {
+        ip:       d.ip       || "unknown",
+        city:     d.city     || "unknown",
+        region:   d.region   || "unknown",
+        country:  d.country_name || "unknown",
+        isp:      d.org      || "unknown",
+        lat:      d.latitude  || null,
+        lng:      d.longitude || null,
+        timezone: d.timezone  || Intl.DateTimeFormat().resolvedOptions().timeZone,
+        postal:   d.postal    || "",
+      };
+    } catch {
+      return { ip:"unknown", city:"unknown", region:"unknown",
+               country:"unknown", isp:"unknown", lat:null, lng:null };
+    }
+  }
+
+  // ── Đăng ký presence (online/offline tự động) ─
+  async function registerPresence() {
+    const device  = getDeviceInfo();
+    const network = await getNetworkInfo();
+    const data = {
+      sessionId:   SESSION_ID,
+      timestamp:   serverTimestamp(),
+      lastSeen:    serverTimestamp(),
+      page:        window.location.href,
+      pageTitle:   document.title,
+      referrer:    document.referrer || "direct",
+      screenSize:  `${screen.width}x${screen.height}`,
+      language:    navigator.language,
+      ...device,
+      ...network,
+      status:      "online",
+      blocked:     false,
+    };
+    await set(onlineRef, data);
+    // Tự xoá khi đóng tab
+    onDisconnect(onlineRef).remove();
+    // Lắng nghe lệnh kick/block từ admin
+    onValue(onlineRef, snap => {
+      const d = snap.val();
+      if (!d) return;
+      if (d.kicked === true) {
+        window.location.href = "/blocked.html";
+      }
+      if (d.blocked === true) {
+        document.body.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:center;
+                      height:100vh;background:#0f172a;color:white;
+                      font-family:sans-serif;flex-direction:column;gap:16px">
+            <div style="font-size:60px">🚫</div>
+            <div style="font-size:22px;font-weight:700">Bạn đã bị chặn</div>
+            <div style="font-size:14px;color:#94a3b8">Liên hệ quản trị viên để biết thêm</div>
+          </div>`;
+      }
+    });
+    // Ghi vào log visits
+    push(ref(db, "visits"), { ...data, timestamp: serverTimestamp() });
+    // Update lastSeen mỗi 30s
+    setInterval(() => set(ref(db, `online/${SESSION_ID}/lastSeen`), serverTimestamp()), 30000);
+    // Update page khi đổi route
+    const _origNavigate = window.navigate;
+    if (_origNavigate) {
+      window.navigate = function(path) {
+        _origNavigate(path);
+        setTimeout(() => set(ref(db, `online/${SESSION_ID}/page`), window.location.href), 300);
+      };
+    }
+  }
+
+  // ── Track SBD tra cứu ──────────────────────
+  const _origSearch = window.search;
+  if (_origSearch) {
+    window.search = async function() {
+      const sbd = document.getElementById("sbdInput")?.value?.trim();
+      await _origSearch();
+      if (sbd) {
+        push(ref(db, "searches"), {
+          timestamp: serverTimestamp(),
+          sessionId: SESSION_ID,
+          sbd,
+          ip: (await getNetworkInfo()).ip,
+        });
+      }
+    };
+  }
+
+  registerPresence();
+</script>
+<!-- ====== END TRACKER ====== -->
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
