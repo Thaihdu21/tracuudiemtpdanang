@@ -9,9 +9,9 @@
 <meta name="keywords" content="tra cứu điểm thi lớp 10 Đà Nẵng 2026, điểm thi tuyển sinh lớp 10 Đà Nẵng, xem điểm thi lớp 10 Đà Nẵng 2026">
 <meta name="google-site-verification" content="yRx1XuGJ9Tort5MxMDaoFkCj5CLKi4hKbKv5JDJS3xY">
 <meta name="msvalidate.01" content="8F08EF9D104B068EBFAF8B2A4AE1C694" />
-<meta property="og:title" content="Tra Cứu Điểm Thi Tuyển Sinh Lớp 10 Đà Nẵng 2026">
-<meta property="og:description" content="Nhập số báo danh để xem điểm thi + gợi ý trường + AI nhận xét ngay lập tức!">
-<meta property="og:url" content="https://tracuudiemtpdanang.vercel.app">
+<meta property="og:title" content="Tra Cứu Điểm Thi Lớp 10 Đà Nẵng 2026">
+<meta property="og:description" content="Tra cứu điểm thi tuyển sinh lớp 10 Đà Nẵng 2026. Nhập số báo danh để xem điểm Toán, Văn, Ngoại Ngữ, gợi ý trường và AI nhận xét.">
+<meta property="og:url" content="https://tracuudiemtpdanang.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="vi_VN">
 <meta property="og:image" content="https://tracuudiemtpdanang.vercel.app/api/og">
@@ -20,7 +20,7 @@
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://tracuudiemtpdanang.vercel.app/api/og">
-<link rel="canonical" href="https://tracuudiemtpdanang.vercel.app">
+<link rel="canonical" href="https://tracuudiemtpdanang.vercel.app/">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -406,7 +406,9 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 .pop { animation: pop 0.5s ease forwards; }
 </style>
 </head>
+
 <body>
+
 
 <!-- HAMBURGER -->
 <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()" title="Menu">
@@ -499,6 +501,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
   </div>
 </div>
 
+
 <div class="container">
 
   <!-- ===== PAGE HOME ===== -->
@@ -584,104 +587,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
     </div>
   </div>
 
-  <!-- ===== PAGE ĐIỂM CHUẨN ===== -->
-  <div class="page" id="page-diem-chuan">
-    <div class="page-header">
-      <span class="page-emoji">📋</span>
-      <h2>Điểm Chuẩn Tuyển Sinh Lớp 10<br>Đà Nẵng 2026</h2>
-      <p>Điểm chuẩn chính thức từ Sở GD&ĐT Đà Nẵng, năm học 2026–2027</p>
-    </div>
-    <div class="pdf-card">
-      <div class="pdf-toolbar">
-        <div class="pdf-title"><i class="fa-solid fa-file-pdf"></i> Thông báo điểm chuẩn (Sở GD&ĐT)</div>
-        <div class="pdf-actions">
-          <a class="btn-download pdf disabled" id="btnDcPdf" href="#" target="_blank">
-            <i class="fa-solid fa-file-pdf"></i> Tải PDF
-          </a>
-        </div>
-      </div>
-      <div class="pdf-embed-wrap">
-        <div class="pdf-placeholder" id="dcPdfPlaceholder">
-          <i class="fa-solid fa-file-pdf"></i>
-          <div class="ph-title">File PDF sẽ được cập nhật sớm</div>
-          <div class="ph-sub">Bạn có thể xem bảng điểm chuẩn chi tiết bên dưới</div>
-        </div>
-        <iframe id="dcPdfIframe" src="" style="display:none" allowfullscreen></iframe>
-      </div>
-    </div>
-    <div class="card" style="padding:24px 20px">
-      <div class="tab-row">
-        <button class="tab-btn active" onclick="switchDcTab('cong_lap')">🏫 Công lập (69 trường)</button>
-        <button class="tab-btn" onclick="switchDcTab('chuyen')">⭐ THPT Chuyên</button>
-        <button class="tab-btn" onclick="switchDcTab('ptdtnt')">🌿 PTDTNT</button>
-        <button class="tab-btn" onclick="switchDcTab('ngoai_ngu')">🌐 Tiếng Nhật / Pháp</button>
-      </div>
-      <div class="dc-filter-row" id="dcFilterRow">
-        <input type="text" class="dc-search-input" id="dcSearchInput" placeholder="🔍 Tìm tên trường..." oninput="filterDcTable()">
-      </div>
-      <div class="dc-table-wrap">
-        <table class="dc-table">
-          <thead id="dcTableHead"></thead>
-          <tbody id="dcTableBody"></tbody>
-        </table>
-      </div>
-      <p style="font-size:12px;color:#aaa;margin-top:12px">Nguồn: Thông báo số 2702/TB-SGDĐT ngày 08/6/2026 của Sở GD&ĐT Đà Nẵng</p>
-    </div>
-  </div>
-
-  <!-- ===== PAGE DANH SÁCH ĐIỂM THI ===== -->
-  <div class="page" id="page-danh-sach">
-    <div class="page-header">
-      <span class="page-emoji">📁</span>
-      <h2>Danh Sách Điểm Thi<br>Tuyển Sinh Lớp 10 Đà Nẵng 2026</h2>
-      <p>Toàn bộ điểm thi của các thí sinh — xem trước và tải về dạng PDF hoặc CSV</p>
-    </div>
-    <div class="pdf-card">
-      <div class="pdf-toolbar">
-        <div class="pdf-title"><i class="fa-solid fa-file-pdf"></i> Danh sách điểm thi (PDF)</div>
-        <div class="pdf-actions">
-          <a class="btn-download pdf disabled" id="btnDanhSachPdf" href="#" target="_blank">
-            <i class="fa-solid fa-file-pdf"></i> Tải PDF
-          </a>
-          <a class="btn-download csv disabled" id="btnDanhSachCsv" href="#" download>
-            <i class="fa-solid fa-file-csv"></i> Tải CSV
-          </a>
-        </div>
-      </div>
-      <div class="pdf-embed-wrap">
-        <div class="pdf-placeholder" id="dsPdfPlaceholder">
-          <i class="fa-solid fa-file-pdf"></i>
-          <div class="ph-title">File PDF sẽ được cập nhật sớm</div>
-          <div class="ph-sub">Khi có file, nhấn "Tải PDF" để tải hoặc xem trực tiếp tại đây</div>
-        </div>
-        <iframe id="dsPdfIframe" src="" style="display:none" allowfullscreen></iframe>
-      </div>
-    </div>
-    <div class="card" style="padding:20px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <span style="font-size:20px">ℹ️</span>
-        <span style="font-size:14px;font-weight:700;color:#333">Hướng dẫn sử dụng file</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:12px;background:#fef2f2;border-radius:10px;border-left:4px solid #ef4444">
-          <i class="fa-solid fa-file-pdf" style="color:#ef4444;font-size:16px;margin-top:2px;flex-shrink:0"></i>
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#333">File PDF</div>
-            <div style="font-size:12px;color:#666;margin-top:2px">Xem toàn bộ danh sách điểm thi dạng văn bản, dễ đọc, phù hợp in ấn.</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:12px;background:#f0fdf4;border-radius:10px;border-left:4px solid #22c55e">
-          <i class="fa-solid fa-file-csv" style="color:#16a34a;font-size:16px;margin-top:2px;flex-shrink:0"></i>
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#333">File CSV</div>
-            <div style="font-size:12px;color:#666;margin-top:2px">Dữ liệu thô dạng bảng, mở bằng Excel / Google Sheets để lọc, sắp xếp, phân tích.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">Dữ liệu từ Sở GD&ĐT Đà Nẵng • AI nhận xét mang tính tham khảo</div>
+    <div class="footer">Dữ liệu từ Sở GD&ĐT Đà Nẵng • AI nhận xét mang tính tham khảo</div>
 </div>
 
 <script>
@@ -728,23 +634,13 @@ const ROUTES = {
   "danh-sach-diem-chuan-vao-10":                        "diem-chuan",
   "danh-sach-diem-tuyen-sinh-cua-cac-thi-sinh-vao-10": "danh-sach",
 };
-function getRoute() {
-  const hash = location.hash.replace(/^#\/?/, "").trim();
-  const route = ROUTES[hash] ?? "home";
-  return VALID_ROUTES.has(route) ? route : "home";
-}
+function getRoute() { return "home"; }
 function navigate(path) {
-  location.hash = path ? `/${path}` : "";
-  renderPage(); closeSidebar();
+  window.location.href = path;
 }
 function renderPage() {
-  const route = getRoute();
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  const el = document.getElementById(`page-${route}`);
-  if (el) { el.classList.add("active"); window.scrollTo(0, 0); }
   renderSidebar();
-  updateMeta(route);
-  if (route === "diem-chuan") renderDcTable();
+  
 }
 function updateMeta(route) {
   const metas = {
@@ -762,9 +658,9 @@ window.addEventListener("hashchange", renderPage);
 // SIDEBAR
 // ================================================
 const NAV_ITEMS = [
-  { id:"home",       path:"",                                                    icon:"fa-magnifying-glass", label:"Tra cứu điểm thi",     sub:"Trang chủ — Nhập SBD" },
-  { id:"diem-chuan", path:"danh-sach-diem-chuan-vao-10",                         icon:"fa-list-ol",          label:"Điểm chuẩn các trường", sub:"69 trường THPT + chuyên" },
-  { id:"danh-sach",  path:"danh-sach-diem-tuyen-sinh-cua-cac-thi-sinh-vao-10",  icon:"fa-file-lines",       label:"Danh sách điểm thi",    sub:"File PDF & CSV toàn bộ thí sinh" },
+  { id:"home",       path:"/",                           icon:"fa-magnifying-glass", label:"Tra cứu điểm thi",     sub:"Trang chủ — Nhập SBD" },
+  { id:"diem-chuan", path:"/diem-chuan-cac-truong/",     icon:"fa-list-ol",          label:"Điểm chuẩn các trường", sub:"69 trường THPT + chuyên" },
+  { id:"danh-sach",  path:"/diem-thi-hoc-sinh-vao-10/",  icon:"fa-file-lines",       label:"Danh sách điểm thi",    sub:"File PDF & CSV toàn bộ thí sinh" },
 ];
 
 function renderSidebar() {
