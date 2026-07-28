@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -55,8 +56,12 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 /* HAMBURGER */
 .hamburger-btn { position: fixed; top: 16px; right: 16px; z-index: 1000; width: 46px; height: 46px; border-radius: 14px; background: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: all 0.3s; color: #0066cc; font-size: 18px; }
 .hamburger-btn:hover { transform: scale(1.08); box-shadow: 0 6px 25px rgba(0,0,0,0.25); }
+
+/* OVERLAY */
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1001; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .overlay.show { opacity: 1; pointer-events: all; }
+
+/* SIDEBAR */
 .sidebar { position: fixed; top: 0; right: -340px; width: 320px; height: 100vh; background: white; z-index: 1002; padding: 0; box-shadow: -8px 0 40px rgba(0,0,0,0.2); transition: right 0.35s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column; border-radius: 20px 0 0 20px; overflow: hidden; }
 .sidebar.open { right: 0; }
 .sidebar-header { background: linear-gradient(135deg,#0066cc,#0099ff); padding: 24px 20px 20px; display: flex; align-items: center; justify-content: space-between; }
@@ -72,20 +77,26 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 .sidebar-nav-item .nav-text .nav-sub { font-size: 12px; color: #888; margin-top: 2px; }
 .sidebar-divider { border: none; border-top: 1px solid #f0f0f0; margin: 6px 0 14px; }
 .sidebar-section-label { font-size: 11px; font-weight: 700; color: #aaa; letter-spacing: 1.5px; text-transform: uppercase; padding: 0 4px; margin-bottom: 10px; }
+
+/* DONATE BANNER */
 .donate-banner { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; margin-bottom: 10px; background: linear-gradient(135deg,#fff0f6,#ffe4f0); border: 2px solid #f72585; cursor: pointer; transition: all 0.2s; }
 .donate-banner:hover { transform: translateX(-4px); box-shadow: 0 4px 16px rgba(247,37,133,0.2); }
 .donate-banner-icon { font-size: 26px; flex-shrink: 0; }
 .donate-banner-title { font-size: 14px; font-weight: 800; color: #be185d; }
 .donate-banner-sub { font-size: 11px; color: #db2777; margin-top: 2px; }
+
+/* COMPARE BANNER */
 .compare-banner { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; margin-bottom: 10px; background: linear-gradient(135deg,#f0f7ff,#dbeafe); border: 2px solid #0066cc; cursor: pointer; transition: all 0.2s; }
 .compare-banner:hover { transform: translateX(-4px); box-shadow: 0 4px 16px rgba(0,102,204,0.2); }
 .compare-banner-icon { font-size: 26px; flex-shrink: 0; }
 .compare-banner-title { font-size: 14px; font-weight: 800; color: #0066cc; }
 .compare-banner-sub { font-size: 11px; color: #0284c7; margin-top: 2px; }
 
-/* DONATE */
+/* DONATE OVERLAY */
 .donate-overlay { position: fixed; inset: 0; z-index: 3000; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .donate-overlay.show { opacity: 1; pointer-events: all; }
+
+/* DONATE MODAL */
 .donate-modal { background: white; border-radius: 28px; width: 100%; max-width: 400px; box-shadow: 0 30px 80px rgba(0,0,0,0.3); overflow: hidden; transform: translateY(40px) scale(0.96); transition: transform 0.35s cubic-bezier(.4,0,.2,1); max-height: 90vh; overflow-y: auto; }
 .donate-overlay.show .donate-modal { transform: translateY(0) scale(1); }
 .dm-header { background: linear-gradient(135deg,#ae017e,#f72585); padding: 28px 24px 22px; text-align: center; position: relative; }
@@ -129,7 +140,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 .dm-divider { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: #ddd; font-size: 12px; }
 .dm-divider::before, .dm-divider::after { content: ''; flex: 1; height: 1px; background: #f0e0f0; }
 
-/* COMPARE */
+/* COMPARE MODAL */
 .compare-overlay { position: fixed; inset: 0; z-index: 3000; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .compare-overlay.show { opacity: 1; pointer-events: all; }
 .compare-modal { background: white; border-radius: 28px; width: 100%; max-width: 560px; box-shadow: 0 30px 80px rgba(0,0,0,0.3); overflow: hidden; transform: translateY(40px) scale(0.96); transition: transform 0.35s cubic-bezier(.4,0,.2,1); max-height: 92vh; overflow-y: auto; }
@@ -183,29 +194,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 /* CARD */
 .card { background: white; border-radius: 24px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin-bottom: 20px; animation: fadeUp 0.6s ease; }
 
-/* SEARCH TABS — MỚI */
-.search-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
-.tab-btn { flex: 1; padding: 10px; border: 2.5px solid #e0e0e0; border-radius: 12px; background: white; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; transition: all 0.2s; color: #666; }
-.tab-btn.active { border-color: #0066cc; background: #0066cc; color: white; }
-
-/* TÊN THÍ SINH SEARCH — MỚI */
-.ten-input-wrap input { width: 100%; padding: 16px 20px; border: 2.5px solid #e0e0e0; border-radius: 14px; font-size: 16px; font-family: inherit; font-weight: 600; outline: none; transition: all 0.3s; color: #333; }
-.ten-input-wrap input:focus { border-color: #0066cc; box-shadow: 0 0 0 4px rgba(0,102,204,0.15); }
-.ten-input-wrap input::placeholder { font-weight: 400; color: #aaa; }
-.search-results { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-.result-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-radius: 12px; background: #f8faff; border: 1.5px solid #e8eeff; cursor: pointer; transition: all 0.2s; gap: 10px; }
-.result-item:hover { background: #eef3ff; border-color: #0066cc; transform: translateX(4px); }
-.result-name { font-size: 15px; font-weight: 700; color: #222; }
-.result-sbd  { font-size: 12px; color: #888; margin-top: 2px; }
-.result-score { font-size: 22px; font-weight: 800; color: #0066cc; flex-shrink: 0; text-align: right; }
-.result-score small { font-size: 11px; color: #aaa; display: block; }
-.btn-xem-them { width: 100%; padding: 12px; margin-top: 8px; background: white; border: 2px solid #0066cc; border-radius: 12px; color: #0066cc; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; transition: all 0.2s; }
-.btn-xem-them:hover { background: #0066cc; color: white; }
-.btn-xem-them:disabled { opacity: 0.5; cursor: not-allowed; }
-.search-empty { text-align: center; padding: 20px; color: #aaa; font-size: 14px; }
-.search-loading { text-align: center; padding: 16px; color: #0066cc; font-size: 14px; }
-
-/* INPUT SBD */
+/* INPUT */
 .input-group { display: flex; gap: 12px; flex-wrap: wrap; }
 .input-group input { flex: 1; min-width: 180px; padding: 16px 20px; border: 2.5px solid #e0e0e0; border-radius: 14px; font-size: 18px; font-family: inherit; font-weight: 600; letter-spacing: 2px; outline: none; transition: all 0.3s; color: #333; }
 .input-group input:focus { border-color: #0066cc; box-shadow: 0 0 0 4px rgba(0,102,204,0.15); }
@@ -311,7 +300,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 .chuyen-table .dc { font-weight: 800; color: #0066cc; }
 .not-found { text-align: center; padding: 20px; color: #ef4444; font-weight: 600; font-size: 15px; }
 
-/* DISTRIBUTION */
+/* DISTRIBUTION CHART */
 .dist-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin-bottom: 20px; animation: fadeUp 0.6s ease; }
 .dist-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
 .dist-title { font-size: 16px; font-weight: 800; color: #333; }
@@ -355,7 +344,6 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
   .compare-overlay { align-items: flex-end; padding: 0; }
   .dist-chart-wrap { height: 180px; }
   .cm-chart-wrap { height: 220px; }
-  .tab-btn { font-size: 13px; padding: 9px 6px; }
 }
 
 @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -370,7 +358,9 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()" title="Menu">
   <i class="fa-solid fa-bars"></i>
 </button>
+
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <span class="sb-title">📚 Điều hướng</span>
@@ -378,31 +368,54 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
   </div>
   <div class="sidebar-body">
     <div class="sidebar-section-label">Danh mục</div>
+
     <a class="sidebar-nav-item active" href="/">
       <div class="nav-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-      <div class="nav-text"><div class="nav-label">Tra cứu điểm thi</div><div class="nav-sub">Trang chủ — Nhập SBD</div></div>
+      <div class="nav-text">
+        <div class="nav-label">Tra cứu điểm thi</div>
+        <div class="nav-sub">Trang chủ — Nhập SBD</div>
+      </div>
     </a>
+
     <a class="sidebar-nav-item" href="/diem-chuan-cac-truong/">
       <div class="nav-icon"><i class="fa-solid fa-list-ol"></i></div>
-      <div class="nav-text"><div class="nav-label">Điểm chuẩn các trường</div><div class="nav-sub">69 trường THPT + chuyên</div></div>
+      <div class="nav-text">
+        <div class="nav-label">Điểm chuẩn các trường</div>
+        <div class="nav-sub">69 trường THPT + chuyên</div>
+      </div>
     </a>
+
     <a class="sidebar-nav-item" href="/diem-thi-hoc-sinh-vao-10/">
       <div class="nav-icon"><i class="fa-solid fa-file-lines"></i></div>
-      <div class="nav-text"><div class="nav-label">Danh sách điểm thi</div><div class="nav-sub">File PDF &amp; CSV toàn bộ thí sinh</div></div>
+      <div class="nav-text">
+        <div class="nav-label">Danh sách điểm thi</div>
+        <div class="nav-sub">File PDF &amp; CSV toàn bộ thí sinh</div>
+      </div>
     </a>
+
     <hr class="sidebar-divider">
     <div class="sidebar-section-label">Công cụ</div>
+
     <div class="compare-banner" onclick="openCompare()">
       <div class="compare-banner-icon">⚔️</div>
-      <div style="flex:1"><div class="compare-banner-title">So Sánh Điểm Thi</div><div class="compare-banner-sub">So sánh 2–5 thí sinh cùng lúc</div></div>
+      <div style="flex:1">
+        <div class="compare-banner-title">So Sánh Điểm Thi</div>
+        <div class="compare-banner-sub">So sánh 2–5 thí sinh cùng lúc</div>
+      </div>
       <i class="fa-solid fa-chevron-right" style="color:#0066cc;font-size:12px"></i>
     </div>
+
     <hr class="sidebar-divider">
+
     <div class="donate-banner" onclick="openDonate()">
       <div class="donate-banner-icon">☕</div>
-      <div style="flex:1"><div class="donate-banner-title">Mua cho mình ly cà phê?</div><div class="donate-banner-sub">Ủng hộ để duy trì trang web 💙</div></div>
+      <div style="flex:1">
+        <div class="donate-banner-title">Mua cho mình ly cà phê?</div>
+        <div class="donate-banner-sub">Ủng hộ để duy trì trang web 💙</div>
+      </div>
       <i class="fa-solid fa-chevron-right" style="color:#f72585;font-size:12px"></i>
     </div>
+
     <hr class="sidebar-divider">
     <div class="sidebar-section-label">Thông tin</div>
     <div style="padding:8px 4px;font-size:12px;color:#aaa;line-height:1.9">
@@ -414,7 +427,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
   </div>
 </div>
 
-<!-- DONATE -->
+<!-- DONATE POPUP -->
 <div class="donate-overlay" id="donateOverlay" onclick="closeDonateOutside(event)">
   <div class="donate-modal" id="donateModal">
     <div class="dm-header">
@@ -457,7 +470,7 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
   </div>
 </div>
 
-<!-- COMPARE -->
+<!-- COMPARE MODAL -->
 <div class="compare-overlay" id="compareOverlay" onclick="closeCompareOutside(event)">
   <div class="compare-modal">
     <div class="cm-header">
@@ -490,38 +503,38 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
   <div class="header">
     <span class="emoji-big">🎓</span>
     <h1>Tra Cứu Điểm Thi<br>Tuyển Sinh Lớp 10 Đà Nẵng 2026</h1>
-    <p>Nhập SBD hoặc tên để xem điểm + gợi ý trường + AI nhận xét 👇</p>
+    <p>Nhập SBD để xem điểm + gợi ý trường + AI nhận xét 👇</p>
   </div>
 
   <div class="stats-row">
-    <div class="stat-badge"><span class="stat-icon">🏫</span><div class="stat-info"><div class="stat-num" id="statDaiTra">—</div><div class="stat-label">Thí sinh đại trà</div></div></div>
-    <div class="stat-badge"><span class="stat-icon">⭐</span><div class="stat-info"><div class="stat-num" id="statChuyen">—</div><div class="stat-label">Thí sinh chuyên</div></div></div>
-    <div class="stat-badge"><span class="stat-icon">🌿</span><div class="stat-info"><div class="stat-num" id="statPTDTNT">—</div><div class="stat-label">Thí sinh PTDTNT</div></div></div>
+    <div class="stat-badge">
+      <span class="stat-icon">🏫</span>
+      <div class="stat-info">
+        <div class="stat-num" id="statDaiTra">—</div>
+        <div class="stat-label">Thí sinh đại trà</div>
+      </div>
+    </div>
+    <div class="stat-badge">
+      <span class="stat-icon">⭐</span>
+      <div class="stat-info">
+        <div class="stat-num" id="statChuyen">—</div>
+        <div class="stat-label">Thí sinh chuyên</div>
+      </div>
+    </div>
+    <div class="stat-badge">
+      <span class="stat-icon">🌿</span>
+      <div class="stat-info">
+        <div class="stat-num" id="statPTDTNT">—</div>
+        <div class="stat-label">Thí sinh PTDTNT</div>
+      </div>
+    </div>
   </div>
 
-  <!-- CARD TÌM KIẾM — CÓ 2 TAB -->
   <div class="card">
-    <div class="search-tabs">
-      <button class="tab-btn active" id="tabSBD" onclick="switchTab('sbd')">🔢 Số báo danh</button>
-      <button class="tab-btn" id="tabTen" onclick="switchTab('ten')">👤 Tên thí sinh</button>
-    </div>
-
-    <!-- Tab SBD -->
-    <div id="panelSBD">
-      <div class="input-group">
-        <input type="text" id="sbdInput" placeholder="Nhập số báo danh..."
-          maxlength="10" onkeydown="if(event.key==='Enter') search()">
-        <button class="btn-search" id="btnSearch" onclick="search()">🔍 Tra cứu</button>
-      </div>
-    </div>
-
-    <!-- Tab Tên -->
-    <div id="panelTen" style="display:none">
-      <div class="ten-input-wrap">
-        <input type="text" id="tenInput" placeholder="Nhập tên thí sinh (ví dụ: Nguyễn Văn An)..."
-          oninput="onTenInput()" autocomplete="off">
-      </div>
-      <div class="search-results" id="searchResults"></div>
+    <div class="input-group">
+      <input type="text" id="sbdInput" placeholder="Nhập số báo danh..."
+        maxlength="10" onkeydown="if(event.key==='Enter') search()">
+      <button class="btn-search" id="btnSearch" onclick="search()">🔍 Tra cứu</button>
     </div>
   </div>
 
@@ -554,12 +567,14 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
       <button class="dist-mode-btn" onclick="switchDistMode('chuyen',this)">⭐ Chuyên</button>
       <button class="dist-mode-btn" onclick="switchDistMode('ptdtnt',this)">🌿 PTDTNT</button>
     </div>
-    <div class="dist-chart-wrap"><canvas id="distChart"></canvas></div>
+    <div class="dist-chart-wrap">
+      <canvas id="distChart"></canvas>
+    </div>
     <div class="dist-my-score" id="distMyScore" style="display:none">
       <div class="dms-icon">📍</div>
       <div>
         <div class="dms-text" id="distMyScoreText"></div>
-        <div class="dms-sub"  id="distMyScoreSub"></div>
+        <div class="dms-sub" id="distMyScoreSub"></div>
       </div>
     </div>
   </div>
@@ -569,202 +584,389 @@ body { font-family: 'Be Vietnam Pro', sans-serif; min-height: 100vh; background:
 
 <script>
 // ================================================
-// SECURITY
+// SECURITY HELPERS
 // ================================================
 function escapeHtml(str) {
   if (str == null) return "";
-  return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#x27;");
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
 }
-function safeChunk(text) { return escapeHtml(text).replace(/\n/g,"<br>"); }
+function safeChunk(text) {
+  return escapeHtml(text).replace(/\n/g, "<br>");
+}
 
 // ================================================
-// CONFIG
+// DONATE CONFIG
 // ================================================
 const MOMO_CONFIG = { PHONE: "0934937827", NAME: "VO VAN HOANG QUAN" };
 
 // ================================================
+// CONFIG
+// ================================================
+const CONFIG = {
+  PDF_DIEM_CHUAN: "/files/diem-chuan-2026.pdf",
+  PDF_DANH_SACH:  "/files/danh-sach-diem-thi-2026.pdf",
+  CSV_DANH_SACH:  "/files/diem_danang_2026.csv",
+};
+
+// ================================================
 // SIDEBAR
 // ================================================
-function toggleSidebar() { document.getElementById("sidebar").classList.toggle("open"); document.getElementById("overlay").classList.toggle("show"); }
-function closeSidebar()  { document.getElementById("sidebar").classList.remove("open"); document.getElementById("overlay").classList.remove("show"); }
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("overlay").classList.toggle("show");
+}
+function closeSidebar() {
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("overlay").classList.remove("show");
+}
 
 // ================================================
 // DONATE
 // ================================================
 let dmSelectedCoffees = 1;
-function openDonate() { closeSidebar(); dmBackToStep1(); document.getElementById("donateOverlay").classList.add("show"); document.body.style.overflow="hidden"; }
-function closeDonate() { document.getElementById("donateOverlay").classList.remove("show"); document.body.style.overflow=""; }
-function closeDonateOutside(e) { if(e.target===document.getElementById("donateOverlay")) closeDonate(); }
-function selectCoffee(cups,amount,el) { dmSelectedCoffees=cups; document.querySelectorAll(".dm-coffee-btn").forEach(b=>b.classList.remove("active")); el.classList.add("active"); document.getElementById("dmAmount").value=amount; document.getElementById("dmMinNote").classList.remove("show"); }
-function onDmInput() { document.querySelectorAll(".dm-coffee-btn").forEach(b=>b.classList.remove("active")); dmSelectedCoffees=0; const val=parseInt(document.getElementById("dmAmount").value); document.getElementById("dmMinNote").classList.toggle("show",val>0&&val<5000); }
+function openDonate() {
+  closeSidebar(); dmBackToStep1();
+  document.getElementById("donateOverlay").classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+function closeDonate() {
+  document.getElementById("donateOverlay").classList.remove("show");
+  document.body.style.overflow = "";
+}
+function closeDonateOutside(e) {
+  if (e.target === document.getElementById("donateOverlay")) closeDonate();
+}
+function selectCoffee(cups, amount, el) {
+  dmSelectedCoffees = cups;
+  document.querySelectorAll(".dm-coffee-btn").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("dmAmount").value = amount;
+  document.getElementById("dmMinNote").classList.remove("show");
+}
+function onDmInput() {
+  document.querySelectorAll(".dm-coffee-btn").forEach(b => b.classList.remove("active"));
+  dmSelectedCoffees = 0;
+  const val = parseInt(document.getElementById("dmAmount").value);
+  document.getElementById("dmMinNote").classList.toggle("show", val > 0 && val < 5000);
+}
 function genDonateQR() {
-  const val=parseInt(document.getElementById("dmAmount").value);
-  if(!val||val<5000){document.getElementById("dmMinNote").classList.add("show");document.getElementById("dmAmount").focus();return;}
-  const {PHONE,NAME}=MOMO_CONFIG;
-  const desc=encodeURIComponent("Cam on ban da ung ho!");
-  const qrUrl=`https://api.vietqr.io/image/971025-${PHONE}-NKNPGUv.jpg?accountName=${encodeURIComponent(NAME)}&amount=${val}&addInfo=${desc}`;
-  const cups=dmSelectedCoffees||Math.ceil(val/20000);
-  const icons=cups<=5?"☕".repeat(Math.min(cups,5)):cups<=10?"☕☕☕☕☕+":"🏆";
-  document.getElementById("dmQRCoffees").textContent=icons;
-  document.getElementById("dmQRAmount").textContent=val.toLocaleString("vi-VN")+"đ";
-  document.getElementById("dmQRImg").src=qrUrl;
-  document.getElementById("dmBankInfo").innerHTML=`💜 Ví MoMo: <strong>${escapeHtml(PHONE)}</strong><br>👤 Tên: <strong>${escapeHtml(NAME)}</strong><br>📝 Nội dung: <strong>Cam on ban da ung ho!</strong>`;
-  document.getElementById("dmStep1").style.display="none";
+  const val = parseInt(document.getElementById("dmAmount").value);
+  if (!val || val < 5000) { document.getElementById("dmMinNote").classList.add("show"); document.getElementById("dmAmount").focus(); return; }
+  const { PHONE, NAME } = MOMO_CONFIG;
+  const desc  = encodeURIComponent("Cam on ban da ung ho!");
+  const qrUrl = `https://api.vietqr.io/image/971025-${PHONE}-NKNPGUv.jpg?accountName=${encodeURIComponent(NAME)}&amount=${val}&addInfo=${desc}`;
+  const cups  = dmSelectedCoffees || Math.ceil(val / 20000);
+  const icons = cups <= 5 ? "☕".repeat(Math.min(cups,5)) : cups <= 10 ? "☕☕☕☕☕+" : "🏆";
+  document.getElementById("dmQRCoffees").textContent = icons;
+  document.getElementById("dmQRAmount").textContent  = val.toLocaleString("vi-VN") + "đ";
+  document.getElementById("dmQRImg").src             = qrUrl;
+  document.getElementById("dmBankInfo").innerHTML    =
+    `💜 Ví MoMo: <strong>${escapeHtml(PHONE)}</strong><br>👤 Tên: <strong>${escapeHtml(NAME)}</strong><br>📝 Nội dung: <strong>Cam on ban da ung ho!</strong>`;
+  document.getElementById("dmStep1").style.display = "none";
   document.getElementById("dmStep2").classList.add("show");
 }
-function dmBackToStep1() { document.getElementById("dmStep1").style.display="block"; document.getElementById("dmStep2").classList.remove("show"); document.getElementById("dmAmount").value=""; document.getElementById("dmMinNote").classList.remove("show"); document.querySelectorAll(".dm-coffee-btn").forEach(b=>b.classList.remove("active")); dmSelectedCoffees=1; }
+function dmBackToStep1() {
+  document.getElementById("dmStep1").style.display = "block";
+  document.getElementById("dmStep2").classList.remove("show");
+  document.getElementById("dmAmount").value = "";
+  document.getElementById("dmMinNote").classList.remove("show");
+  document.querySelectorAll(".dm-coffee-btn").forEach(b => b.classList.remove("active"));
+  dmSelectedCoffees = 1;
+}
 
 // ================================================
-// COMPARE
+// COMPARE MODAL
 // ================================================
-const COMPARE_COLORS=["#0066cc","#f72585","#16a34a","#f59e0b","#7c3aed"];
-let cmChart=null;
+const COMPARE_COLORS = ["#0066cc","#f72585","#16a34a","#f59e0b","#7c3aed"];
+let cmChart = null;
+
 function openCompare() {
   closeSidebar();
   document.getElementById("compareOverlay").classList.add("show");
-  document.body.style.overflow="hidden";
-  const list=document.getElementById("cmSbdList");
-  list.innerHTML="";
+  document.body.style.overflow = "hidden";
+  const list = document.getElementById("cmSbdList");
+  list.innerHTML = "";
   document.getElementById("cmResults").classList.remove("show");
   document.getElementById("cmError").classList.remove("show");
-  if(cmChart){cmChart.destroy();cmChart=null;}
-  addCompareRow();addCompareRow();updateAddBtn();
-  const sbdVal=document.getElementById("sbdInput").value.trim();
-  if(sbdVal){const inputs=document.querySelectorAll(".cm-sbd-input");if(inputs[0])inputs[0].value=sbdVal;}
+  if (cmChart) { cmChart.destroy(); cmChart = null; }
+  addCompareRow(); addCompareRow();
+  updateAddBtn();
+  const sbdVal = document.getElementById("sbdInput").value.trim();
+  if (sbdVal) {
+    const inputs = document.querySelectorAll(".cm-sbd-input");
+    if (inputs[0]) inputs[0].value = sbdVal;
+  }
 }
-function closeCompare() { document.getElementById("compareOverlay").classList.remove("show"); document.body.style.overflow=""; }
-function closeCompareOutside(e) { if(e.target===document.getElementById("compareOverlay"))closeCompare(); }
+function closeCompare() {
+  document.getElementById("compareOverlay").classList.remove("show");
+  document.body.style.overflow = "";
+}
+function closeCompareOutside(e) {
+  if (e.target === document.getElementById("compareOverlay")) closeCompare();
+}
 function addCompareRow() {
-  const list=document.getElementById("cmSbdList");
-  const idx=list.children.length;
-  if(idx>=5)return;
-  const row=document.createElement("div"); row.className="cm-sbd-row";
-  const dot=document.createElement("div"); dot.className="cm-sbd-dot"; dot.style.background=COMPARE_COLORS[idx];
-  const input=document.createElement("input"); input.className="cm-sbd-input"; input.type="text"; input.placeholder=`Số báo danh ${idx+1}...`; input.maxLength=10;
-  input.addEventListener("keydown",e=>{if(e.key==="Enter")runCompare();});
-  const btn=document.createElement("button"); btn.className="cm-remove-btn"; btn.innerHTML=`<i class="fa-solid fa-xmark"></i>`;
-  btn.addEventListener("click",()=>compareRemoveRow(btn));
-  row.appendChild(dot);row.appendChild(input);row.appendChild(btn);
-  list.appendChild(row);updateAddBtn();
-}
-function compareAddRow() { addCompareRow(); const inputs=document.querySelectorAll(".cm-sbd-input"); inputs[inputs.length-1]?.focus(); }
-function compareRemoveRow(btn) {
-  const list=document.getElementById("cmSbdList");
-  if(list.children.length<=2)return;
-  btn.closest(".cm-sbd-row").remove();
-  Array.from(list.children).forEach((row,i)=>{row.querySelector(".cm-sbd-dot").style.background=COMPARE_COLORS[i];row.querySelector(".cm-sbd-input").placeholder=`Số báo danh ${i+1}...`;});
+  const list = document.getElementById("cmSbdList");
+  const idx  = list.children.length;
+  if (idx >= 5) return;
+  const row   = document.createElement("div");
+  row.className = "cm-sbd-row";
+  const dot   = document.createElement("div");
+  dot.className = "cm-sbd-dot";
+  dot.style.background = COMPARE_COLORS[idx];
+  const input = document.createElement("input");
+  input.className = "cm-sbd-input";
+  input.type = "text";
+  input.placeholder = `Số báo danh ${idx + 1}...`;
+  input.maxLength = 10;
+  input.addEventListener("keydown", e => { if (e.key === "Enter") runCompare(); });
+  const btn = document.createElement("button");
+  btn.className = "cm-remove-btn";
+  btn.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+  btn.addEventListener("click", () => compareRemoveRow(btn));
+  row.appendChild(dot); row.appendChild(input); row.appendChild(btn);
+  list.appendChild(row);
   updateAddBtn();
 }
-function updateAddBtn() { document.getElementById("cmAddBtn").disabled=document.getElementById("cmSbdList").children.length>=5; }
+function compareAddRow() {
+  addCompareRow();
+  const inputs = document.querySelectorAll(".cm-sbd-input");
+  inputs[inputs.length - 1]?.focus();
+}
+function compareRemoveRow(btn) {
+  const list = document.getElementById("cmSbdList");
+  if (list.children.length <= 2) return;
+  btn.closest(".cm-sbd-row").remove();
+  Array.from(list.children).forEach((row, i) => {
+    row.querySelector(".cm-sbd-dot").style.background = COMPARE_COLORS[i];
+    row.querySelector(".cm-sbd-input").placeholder = `Số báo danh ${i + 1}...`;
+  });
+  updateAddBtn();
+}
+function updateAddBtn() {
+  document.getElementById("cmAddBtn").disabled = document.getElementById("cmSbdList").children.length >= 5;
+}
+
 async function runCompare() {
-  if(!diemThiData){showCmError("Dữ liệu chưa tải xong!");return;}
-  const inputs=Array.from(document.querySelectorAll(".cm-sbd-input"));
-  const sbds=inputs.map(i=>i.value.trim()).filter(Boolean);
-  if(sbds.length<2){showCmError("Nhập ít nhất 2 số báo danh!");return;}
-  const btn=document.getElementById("cmSearchBtn");
-  btn.disabled=true;btn.innerHTML=`<i class="fa-solid fa-spinner fa-spin"></i> Đang tìm...`;
-  const results=[],notFound=[];
-  for(const sbd of sbds){const ts=diemThiData[sbd]??diemThiData[sbd.padStart(5,"0")]??null;if(ts)results.push(ts);else notFound.push(escapeHtml(sbd));}
-  btn.disabled=false;btn.innerHTML=`<i class="fa-solid fa-chart-bar"></i> So sánh ngay`;
-  if(notFound.length>0)showCmError(`Không tìm thấy SBD: ${notFound.join(", ")}`);
+  if (!diemThiData) { showCmError("Dữ liệu chưa tải xong, thử lại!"); return; }
+  const inputs = Array.from(document.querySelectorAll(".cm-sbd-input"));
+  const sbds   = inputs.map(i => i.value.trim()).filter(Boolean);
+  if (sbds.length < 2) { showCmError("Nhập ít nhất 2 số báo danh để so sánh!"); return; }
+  const btn = document.getElementById("cmSearchBtn");
+  btn.disabled = true;
+  btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Đang tìm...`;
+  const results = [], notFound = [];
+  for (const sbd of sbds) {
+    const ts = diemThiData[sbd] ?? diemThiData[sbd.padStart(5,"0")] ?? null;
+    if (ts) results.push(ts); else notFound.push(escapeHtml(sbd));
+  }
+  btn.disabled = false;
+  btn.innerHTML = `<i class="fa-solid fa-chart-bar"></i> So sánh ngay`;
+  if (notFound.length > 0) showCmError(`Không tìm thấy SBD: ${notFound.join(", ")}. Kiểm tra lại!`);
   else document.getElementById("cmError").classList.remove("show");
-  if(results.length<2){showCmError("Cần ít nhất 2 SBD hợp lệ!");return;}
+  if (results.length < 2) { showCmError("Cần ít nhất 2 SBD hợp lệ để so sánh!"); return; }
   renderCompareResults(results);
 }
-function showCmError(msg){const el=document.getElementById("cmError");el.textContent="⚠️ "+msg;el.classList.add("show");}
+function showCmError(msg) {
+  const el = document.getElementById("cmError");
+  el.textContent = "⚠️ " + msg;
+  el.classList.add("show");
+}
 function renderCompareResults(list) {
-  const resultsEl=document.getElementById("cmResults");resultsEl.classList.add("show");
-  setTimeout(()=>resultsEl.scrollIntoView({behavior:"smooth",block:"start"}),100);
-  const labels=["Ngữ Văn","Ngoại Ngữ","Toán","Tổng ĐT"];
-  const datasets=list.map((ts,i)=>({label:ts.ho_ten?`${escapeHtml(String(ts.ho_ten))} (${escapeHtml(String(ts.so_bao_danh))})`:` SBD ${escapeHtml(String(ts.so_bao_danh))}`,data:[ts.ngu_van??0,ts.ngoai_ngu??0,ts.toan??0,ts.tong_dai_tra??0],backgroundColor:COMPARE_COLORS[i]+"33",borderColor:COMPARE_COLORS[i],borderWidth:2,borderRadius:6}));
-  if(cmChart){cmChart.destroy();cmChart=null;}
-  const ctx=document.getElementById("cmChart").getContext("2d");
-  cmChart=new Chart(ctx,{type:"bar",data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"top",labels:{font:{family:"'Be Vietnam Pro',sans-serif",size:12},padding:12}},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.parsed.y} điểm`}}},scales:{x:{grid:{display:false},ticks:{font:{family:"'Be Vietnam Pro',sans-serif",size:12}}},y:{beginAtZero:true,ticks:{font:{family:"'Be Vietnam Pro',sans-serif",size:11}}}}}});
-  const fields=[{key:"ngu_van",label:"📖 Ngữ Văn"},{key:"ngoai_ngu",label:"🌐 Ngoại Ngữ"},{key:"toan",label:"📐 Toán"},{key:"mon_chuyen",label:"⭐ Môn Chuyên"},{key:"diem_kk",label:"🎖️ Khuyến Khích"},{key:"diem_uu_tien",label:"🌿 Ưu Tiên"},{key:"diem_quy_doi",label:"📋 Quy Đổi"},{key:"tong_dai_tra",label:"🏫 Tổng ĐT"},{key:"tong_chuyen",label:"⭐ Tổng Chuyên"},{key:"tong_ptdtnt",label:"🌿 Tổng PTDTNT"}];
-  const activeFields=fields.filter(f=>list.some(ts=>ts[f.key]!=null));
-  const headCols=list.map((ts,i)=>`<th><span class="cm-color-dot" style="background:${COMPARE_COLORS[i]}"></span>${escapeHtml(ts.ho_ten?String(ts.ho_ten).split(" ").pop():"SBD")}<br><small style="font-weight:600;opacity:0.8">${escapeHtml(String(ts.so_bao_danh))}</small></th>`).join("");
-  document.getElementById("cmTableHead").innerHTML=`<tr><th>Môn / Điểm</th>${headCols}</tr>`;
-  const rows=activeFields.map(f=>{const vals=list.map(ts=>ts[f.key]??null);const valid=vals.filter(v=>v!=null);const maxV=valid.length?Math.max(...valid):null;const cols=vals.map((v,i)=>{if(v==null)return`<td style="color:#ccc">—</td>`;const isWin=v===maxV&&valid.filter(x=>x===maxV).length===1;return`<td style="font-weight:700;color:${COMPARE_COLORS[i]}">${escapeHtml(String(v))}${isWin?'<span class="cm-winner-badge">🏆 Cao nhất</span>':''}</td>`;}).join("");return`<tr><td style="font-weight:700;color:#444">${escapeHtml(f.label)}</td>${cols}</tr>`;}).join("");
-  document.getElementById("cmTableBody").innerHTML=rows;
+  const resultsEl = document.getElementById("cmResults");
+  resultsEl.classList.add("show");
+  setTimeout(() => resultsEl.scrollIntoView({ behavior:"smooth", block:"start" }), 100);
+  const labels   = ["Ngữ Văn","Ngoại Ngữ","Toán","Tổng ĐT"];
+  const datasets = list.map((ts, i) => ({
+    label: ts.ho_ten ? `${escapeHtml(String(ts.ho_ten))} (${escapeHtml(String(ts.so_bao_danh))})` : `SBD ${escapeHtml(String(ts.so_bao_danh))}`,
+    data: [ts.ngu_van??0, ts.ngoai_ngu??0, ts.toan??0, ts.tong_dai_tra??0],
+    backgroundColor: COMPARE_COLORS[i] + "33",
+    borderColor: COMPARE_COLORS[i],
+    borderWidth: 2, borderRadius: 6,
+  }));
+  if (cmChart) { cmChart.destroy(); cmChart = null; }
+  const ctx = document.getElementById("cmChart").getContext("2d");
+  cmChart = new Chart(ctx, {
+    type: "bar",
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top", labels: { font: { family:"'Be Vietnam Pro',sans-serif", size:12 }, padding:12 } },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y} điểm` } }
+      },
+      scales: {
+        x: { grid: { display:false }, ticks: { font: { family:"'Be Vietnam Pro',sans-serif", size:12 } } },
+        y: { beginAtZero: true, ticks: { font: { family:"'Be Vietnam Pro',sans-serif", size:11 } } }
+      }
+    }
+  });
+  const fields = [
+    { key:"ngu_van", label:"📖 Ngữ Văn" }, { key:"ngoai_ngu", label:"🌐 Ngoại Ngữ" },
+    { key:"toan", label:"📐 Toán" }, { key:"mon_chuyen", label:"⭐ Môn Chuyên" },
+    { key:"diem_kk", label:"🎖️ Khuyến Khích" }, { key:"diem_uu_tien", label:"🌿 Ưu Tiên" },
+    { key:"diem_quy_doi", label:"📋 Quy Đổi" }, { key:"tong_dai_tra", label:"🏫 Tổng ĐT" },
+    { key:"tong_chuyen", label:"⭐ Tổng Chuyên" }, { key:"tong_ptdtnt", label:"🌿 Tổng PTDTNT" },
+  ];
+  const activeFields = fields.filter(f => list.some(ts => ts[f.key] != null));
+  const headCols = list.map((ts, i) =>
+    `<th><span class="cm-color-dot" style="background:${COMPARE_COLORS[i]}"></span>${escapeHtml(ts.ho_ten ? String(ts.ho_ten).split(" ").pop() : "SBD")}<br><small style="font-weight:600;opacity:0.8">${escapeHtml(String(ts.so_bao_danh))}</small></th>`
+  ).join("");
+  document.getElementById("cmTableHead").innerHTML = `<tr><th>Môn / Điểm</th>${headCols}</tr>`;
+  const rows = activeFields.map(f => {
+    const vals = list.map(ts => ts[f.key] ?? null);
+    const valid = vals.filter(v => v != null);
+    const maxV  = valid.length ? Math.max(...valid) : null;
+    const cols  = vals.map((v, i) => {
+      if (v == null) return `<td style="color:#ccc">—</td>`;
+      const isWin = v === maxV && valid.filter(x => x === maxV).length === 1;
+      return `<td style="font-weight:700;color:${COMPARE_COLORS[i]}">${escapeHtml(String(v))}${isWin ? '<span class="cm-winner-badge">🏆 Cao nhất</span>' : ''}</td>`;
+    }).join("");
+    return `<tr><td style="font-weight:700;color:#444">${escapeHtml(f.label)}</td>${cols}</tr>`;
+  }).join("");
+  document.getElementById("cmTableBody").innerHTML = rows;
 }
 
 // ================================================
 // DATA
 // ================================================
-let diemThiData=null,diemChuanData=null;
+let diemThiData   = null;
+let diemChuanData = null;
+
 async function loadData() {
   try {
-    const [r1,r2]=await Promise.all([fetch("/diem-thi-lop10-danang-2026.json"),fetch("/diem-chuan-danang-2026.json")]);
-    const j1=await r1.json(),j2=await r2.json();
-    const arr=Array.isArray(j1)?j1:(j1.du_lieu??[]);
-    diemThiData={};
-    arr.forEach(item=>{diemThiData[String(item.so_bao_danh).trim()]=item;});
-    diemChuanData=j2;
-    const all=Object.values(diemThiData);
-    document.getElementById("statDaiTra").textContent=all.filter(d=>d.tong_dai_tra!=null).length.toLocaleString("vi-VN");
-    document.getElementById("statChuyen").textContent=all.filter(d=>d.tong_chuyen!=null).length.toLocaleString("vi-VN");
-    document.getElementById("statPTDTNT").textContent=all.filter(d=>d.tong_ptdtnt!=null).length.toLocaleString("vi-VN");
-    renderThuKhoa();buildDistData();
+    const [r1, r2] = await Promise.all([
+      fetch("/diem-thi-lop10-danang-2026.json"),
+      fetch("/diem-chuan-danang-2026.json"),
+    ]);
+    const j1  = await r1.json();
+    const j2  = await r2.json();
+    const arr = Array.isArray(j1) ? j1 : (j1.du_lieu ?? []);
+    diemThiData = {};
+    arr.forEach(item => { diemThiData[String(item.so_bao_danh).trim()] = item; });
+    diemChuanData = j2;
+    const all = Object.values(diemThiData);
+    document.getElementById("statDaiTra").textContent = all.filter(d => d.tong_dai_tra != null).length.toLocaleString("vi-VN");
+    document.getElementById("statChuyen").textContent = all.filter(d => d.tong_chuyen  != null).length.toLocaleString("vi-VN");
+    document.getElementById("statPTDTNT").textContent = all.filter(d => d.tong_ptdtnt  != null).length.toLocaleString("vi-VN");
+    renderThuKhoa();
+    buildDistData();
   } catch(e) {
-    console.error("❌ Lỗi load data:",e);
-    document.getElementById("tkList").innerHTML=`<div style="text-align:center;color:#ef4444;padding:16px;font-size:14px">❌ Không tải được dữ liệu</div>`;
+    console.error("❌ Lỗi load data:", e);
+    document.getElementById("tkList").innerHTML =
+      `<div style="text-align:center;color:#ef4444;padding:16px;font-size:14px">❌ Không tải được dữ liệu</div>`;
   }
 }
 
 // ================================================
-// DISTRIBUTION
+// DISTRIBUTION CHART
 // ================================================
-let distData={},distChart=null,distMode="dai_tra";
-let distMyScores={dai_tra:null,chuyen:null,ptdtnt:null};
+let distData     = {};
+let distChart    = null;
+let distMode     = "dai_tra";
+let distMyScores = { dai_tra: null, chuyen: null, ptdtnt: null };
+
 function buildDistData() {
-  if(!diemThiData)return;
-  const all=Object.values(diemThiData);
-  function buildBins(arr,step){const max=Math.ceil(Math.max(...arr)/step)*step;const bins={};for(let i=0;i<=max;i+=step)bins[i]=0;arr.forEach(v=>{const b=Math.floor(v/step)*step;bins[b]=(bins[b]??0)+1;});return Object.entries(bins).map(([k,v])=>({range:`${k}–${+k+step}`,count:v}));}
-  distData.dai_tra=all.filter(d=>d.tong_dai_tra!=null).map(d=>d.tong_dai_tra);
-  distData.chuyen=all.filter(d=>d.tong_chuyen!=null).map(d=>d.tong_chuyen);
-  distData.ptdtnt=all.filter(d=>d.tong_ptdtnt!=null).map(d=>d.tong_ptdtnt);
-  distData.dai_tra=distData.dai_tra.length?buildBins(distData.dai_tra,2.5):[];
-  distData.chuyen=distData.chuyen.length?buildBins(distData.chuyen,2.5):[];
-  distData.ptdtnt=distData.ptdtnt.length?buildBins(distData.ptdtnt,2.5):[];
+  if (!diemThiData) return;
+  const all = Object.values(diemThiData);
+  function buildBins(arr, step) {
+    const max = Math.ceil(Math.max(...arr) / step) * step;
+    const bins = {};
+    for (let i = 0; i <= max; i += step) bins[i] = 0;
+    arr.forEach(v => { const b = Math.floor(v / step) * step; bins[b] = (bins[b] ?? 0) + 1; });
+    return Object.entries(bins).map(([k, v]) => ({ range: `${k}–${+k+step}`, count: v }));
+  }
+  distData.dai_tra = all.filter(d => d.tong_dai_tra != null).map(d => d.tong_dai_tra);
+  distData.chuyen  = all.filter(d => d.tong_chuyen  != null).map(d => d.tong_chuyen);
+  distData.ptdtnt  = all.filter(d => d.tong_ptdtnt  != null).map(d => d.tong_ptdtnt);
+  distData.dai_tra = distData.dai_tra.length ? buildBins(distData.dai_tra, 2.5) : [];
+  distData.chuyen  = distData.chuyen.length  ? buildBins(distData.chuyen, 2.5)  : [];
+  distData.ptdtnt  = distData.ptdtnt.length  ? buildBins(distData.ptdtnt, 2.5)  : [];
 }
-function switchDistMode(mode,btn){distMode=mode;document.querySelectorAll(".dist-mode-btn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderDistChart();}
+function switchDistMode(mode, btn) {
+  distMode = mode;
+  document.querySelectorAll(".dist-mode-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderDistChart();
+}
 function renderDistChart(myScore) {
-  const data=distData[distMode];if(!data||!data.length)return;
-  document.getElementById("distCard").style.display="block";
-  const labels=data.map(d=>d.range),counts=data.map(d=>d.count);
-  const score=myScore??distMyScores[distMode];
-  const bgColors=labels.map(lbl=>{if(score!=null){const s=parseFloat(lbl.split("–")[0]),e=parseFloat(lbl.split("–")[1]);if(score>=s&&score<e)return"#f59e0b";}return"#0099ff55";});
-  const borderColors=bgColors.map(c=>c==="#f59e0b"?"#f59e0b":"#0066cc");
-  if(distChart){distChart.destroy();distChart=null;}
-  const ctx=document.getElementById("distChart").getContext("2d");
-  distChart=new Chart(ctx,{type:"bar",data:{labels,datasets:[{label:"Số thí sinh",data:counts,backgroundColor:bgColors,borderColor:borderColors,borderWidth:1.5,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{title:ctx=>`Tổng điểm: ${ctx[0].label}`,label:ctx=>` ${ctx.parsed.y.toLocaleString("vi-VN")} thí sinh`}}},scales:{x:{grid:{display:false},ticks:{font:{family:"'Be Vietnam Pro',sans-serif",size:10},maxRotation:45}},y:{ticks:{font:{family:"'Be Vietnam Pro',sans-serif",size:11}},grid:{color:"#f0f0f0"}}}}});
-  const myScoreEl=document.getElementById("distMyScore");
-  if(score!=null){const total=counts.reduce((a,b)=>a+b,0);const above=counts.reduce((sum,c,i)=>sum+(parseFloat(labels[i].split("–")[0])>score?c:0),0);const pct=Math.round((above/total)*100);myScoreEl.style.display="flex";const ml=distMode==="chuyen"?"chuyên":distMode==="ptdtnt"?"PTDTNT":"đại trà";document.getElementById("distMyScoreText").textContent=`📍 Điểm ${ml} của bạn: ${score} điểm`;document.getElementById("distMyScoreSub").textContent=`Cao hơn khoảng ${pct}% số thí sinh ${ml}`;}
-  else myScoreEl.style.display="none";
+  const data = distData[distMode];
+  if (!data || !data.length) return;
+  document.getElementById("distCard").style.display = "block";
+  const labels = data.map(d => d.range);
+  const counts = data.map(d => d.count);
+  const score  = myScore ?? distMyScores[distMode];
+  const bgColors = labels.map(lbl => {
+    if (score != null) {
+      const binStart = parseFloat(lbl.split("–")[0]);
+      const binEnd   = parseFloat(lbl.split("–")[1]);
+      if (score >= binStart && score < binEnd) return "#f59e0b";
+    }
+    return "#0099ff55";
+  });
+  const borderColors = bgColors.map(c => c === "#f59e0b" ? "#f59e0b" : "#0066cc");
+  if (distChart) { distChart.destroy(); distChart = null; }
+  const ctx = document.getElementById("distChart").getContext("2d");
+  distChart = new Chart(ctx, {
+    type: "bar",
+    data: { labels, datasets: [{ label:"Số thí sinh", data:counts, backgroundColor:bgColors, borderColor:borderColors, borderWidth:1.5, borderRadius:4 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display:false }, tooltip: { callbacks: { title: ctx => `Tổng điểm: ${ctx[0].label}`, label: ctx => ` ${ctx.parsed.y.toLocaleString("vi-VN")} thí sinh` } } },
+      scales: {
+        x: { grid: { display:false }, ticks: { font: { family:"'Be Vietnam Pro',sans-serif", size:10 }, maxRotation:45 } },
+        y: { ticks: { font: { family:"'Be Vietnam Pro',sans-serif", size:11 } }, grid: { color:"#f0f0f0" } }
+      }
+    }
+  });
+  const myScoreEl = document.getElementById("distMyScore");
+  if (score != null) {
+    const total = counts.reduce((a,b)=>a+b,0);
+    const above = counts.reduce((sum,c,i) => sum + (parseFloat(labels[i].split("–")[0]) > score ? c : 0), 0);
+    const pct   = Math.round((above / total) * 100);
+    myScoreEl.style.display = "flex";
+    const modeLabel = distMode === "chuyen" ? "chuyên" : distMode === "ptdtnt" ? "PTDTNT" : "đại trà";
+    document.getElementById("distMyScoreText").textContent = `📍 Điểm ${modeLabel} của bạn: ${score} điểm`;
+    document.getElementById("distMyScoreSub").textContent  = `Cao hơn khoảng ${pct}% số thí sinh ${modeLabel}`;
+  } else {
+    myScoreEl.style.display = "none";
+  }
 }
 
 // ================================================
 // THỦ KHOA
 // ================================================
 function renderThuKhoa() {
-  if(!diemThiData)return;
-  const mode=document.getElementById("tkModeSelect").value;
-  const medals=["🥇","🥈","🥉"],classes=["rank1","rank2","rank3"],labels=["Thủ khoa","Á khoa","Hạng Ba"];
-  const tongField=mode==="chuyen"?"tong_chuyen":mode==="ptdtnt"?"tong_ptdtnt":"tong_dai_tra";
-  const modeLabel=mode==="chuyen"?"tổng chuyên":mode==="ptdtnt"?"tổng PTDTNT":"đại trà";
-  const sorted=Object.values(diemThiData).filter(ts=>ts[tongField]!=null).map(ts=>({sbd:String(ts.so_bao_danh),ten:ts.ho_ten??"—",van:ts.ngu_van,nn:ts.ngoai_ngu,toan:ts.toan,mon_chuyen:ts.mon_chuyen,tong:ts[tongField]})).sort((a,b)=>b.tong-a.tong).slice(0,3);
-  if(!sorted.length){document.getElementById("tkList").innerHTML=`<div style="text-align:center;color:#aaa;padding:16px;font-size:14px">Không có dữ liệu</div>`;return;}
-  document.getElementById("tkList").innerHTML=sorted.map((ts,i)=>`
+  if (!diemThiData) return;
+  const mode    = document.getElementById("tkModeSelect").value;
+  const medals  = ["🥇","🥈","🥉"];
+  const classes = ["rank1","rank2","rank3"];
+  const labels  = ["Thủ khoa","Á khoa","Hạng Ba"];
+  const tongField  = mode === "chuyen" ? "tong_chuyen" : mode === "ptdtnt" ? "tong_ptdtnt" : "tong_dai_tra";
+  const modeLabel  = mode === "chuyen" ? "tổng chuyên" : mode === "ptdtnt" ? "tổng PTDTNT" : "đại trà";
+  const sorted = Object.values(diemThiData)
+    .filter(ts => ts[tongField] != null)
+    .map(ts => ({ sbd:String(ts.so_bao_danh), ten:ts.ho_ten??"—", van:ts.ngu_van, nn:ts.ngoai_ngu, toan:ts.toan, mon_chuyen:ts.mon_chuyen, tong:ts[tongField] }))
+    .sort((a,b)=>b.tong-a.tong).slice(0,3);
+  if (!sorted.length) {
+    document.getElementById("tkList").innerHTML = `<div style="text-align:center;color:#aaa;padding:16px;font-size:14px">Không có dữ liệu</div>`;
+    return;
+  }
+  document.getElementById("tkList").innerHTML = sorted.map((ts,i) => `
     <div class="tk-item ${classes[i]} pop" style="animation-delay:${i*0.12}s">
       <div class="tk-medal">${medals[i]}</div>
       <div class="tk-info">
         <div class="tk-sbd">SBD: ${escapeHtml(ts.sbd)}</div>
         <div class="tk-name">${escapeHtml(ts.ten)} &nbsp;•&nbsp; ${escapeHtml(labels[i])}</div>
         <div class="tk-details">
-          <span class="tk-tag">📖 Văn: ${ts.van!=null?escapeHtml(String(ts.van)):"—"}</span>
-          <span class="tk-tag">🌐 NN: ${ts.nn!=null?escapeHtml(String(ts.nn)):"—"}</span>
-          <span class="tk-tag">📐 Toán: ${ts.toan!=null?escapeHtml(String(ts.toan)):"—"}</span>
-          ${ts.mon_chuyen!=null?`<span class="tk-tag">⭐ Chuyên: ${escapeHtml(String(ts.mon_chuyen))}</span>`:""}
+          <span class="tk-tag">📖 Văn: ${ts.van != null ? escapeHtml(String(ts.van)) : "—"}</span>
+          <span class="tk-tag">🌐 NN: ${ts.nn != null ? escapeHtml(String(ts.nn)) : "—"}</span>
+          <span class="tk-tag">📐 Toán: ${ts.toan != null ? escapeHtml(String(ts.toan)) : "—"}</span>
+          ${ts.mon_chuyen != null ? `<span class="tk-tag">⭐ Chuyên: ${escapeHtml(String(ts.mon_chuyen))}</span>` : ""}
         </div>
       </div>
       <div class="tk-score-box">
@@ -773,199 +975,250 @@ function renderThuKhoa() {
       </div>
     </div>`).join("");
 }
-function hideThuKhoa(){document.getElementById("thuKhoaCard").classList.add("hidden");}
+function hideThuKhoa() {
+  document.getElementById("thuKhoaCard").classList.add("hidden");
+}
 
 // ================================================
-// RANK & GỢI Ý TRƯỜNG
+// RANK
 // ================================================
-function tinhRank(tong){if(!diemThiData)return{rank:"?",total:"?"};const all=Object.values(diemThiData).map(d=>d.tong_dai_tra??0).sort((a,b)=>b-a);return{rank:all.findIndex(d=>d<=tong)+1,total:all.length};}
-function tinhRankChuyen(tong){if(!diemThiData||tong==null)return null;const all=Object.values(diemThiData).filter(d=>d.tong_chuyen!=null).map(d=>d.tong_chuyen).sort((a,b)=>b-a);if(!all.length)return null;return{rank:all.findIndex(d=>d<=tong)+1,total:all.length};}
-function tinhRankPTDTNT(tong){if(!diemThiData||tong==null)return null;const all=Object.values(diemThiData).filter(d=>d.tong_ptdtnt!=null).map(d=>d.tong_ptdtnt).sort((a,b)=>b-a);if(!all.length)return null;return{rank:all.findIndex(d=>d<=tong)+1,total:all.length};}
-function goiYTruong(tong){if(!diemChuanData?.phu_luc_4_cong_lap)return{dau:[],sat:[],kho:[]};const dau=[],sat=[],kho=[];diemChuanData.phu_luc_4_cong_lap.forEach(t=>{const dc=t.diem_chuan;if(!dc)return;const diff=Math.round((tong-dc)*100)/100;const obj={ten:t.ten_truong,dc,diff};if(diff>=0)dau.push(obj);else if(diff>-1)sat.push(obj);else kho.push(obj);});dau.sort((a,b)=>b.dc-a.dc);sat.sort((a,b)=>b.diff-a.diff);kho.sort((a,b)=>b.diff-a.diff);return{dau,sat,kho};}
+function tinhRank(tong) {
+  if (!diemThiData) return { rank:"?", total:"?" };
+  const all = Object.values(diemThiData).map(d=>d.tong_dai_tra??0).sort((a,b)=>b-a);
+  return { rank: all.findIndex(d=>d<=tong)+1, total: all.length };
+}
+function tinhRankChuyen(tong) {
+  if (!diemThiData || tong == null) return null;
+  const all = Object.values(diemThiData).filter(d=>d.tong_chuyen!=null).map(d=>d.tong_chuyen).sort((a,b)=>b-a);
+  if (!all.length) return null;
+  return { rank: all.findIndex(d=>d<=tong)+1, total: all.length };
+}
+function tinhRankPTDTNT(tong) {
+  if (!diemThiData || tong == null) return null;
+  const all = Object.values(diemThiData).filter(d=>d.tong_ptdtnt!=null).map(d=>d.tong_ptdtnt).sort((a,b)=>b-a);
+  if (!all.length) return null;
+  return { rank: all.findIndex(d=>d<=tong)+1, total: all.length };
+}
+
+// ================================================
+// GỢI Ý TRƯỜNG
+// ================================================
+function goiYTruong(tong) {
+  if (!diemChuanData?.phu_luc_4_cong_lap) return { dau:[], sat:[], kho:[] };
+  const dau=[], sat=[], kho=[];
+  diemChuanData.phu_luc_4_cong_lap.forEach(t => {
+    const dc = t.diem_chuan; if (!dc) return;
+    const diff = Math.round((tong-dc)*100)/100;
+    const obj  = { ten:t.ten_truong, dc, diff };
+    if (diff >= 0) dau.push(obj);
+    else if (diff > -1) sat.push(obj);
+    else kho.push(obj);
+  });
+  dau.sort((a,b)=>b.dc-a.dc); sat.sort((a,b)=>b.diff-a.diff); kho.sort((a,b)=>b.diff-a.diff);
+  return { dau, sat, kho };
+}
 
 // ================================================
 // BẢNG CHUYÊN & PTDTNT
 // ================================================
-function renderBangChuyen(tong){if(!diemChuanData?.phu_luc_1_chuyen||tong==null)return"";const rows=diemChuanData.phu_luc_1_chuyen.map(lop=>{const truongs=[{ten:"Lê Quý Đôn",dc:lop.Le_Quy_Don},{ten:"N.Bỉnh Khiêm",dc:lop.Nguyen_Binh_Khiem},{ten:"Lê Thánh Tông",dc:lop.Le_Thanh_Tong}];const tds=truongs.map(t=>{if(!t.dc)return`<td>—</td>`;const diff=Math.round((tong-t.dc)*100)/100;const style=diff>=0?' style="color:#16a34a;font-weight:800"':diff>-2?' style="color:#f59e0b;font-weight:700"':'';const icon=diff>=0?"✅":diff>-2?"⚡":"";return`<td class="dc"${style}>${escapeHtml(String(t.dc))} ${icon}</td>`;}).join("");return`<tr><td style="text-align:left;font-weight:600">${escapeHtml(lop.lop_chuyen)}</td>${tds}</tr>`;}).join("");return`<div class="section-title">🎯 So sánh điểm chuyên (tổng chuyên: <strong>${escapeHtml(String(tong))}</strong>)</div><div style="overflow-x:auto;margin-bottom:8px"><table class="chuyen-table"><thead><tr><th>Lớp chuyên</th><th>Lê Quý Đôn</th><th>N.Bỉnh Khiêm</th><th>Lê Thánh Tông</th></tr></thead><tbody>${rows}</tbody></table></div><p style="font-size:12px;color:#888;margin-bottom:16px">✅ Đủ điểm &nbsp;⚡ Sát trong 2 điểm</p>`;}
-function renderPTDTNT(tong){if(!diemChuanData?.phu_luc_2_ptdtnt||tong==null)return"";const rows=diemChuanData.phu_luc_2_ptdtnt.map(obj=>{const diff=Math.round((tong-obj.diem_chuan)*100)/100;const cls=diff>=0?"dau":diff>-1?"sat":"kho";const icon=diff>=0?"✅":diff>-1?"⚡":"❌";const txt=diff>=0?"Đủ điều kiện":diff>-1?"Sát sao":"Chưa đủ";return`<div class="school-item ${cls}" style="margin-bottom:8px"><div><div class="school-name">${escapeHtml(obj.doi_tuong)}</div><div class="school-meta">Điểm chuẩn PTDTNT: ${escapeHtml(String(obj.diem_chuan))}</div></div><span class="school-badge">${icon} ${escapeHtml(txt)}</span></div>`;}).join("");return`<div class="section-title">🏫 Trường PTDTNT Quảng Nam (tổng: ${escapeHtml(String(tong))})</div>${rows}`;}
+function renderBangChuyen(tong) {
+  if (!diemChuanData?.phu_luc_1_chuyen || tong == null) return "";
+  const rows = diemChuanData.phu_luc_1_chuyen.map(lop => {
+    const truongs = [
+      { ten:"Lê Quý Đôn",    dc:lop.Le_Quy_Don },
+      { ten:"N.Bỉnh Khiêm",  dc:lop.Nguyen_Binh_Khiem },
+      { ten:"Lê Thánh Tông", dc:lop.Le_Thanh_Tong },
+    ];
+    const tds = truongs.map(t => {
+      if (!t.dc) return `<td>—</td>`;
+      const diff  = Math.round((tong-t.dc)*100)/100;
+      const style = diff >= 0 ? ' style="color:#16a34a;font-weight:800"' : diff > -2 ? ' style="color:#f59e0b;font-weight:700"' : '';
+      const icon  = diff >= 0 ? "✅" : diff > -2 ? "⚡" : "";
+      return `<td class="dc"${style}>${escapeHtml(String(t.dc))} ${icon}</td>`;
+    }).join("");
+    return `<tr><td style="text-align:left;font-weight:600">${escapeHtml(lop.lop_chuyen)}</td>${tds}</tr>`;
+  }).join("");
+  return `
+    <div class="section-title">🎯 So sánh điểm chuyên (tổng chuyên: <strong>${escapeHtml(String(tong))}</strong>)</div>
+    <div style="overflow-x:auto;margin-bottom:8px">
+      <table class="chuyen-table">
+        <thead><tr><th>Lớp chuyên</th><th>Lê Quý Đôn</th><th>N.Bỉnh Khiêm</th><th>Lê Thánh Tông</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:#888;margin-bottom:16px">✅ Đủ điểm &nbsp;⚡ Sát trong 2 điểm</p>`;
+}
+function renderPTDTNT(tong) {
+  if (!diemChuanData?.phu_luc_2_ptdtnt || tong == null) return "";
+  const rows = diemChuanData.phu_luc_2_ptdtnt.map(obj => {
+    const diff = Math.round((tong-obj.diem_chuan)*100)/100;
+    const cls  = diff >= 0 ? "dau" : diff > -1 ? "sat" : "kho";
+    const icon = diff >= 0 ? "✅" : diff > -1 ? "⚡" : "❌";
+    const txt  = diff >= 0 ? "Đủ điều kiện" : diff > -1 ? "Sát sao" : "Chưa đủ";
+    return `<div class="school-item ${cls}" style="margin-bottom:8px">
+      <div>
+        <div class="school-name">${escapeHtml(obj.doi_tuong)}</div>
+        <div class="school-meta">Điểm chuẩn PTDTNT: ${escapeHtml(String(obj.diem_chuan))}</div>
+      </div>
+      <span class="school-badge">${icon} ${escapeHtml(txt)}</span>
+    </div>`;
+  }).join("");
+  return `<div class="section-title">🏫 Trường PTDTNT Quảng Nam (tổng: ${escapeHtml(String(tong))})</div>${rows}`;
+}
 
 // ================================================
-// AI INFO
+// AI INFO BUILDERS
 // ================================================
-function buildChuyenInfoForAI(tong){if(!diemChuanData?.phu_luc_1_chuyen||tong==null)return"";const lines=diemChuanData.phu_luc_1_chuyen.map(lop=>{const truongs=[{ten:"Lê Quý Đôn",dc:lop.Le_Quy_Don},{ten:"Nguyễn Bỉnh Khiêm",dc:lop.Nguyen_Binh_Khiem},{ten:"Lê Thánh Tông",dc:lop.Le_Thanh_Tong}];const parts=truongs.filter(t=>t.dc!=null).map(t=>{const diff=Math.round((tong-t.dc)*100)/100;const trang=diff>=0?"ĐẬU ✅":diff>-2?"SÁT ⚡":"TRƯỢT ❌";return`${t.ten}: chuẩn ${t.dc} → ${trang} (${diff>=0?"+":""}${diff})`;});return`  ${lop.lop_chuyen}: ${parts.join(" | ")}`;});return`\nĐiểm chuẩn các lớp chuyên:\n${lines.join("\n")}`;}
-function buildPTDTNTInfoForAI(tong){if(!diemChuanData?.phu_luc_2_ptdtnt||tong==null)return"";const lines=diemChuanData.phu_luc_2_ptdtnt.map(obj=>{const diff=Math.round((tong-obj.diem_chuan)*100)/100;const trang=diff>=0?"ĐỦ ✅":diff>-1?"SÁT ⚡":"CHƯA ĐỦ ❌";return`  ${obj.doi_tuong}: chuẩn ${obj.diem_chuan} → ${trang} (${diff>=0?"+":""}${diff})`;});return`\nĐiểm chuẩn PTDTNT:\n${lines.join("\n")}`;}
+function buildChuyenInfoForAI(tong) {
+  if (!diemChuanData?.phu_luc_1_chuyen || tong == null) return "";
+  const lines = diemChuanData.phu_luc_1_chuyen.map(lop => {
+    const truongs = [
+      { ten:"Lê Quý Đôn", dc:lop.Le_Quy_Don },
+      { ten:"Nguyễn Bỉnh Khiêm", dc:lop.Nguyen_Binh_Khiem },
+      { ten:"Lê Thánh Tông", dc:lop.Le_Thanh_Tong },
+    ];
+    const parts = truongs.filter(t=>t.dc!=null).map(t => {
+      const diff  = Math.round((tong-t.dc)*100)/100;
+      const trang = diff >= 0 ? "ĐẬU ✅" : diff > -2 ? "SÁT ⚡" : "TRƯỢT ❌";
+      return `${t.ten}: chuẩn ${t.dc} → ${trang} (${diff>=0?"+":""}${diff})`;
+    });
+    return `  ${lop.lop_chuyen}: ${parts.join(" | ")}`;
+  });
+  return `\nĐiểm chuẩn các lớp chuyên:\n${lines.join("\n")}`;
+}
+function buildPTDTNTInfoForAI(tong) {
+  if (!diemChuanData?.phu_luc_2_ptdtnt || tong == null) return "";
+  const lines = diemChuanData.phu_luc_2_ptdtnt.map(obj => {
+    const diff  = Math.round((tong-obj.diem_chuan)*100)/100;
+    const trang = diff >= 0 ? "ĐỦ ✅" : diff > -1 ? "SÁT ⚡" : "CHƯA ĐỦ ❌";
+    return `  ${obj.doi_tuong}: chuẩn ${obj.diem_chuan} → ${trang} (${diff>=0?"+":""}${diff})`;
+  });
+  return `\nĐiểm chuẩn PTDTNT:\n${lines.join("\n")}`;
+}
 
 // ================================================
 // AI
 // ================================================
 async function goiAI(info) {
-  const {sbd,ten,van,nn,toan,mon_chuyen,diem_kk,diem_ut,diem_qd,tong_dai_tra,tong_chuyen,tong_ptdtnt,rank,total,truongDau,truongSat,truongKho,chuyenInfo,ptdtntInfo}=info;
-  const prompt=`Bạn là AI cà khịa nhưng vẫn động viên học sinh vừa tra điểm thi tuyển sinh lớp 10 Đà Nẵng 2026.
+  const { sbd, ten, van, nn, toan, mon_chuyen, diem_kk, diem_ut, diem_qd,
+          tong_dai_tra, tong_chuyen, tong_ptdtnt, rank, total,
+          truongDau, truongSat, truongKho, chuyenInfo, ptdtntInfo } = info;
+  const prompt = `Bạn là AI cà khịa nhưng vẫn động viên học sinh vừa tra điểm thi tuyển sinh lớp 10 Đà Nẵng 2026.
 
 Thông tin thí sinh ${ten} (SBD: ${sbd}):
-- Điểm Ngữ Văn: ${van??"Vắng"}
-- Điểm Ngoại Ngữ: ${nn??"Vắng"}
-- Điểm Toán: ${toan??"Vắng"}
-${mon_chuyen!=null?`- Điểm môn chuyên: ${mon_chuyen}`:""}
-${diem_kk!=null?`- Điểm khuyến khích: ${diem_kk}`:""}
-${diem_ut!=null?`- Điểm ưu tiên: ${diem_ut}`:""}
-${diem_qd!=null?`- Điểm quy đổi: ${diem_qd}`:""}
+- Điểm Ngữ Văn: ${van ?? "Vắng"}
+- Điểm Ngoại Ngữ: ${nn ?? "Vắng"}
+- Điểm Toán: ${toan ?? "Vắng"}
+${mon_chuyen != null ? `- Điểm môn chuyên: ${mon_chuyen}` : ""}
+${diem_kk    != null ? `- Điểm khuyến khích: ${diem_kk}` : ""}
+${diem_ut    != null ? `- Điểm ưu tiên: ${diem_ut}` : ""}
+${diem_qd    != null ? `- Điểm quy đổi: ${diem_qd}` : ""}
 - Tổng điểm đại trà: ${tong_dai_tra}
-${tong_chuyen!=null?`- Tổng điểm chuyên: ${tong_chuyen}`:""}
-${tong_ptdtnt!=null?`- Tổng điểm PTDTNT: ${tong_ptdtnt}`:""}
+${tong_chuyen  != null ? `- Tổng điểm chuyên: ${tong_chuyen}` : ""}
+${tong_ptdtnt  != null ? `- Tổng điểm PTDTNT: ${tong_ptdtnt}` : ""}
 - Xếp hạng: Top ${rank}/${total}
-- Trường có thể đậu: ${truongDau.slice(0,3).map(t=>t.ten).join(", ")||"chưa rõ"}
-- Trường sát sao: ${truongSat.slice(0,2).map(t=>t.ten).join(", ")||"không có"}
+- Trường có thể đậu: ${truongDau.slice(0,3).map(t=>t.ten).join(", ") || "chưa rõ"}
+- Trường sát sao: ${truongSat.slice(0,2).map(t=>t.ten).join(", ") || "không có"}
 ${chuyenInfo}${ptdtntInfo}
 
 Hãy viết 3-5 câu: cà khịa hài hước GenZ nhưng có động viên, nhận xét điểm từng môn, nếu có thi chuyên thì nhận xét khả năng đậu lớp chuyên nào, nhận xét trường công lập khả năng đậu/sát/khó, chúc mừng hoặc an ủi. Dùng tiếng Việt tự nhiên, có thể dùng emoji. KHÔNG dùng markdown.`;
-  return fetch("/api/ai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:[{role:"user",content:prompt}],max_tokens:500})});
+  return fetch("/api/ai", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ messages:[{ role:"user", content:prompt }], max_tokens:50000 }),
+  });
 }
 
 // ================================================
-// TAB SWITCH
-// ================================================
-function switchTab(tab) {
-  const isSBD=tab==="sbd";
-  document.getElementById("panelSBD").style.display=isSBD?"":"none";
-  document.getElementById("panelTen").style.display=isSBD?"none":"";
-  document.getElementById("tabSBD").classList.toggle("active",isSBD);
-  document.getElementById("tabTen").classList.toggle("active",!isSBD);
-  document.getElementById("searchResults").innerHTML="";
-  if(!isSBD)document.getElementById("tenInput").focus();
-}
-
-// ================================================
-// TÌM KIẾM THEO TÊN
-// ================================================
-let tenSearchTimer=null,tenOffset=0,tenCurrentQ="",tenHasMore=true,tenLoading=false;
-
-function onTenInput() {
-  clearTimeout(tenSearchTimer);
-  const q=document.getElementById("tenInput").value.trim();
-  if(q.length<2){document.getElementById("searchResults").innerHTML="";return;}
-  tenSearchTimer=setTimeout(()=>{
-    tenCurrentQ=q;tenOffset=0;tenHasMore=true;
-    document.getElementById("searchResults").innerHTML="";
-    loadTenResults(true);
-  },400);
-}
-
-async function loadTenResults(isNew=false) {
-  if(tenLoading||!tenHasMore)return;
-  tenLoading=true;
-  const resultsEl=document.getElementById("searchResults");
-  const loadingEl=document.createElement("div");
-  loadingEl.className="search-loading";loadingEl.id="tenLoading";
-  loadingEl.innerHTML=`<i class="fa-solid fa-spinner fa-spin"></i> Đang tìm...`;
-  if(isNew)resultsEl.innerHTML="";
-  resultsEl.appendChild(loadingEl);
-  try {
-    const params=new URLSearchParams({q:tenCurrentQ,offset:tenOffset,limit:50});
-    const res=await fetch(`/api/tenthisinh?${params}`);
-    const data=await res.json();
-    document.getElementById("tenLoading")?.remove();
-    document.getElementById("btnXemThem")?.remove();
-    const results=data.results??[];
-    if(results.length===0&&isNew){
-      resultsEl.innerHTML=`<div class="search-empty">😅 Không tìm thấy thí sinh nào có tên "<strong>${escapeHtml(tenCurrentQ)}</strong>"</div>`;
-      tenLoading=false;return;
-    }
-    // Auto redirect nếu chỉ có đúng 1 kết quả duy nhất
-    if(results.length===1&&isNew&&tenOffset===0){
-      tenLoading=false;
-      const ts=results[0];
-      document.getElementById("sbdInput").value=ts.so_bao_danh;
-      switchTab("sbd");
-      search();
-      return;
-    }
-    // Render danh sách
-    results.forEach(ts=>{
-      const item=document.createElement("div");
-      item.className="result-item pop";
-      item.innerHTML=`
-        <div>
-          <div class="result-name">${escapeHtml(ts.ho_ten)}</div>
-          <div class="result-sbd">SBD: ${escapeHtml(String(ts.so_bao_danh))}</div>
-        </div>
-        <div class="result-score">
-          ${ts.tong_dai_tra!=null?escapeHtml(String(ts.tong_dai_tra)):"—"}
-          <small>tổng điểm</small>
-        </div>`;
-      item.onclick=()=>{
-        document.getElementById("sbdInput").value=ts.so_bao_danh;
-        switchTab("sbd");
-        search();
-      };
-      resultsEl.appendChild(item);
-    });
-    tenOffset+=results.length;
-    tenHasMore=results.length===50;
-    if(tenHasMore){
-      const btnMore=document.createElement("button");
-      btnMore.className="btn-xem-them";btnMore.id="btnXemThem";
-      btnMore.innerHTML=`<i class="fa-solid fa-chevron-down"></i> Xem thêm kết quả`;
-      btnMore.onclick=()=>loadTenResults(false);
-      resultsEl.appendChild(btnMore);
-    }
-  } catch(e) {
-    document.getElementById("tenLoading")?.remove();
-    resultsEl.innerHTML+=`<div class="search-empty">❌ Lỗi kết nối, thử lại sau nhé!</div>`;
-  }
-  tenLoading=false;
-}
-
-// ================================================
-// SEARCH (SBD)
+// SEARCH
 // ================================================
 async function search() {
-  const sbd=document.getElementById("sbdInput").value.trim();
-  if(!sbd)return;
-  if(!diemThiData){alert("Đang tải dữ liệu, thử lại!");return;}
-  const btn=document.getElementById("btnSearch"),resultDiv=document.getElementById("result");
-  btn.disabled=true;btn.textContent="⏳ Đang tìm...";
+  const sbd = document.getElementById("sbdInput").value.trim();
+  if (!sbd) return;
+  if (!diemThiData) { alert("Đang tải dữ liệu, thử lại!"); return; }
+  const btn       = document.getElementById("btnSearch");
+  const resultDiv = document.getElementById("result");
+  btn.disabled = true; btn.textContent = "⏳ Đang tìm...";
   hideThuKhoa();
-  document.getElementById("distCard").style.display="none";
-  const contentDiv=document.getElementById("resultContent");
-  resultDiv.style.display="block";
-  const ts=diemThiData[sbd]??diemThiData[sbd.padStart(5,"0")]??null;
-  if(!ts){
-    contentDiv.innerHTML=`<div class="not-found"><span>😅 Không tìm thấy SBD ${escapeHtml(sbd)}</span><br><div style="font-size:13px">Kiểm tra lại số báo danh nhé!</div></div>`;
-    btn.disabled=false;btn.textContent="🔍 Tra cứu";return;
+  document.getElementById("distCard").style.display = "none";
+  const contentDiv = document.getElementById("resultContent");
+  resultDiv.style.display = "block";
+  const ts = diemThiData[sbd] ?? diemThiData[sbd.padStart(5,"0")] ?? null;
+  if (!ts) {
+    contentDiv.innerHTML = `<div class="not-found"><span>😅 Không tìm thấy SBD ${escapeHtml(sbd)}</span><br><div style="font-size:13px">Kiểm tra lại số báo danh nhé!</div></div>`;
+    btn.disabled = false; btn.textContent = "🔍 Tra cứu"; return;
   }
-  const van=ts.ngu_van,nn=ts.ngoai_ngu,toan=ts.toan,mon_chuyen=ts.mon_chuyen;
-  const diem_kk=ts.diem_kk,diem_ut=ts.diem_uu_tien,diem_qd=ts.diem_quy_doi;
-  const tong_dt=ts.tong_dai_tra,tong_pt=ts.tong_ptdtnt,tong_cv=ts.tong_chuyen;
-  const {rank,total}=tinhRank(tong_dt??0);
-  const rankChuyen=tinhRankChuyen(tong_cv),rankPTDTNT=tinhRankPTDTNT(tong_pt);
-  const {dau,sat,kho}=goiYTruong(tong_dt??0);
-  distMyScores={dai_tra:tong_dt??null,chuyen:tong_cv??null,ptdtnt:tong_pt??null};
-  const boxes=[];
-  boxes.push(`<div class="score-box van pop"><div class="mon">Ngữ Văn</div><div class="diem">${van!=null?escapeHtml(String(van)):"—"}</div><div class="label">điểm</div></div>`);
-  boxes.push(`<div class="score-box nn pop"><div class="mon">Ngoại Ngữ</div><div class="diem">${nn!=null?escapeHtml(String(nn)):"—"}</div><div class="label">điểm</div></div>`);
-  boxes.push(`<div class="score-box toan pop"><div class="mon">Toán</div><div class="diem">${toan!=null?escapeHtml(String(toan)):"—"}</div><div class="label">điểm</div></div>`);
-  if(mon_chuyen!=null)boxes.push(`<div class="score-box chuyen pop"><div class="mon">Môn Chuyên</div><div class="diem">${escapeHtml(String(mon_chuyen))}</div><div class="label">điểm</div></div>`);
-  if(diem_kk!=null)boxes.push(`<div class="score-box kk pop"><div class="mon">Khuyến Khích</div><div class="diem">${escapeHtml(String(diem_kk))}</div><div class="label">điểm</div></div>`);
-  if(diem_ut!=null)boxes.push(`<div class="score-box ut pop"><div class="mon">Ưu Tiên</div><div class="diem">${escapeHtml(String(diem_ut))}</div><div class="label">điểm</div></div>`);
-  const colsCls=boxes.length<=3?"cols-3":"cols-4";
-  const qdBox=diem_qd!=null?`<div class="qd-box pop"><div class="qd-left"><div class="qd-label">📋 Điểm Quy Đổi KQHT – RL</div><div class="qd-sub">Kết quả học tập &amp; rèn luyện 4 năm học</div></div><div class="qd-score">${escapeHtml(String(diem_qd))}</div></div>`:"";
-  let tongHtml=`<div class="tong-section">`;
-  if(tong_dt!=null)tongHtml+=`<div class="total-box dai-tra pop"><div class="total-label">🏫 TỔNG ĐIỂM ĐẠI TRÀ</div><div class="total-score">${escapeHtml(String(tong_dt))}</div></div>`;
-  if(tong_pt!=null)tongHtml+=`<div class="total-box ptdtnt pop"><div class="total-label">🌿 TỔNG ĐIỂM PTDTNT</div><div class="total-score">${escapeHtml(String(tong_pt))}</div></div>`;
-  if(tong_cv!=null)tongHtml+=`<div class="total-box chuyen pop"><div class="total-label">⭐ TỔNG ĐIỂM CHUYÊN</div><div class="total-score">${escapeHtml(String(tong_cv))}</div></div>`;
-  tongHtml+=`</div>`;
-  const rankIcon=rank<=10?"🏆":rank<=50?"🥈":rank<=200?"🥉":"📊";
-  const pct=Math.round((1-rank/total)*100);
-  let rankRowsHtml=`<div class="rank-row"><div class="rank-icon">${rankIcon}</div><div><div class="rank-text">🏫 Top ${escapeHtml(String(rank))} / ${escapeHtml(String(total))} thí sinh đại trà</div><div class="rank-sub">Cao hơn ${escapeHtml(String(pct))}% thí sinh 📈</div></div></div>`;
-  if(rankChuyen){const pctC=Math.round((1-rankChuyen.rank/rankChuyen.total)*100);rankRowsHtml+=`<hr class="rank-divider"><div class="rank-row"><div class="rank-icon">⭐</div><div><div class="rank-text">Top ${escapeHtml(String(rankChuyen.rank))} / ${escapeHtml(String(rankChuyen.total))} thí sinh chuyên</div><div class="rank-sub">Cao hơn ${escapeHtml(String(pctC))}% thí sinh chuyên 📈</div></div></div>`;}
-  if(rankPTDTNT){const pctP=Math.round((1-rankPTDTNT.rank/rankPTDTNT.total)*100);rankRowsHtml+=`<hr class="rank-divider"><div class="rank-row"><div class="rank-icon">🌿</div><div><div class="rank-text">Top ${escapeHtml(String(rankPTDTNT.rank))} / ${escapeHtml(String(rankPTDTNT.total))} thí sinh PTDTNT</div><div class="rank-sub">Cao hơn ${escapeHtml(String(pctP))}% thí sinh PTDTNT 📈</div></div></div>`;}
-  function schoolList(arr,cls,badge){return arr.slice(0,4).map(s=>{const diffStr=s.diff===0?"Bằng điểm chuẩn":s.diff>0?`Hơn ${s.diff} điểm`:`Thiếu ${Math.abs(s.diff)} điểm`;return`<div class="school-item ${cls}"><div><div class="school-name">${escapeHtml(String(s.ten))}</div><div class="school-meta">Điểm chuẩn 2026: ${escapeHtml(String(s.dc))} &nbsp;•&nbsp; ${escapeHtml(diffStr)}</div></div><span class="school-badge">${escapeHtml(badge)}</span></div>`;}).join("");}
-  contentDiv.innerHTML=`
+  const van        = ts.ngu_van;
+  const nn         = ts.ngoai_ngu;
+  const toan       = ts.toan;
+  const mon_chuyen = ts.mon_chuyen;
+  const diem_kk    = ts.diem_kk;
+  const diem_ut    = ts.diem_uu_tien;
+  const diem_qd    = ts.diem_quy_doi;
+  const tong_dt    = ts.tong_dai_tra;
+  const tong_pt    = ts.tong_ptdtnt;
+  const tong_cv    = ts.tong_chuyen;
+  const { rank, total }   = tinhRank(tong_dt ?? 0);
+  const rankChuyen        = tinhRankChuyen(tong_cv);
+  const rankPTDTNT        = tinhRankPTDTNT(tong_pt);
+  const { dau, sat, kho } = goiYTruong(tong_dt ?? 0);
+  distMyScores = { dai_tra: tong_dt ?? null, chuyen: tong_cv ?? null, ptdtnt: tong_pt ?? null };
+  const boxes = [];
+  boxes.push(`<div class="score-box van pop"><div class="mon">Ngữ Văn</div><div class="diem">${van != null ? escapeHtml(String(van)) : "—"}</div><div class="label">điểm</div></div>`);
+  boxes.push(`<div class="score-box nn pop"><div class="mon">Ngoại Ngữ</div><div class="diem">${nn != null ? escapeHtml(String(nn)) : "—"}</div><div class="label">điểm</div></div>`);
+  boxes.push(`<div class="score-box toan pop"><div class="mon">Toán</div><div class="diem">${toan != null ? escapeHtml(String(toan)) : "—"}</div><div class="label">điểm</div></div>`);
+  if (mon_chuyen != null) boxes.push(`<div class="score-box chuyen pop"><div class="mon">Môn Chuyên</div><div class="diem">${escapeHtml(String(mon_chuyen))}</div><div class="label">điểm</div></div>`);
+  if (diem_kk    != null) boxes.push(`<div class="score-box kk pop"><div class="mon">Khuyến Khích</div><div class="diem">${escapeHtml(String(diem_kk))}</div><div class="label">điểm</div></div>`);
+  if (diem_ut    != null) boxes.push(`<div class="score-box ut pop"><div class="mon">Ưu Tiên</div><div class="diem">${escapeHtml(String(diem_ut))}</div><div class="label">điểm</div></div>`);
+  const colsCls = boxes.length <= 3 ? "cols-3" : "cols-4";
+  const qdBox = diem_qd != null ? `
+    <div class="qd-box pop">
+      <div class="qd-left">
+        <div class="qd-label">📋 Điểm Quy Đổi KQHT – RL</div>
+        <div class="qd-sub">Kết quả học tập &amp; rèn luyện 4 năm học</div>
+      </div>
+      <div class="qd-score">${escapeHtml(String(diem_qd))}</div>
+    </div>` : "";
+  let tongHtml = `<div class="tong-section">`;
+  if (tong_dt != null) tongHtml += `<div class="total-box dai-tra pop"><div class="total-label">🏫 TỔNG ĐIỂM ĐẠI TRÀ</div><div class="total-score">${escapeHtml(String(tong_dt))}</div></div>`;
+  if (tong_pt != null) tongHtml += `<div class="total-box ptdtnt pop"><div class="total-label">🌿 TỔNG ĐIỂM PTDTNT</div><div class="total-score">${escapeHtml(String(tong_pt))}</div></div>`;
+  if (tong_cv != null) tongHtml += `<div class="total-box chuyen pop"><div class="total-label">⭐ TỔNG ĐIỂM CHUYÊN</div><div class="total-score">${escapeHtml(String(tong_cv))}</div></div>`;
+  tongHtml += `</div>`;
+  const rankIcon = rank<=10?"🏆":rank<=50?"🥈":rank<=200?"🥉":"📊";
+  const pct      = Math.round((1-rank/total)*100);
+  let rankRowsHtml = `
+    <div class="rank-row">
+      <div class="rank-icon">${rankIcon}</div>
+      <div>
+        <div class="rank-text">🏫 Top ${escapeHtml(String(rank))} / ${escapeHtml(String(total))} thí sinh đại trà</div>
+        <div class="rank-sub">Cao hơn ${escapeHtml(String(pct))}% thí sinh 📈</div>
+      </div>
+    </div>`;
+  if (rankChuyen) {
+    const pctC = Math.round((1-rankChuyen.rank/rankChuyen.total)*100);
+    rankRowsHtml += `<hr class="rank-divider"><div class="rank-row"><div class="rank-icon">⭐</div><div>
+      <div class="rank-text">Top ${escapeHtml(String(rankChuyen.rank))} / ${escapeHtml(String(rankChuyen.total))} thí sinh chuyên</div>
+      <div class="rank-sub">Cao hơn ${escapeHtml(String(pctC))}% thí sinh chuyên 📈</div></div></div>`;
+  }
+  if (rankPTDTNT) {
+    const pctP = Math.round((1-rankPTDTNT.rank/rankPTDTNT.total)*100);
+    rankRowsHtml += `<hr class="rank-divider"><div class="rank-row"><div class="rank-icon">🌿</div><div>
+      <div class="rank-text">Top ${escapeHtml(String(rankPTDTNT.rank))} / ${escapeHtml(String(rankPTDTNT.total))} thí sinh PTDTNT</div>
+      <div class="rank-sub">Cao hơn ${escapeHtml(String(pctP))}% thí sinh PTDTNT 📈</div></div></div>`;
+  }
+  function schoolList(arr, cls, badge) {
+    return arr.slice(0,4).map(s => {
+      const diffStr = s.diff===0?"Bằng điểm chuẩn":s.diff>0?`Hơn ${s.diff} điểm`:`Thiếu ${Math.abs(s.diff)} điểm`;
+      return `<div class="school-item ${cls}">
+        <div><div class="school-name">${escapeHtml(String(s.ten))}</div><div class="school-meta">Điểm chuẩn 2026: ${escapeHtml(String(s.dc))} &nbsp;•&nbsp; ${escapeHtml(diffStr)}</div></div>
+        <span class="school-badge">${escapeHtml(badge)}</span></div>`;
+    }).join("");
+  }
+  contentDiv.innerHTML = `
     <div class="student-header">
       <div class="avatar">🎒</div>
       <div class="student-info">
-        <h2>${escapeHtml(ts.ho_ten)||"Thí sinh"}</h2>
+        <h2>${escapeHtml(ts.ho_ten) || "Thí sinh"}</h2>
         <span class="sbd-tag">SBD: ${escapeHtml(String(ts.so_bao_danh))} • Kết quả thi Lớp 10 Đà Nẵng 2026</span>
       </div>
     </div>
@@ -974,23 +1227,63 @@ async function search() {
     <div class="rank-box pop">${rankRowsHtml}</div>
     <div class="ai-box">
       <div class="ai-label">🤖 AI NHẬN XÉT</div>
-      <div class="ai-text" id="aiText"><div class="ai-typing"><span></span><span></span><span></span></div></div>
+      <div class="ai-text" id="aiText">
+        <div class="ai-typing"><span></span><span></span><span></span></div>
+      </div>
     </div>
-    ${renderBangChuyen(tong_cv)}${renderPTDTNT(tong_pt)}
+    ${renderBangChuyen(tong_cv)}
+    ${renderPTDTNT(tong_pt)}
     ${dau.length>0?`<div class="section-title">🟢 Trường công lập có thể đậu</div>${schoolList(dau,"dau","✅ Khả năng cao")}`:""}
     ${sat.length>0?`<div class="section-title">🟡 Sát sao (dưới 1 điểm)</div>${schoolList(sat,"sat","⚡ Cần theo dõi")}`:""}
     ${kho.length>0?`<div class="section-title">🔴 Khó đậu hơn</div>${schoolList(kho.slice(0,4),"kho","❌ Cần cân nhắc")}`:""}
   `;
-  distMode=tong_dt!=null?"dai_tra":tong_cv!=null?"chuyen":"ptdtnt";
-  document.querySelectorAll(".dist-mode-btn").forEach((b,i)=>{b.classList.toggle("active",["dai_tra","chuyen","ptdtnt"][i]===distMode);});
-  setTimeout(()=>renderDistChart(distMyScores[distMode]),100);
+  distMode = tong_dt!=null?"dai_tra":tong_cv!=null?"chuyen":"ptdtnt";
+  document.querySelectorAll(".dist-mode-btn").forEach((b,i) => {
+    b.classList.toggle("active", ["dai_tra","chuyen","ptdtnt"][i] === distMode);
+  });
+  setTimeout(() => renderDistChart(distMyScores[distMode]), 100);
   try {
-    const res=await goiAI({sbd:ts.so_bao_danh,ten:ts.ho_ten,van,nn,toan,mon_chuyen,diem_kk,diem_ut,diem_qd,tong_dai_tra:tong_dt,tong_chuyen:tong_cv,tong_ptdtnt:tong_pt,rank,total,truongDau:dau,truongSat:sat,truongKho:kho,chuyenInfo:buildChuyenInfoForAI(tong_cv),ptdtntInfo:buildPTDTNTInfoForAI(tong_pt)});
-    if(!res.ok){let errMsg="😅 AI đang bận, thử lại sau nhé!";try{const e=await res.json();if(e?.message)errMsg=`⚠️ ${escapeHtml(e.message)}`;}catch{}document.getElementById("aiText").innerHTML=errMsg;}
-    else{const reader=res.body.getReader(),decoder=new TextDecoder();const aiEl=document.getElementById("aiText");aiEl.innerHTML="";let buffer="";while(true){const{done,value}=await reader.read();if(done)break;buffer+=decoder.decode(value,{stream:true});const lines=buffer.split("\n");buffer=lines.pop();for(const line of lines){if(!line.startsWith("data: "))continue;const data=line.slice(6).trim();if(data==="[DONE]")break;try{const json=JSON.parse(data);const chunk=json.choices?.[0]?.delta?.content??"";aiEl.innerHTML+=safeChunk(chunk);}catch{}}}}
-  }catch{document.getElementById("aiText").innerHTML="😅 AI đang bận, thử lại sau nhé!";}
-  btn.disabled=false;btn.textContent="🔍 Tra cứu";
-  resultDiv.scrollIntoView({behavior:"smooth",block:"start"});
+    const res = await goiAI({
+      sbd:ts.so_bao_danh, ten:ts.ho_ten, van, nn, toan,
+      mon_chuyen, diem_kk, diem_ut, diem_qd,
+      tong_dai_tra:tong_dt, tong_chuyen:tong_cv, tong_ptdtnt:tong_pt,
+      rank, total, truongDau:dau, truongSat:sat, truongKho:kho,
+      chuyenInfo:buildChuyenInfoForAI(tong_cv),
+      ptdtntInfo:buildPTDTNTInfoForAI(tong_pt),
+    });
+    if (!res.ok) {
+      let errMsg = "😅 AI đang bận, thử lại sau nhé!";
+      try { const e = await res.json(); if (e?.message) errMsg = `⚠️ ${escapeHtml(e.message)}`; } catch {}
+      document.getElementById("aiText").innerHTML = errMsg;
+    } else {
+      const reader  = res.body.getReader();
+      const decoder = new TextDecoder();
+      const aiEl    = document.getElementById("aiText");
+      aiEl.innerHTML = "";
+      let buffer = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream:true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop();
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          const data = line.slice(6).trim();
+          if (data === "[DONE]") break;
+          try {
+            const json  = JSON.parse(data);
+            const chunk = json.choices?.[0]?.delta?.content ?? "";
+            aiEl.innerHTML += safeChunk(chunk);
+          } catch {}
+        }
+      }
+    }
+  } catch {
+    document.getElementById("aiText").innerHTML = "😅 AI đang bận, thử lại sau nhé!";
+  }
+  btn.disabled = false; btn.textContent = "🔍 Tra cứu";
+  resultDiv.scrollIntoView({ behavior:"smooth", block:"start" });
 }
 
 // ================================================
